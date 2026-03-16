@@ -1,0 +1,17 @@
+aid: red-hat-3scale
+name: Red Hat 3scale
+description: >-
+  Red Hat 3scale provides API capabilities.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - API
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/red-hat-3scale/refs/heads/main/apis.yml
+created: '2026-03-16'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+apis: []
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
