@@ -1,17 +1,134 @@
 aid: red-hat-3scale
 name: Red Hat 3scale
 description: >-
-  Red Hat 3scale provides API capabilities.
+  Red Hat 3scale API Management is an enterprise-grade API management platform
+  that enables organizations to share, secure, distribute, control, and monetize
+  APIs across internal and external teams. It provides a developer portal,
+  analytics, access control, and policy enforcement for REST, SOAP, and other
+  API types.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - API
+  - API Management
+  - API Gateway
+  - Red Hat
+  - Enterprise
 url: >-
   https://raw.githubusercontent.com/api-evangelist/red-hat-3scale/refs/heads/main/apis.yml
 created: '2026-03-16'
-modified: '2026-03-16'
+modified: '2026-03-18'
 specificationVersion: '0.19'
-apis: []
+apis:
+  - aid: red-hat-3scale:service-management-api
+    name: Red Hat 3scale Service Management API
+    description: >-
+      The 3scale Service Management API allows API providers to control and
+      manage access to their APIs, track usage, and enforce traffic policies.
+      It is used by the API gateway to authorize and report API calls in real
+      time.
+    humanURL: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management
+    baseURL: https://su1.3scale.net
+    tags:
+      - API Management
+      - Access Control
+      - Traffic Management
+    properties:
+      - type: Documentation
+        url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/api_authentication/index
+      - type: Reference
+        url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
+
+  - aid: red-hat-3scale:account-management-api
+    name: Red Hat 3scale Account Management API
+    description: >-
+      The 3scale Account Management API provides programmatic access to manage
+      developer accounts, applications, and API keys within the 3scale platform.
+      It enables automation of developer onboarding, subscription management,
+      and application lifecycle operations.
+    humanURL: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
+    baseURL: https://{your-domain}-admin.3scale.net
+    tags:
+      - Account Management
+      - Developer Portal
+      - API Management
+    properties:
+      - type: Documentation
+        url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
+      - type: Reference
+        url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/accounts
+
+  - aid: red-hat-3scale:analytics-api
+    name: Red Hat 3scale Analytics API
+    description: >-
+      The 3scale Analytics API provides access to API usage data, traffic
+      metrics, and reporting for APIs managed through the 3scale platform.
+      It enables operators to retrieve usage statistics and integrate analytics
+      data into external systems.
+    humanURL: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/analytics
+    baseURL: https://{your-domain}-admin.3scale.net
+    tags:
+      - Analytics
+      - Reporting
+      - API Management
+    properties:
+      - type: Documentation
+        url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/analytics
+
+  - aid: red-hat-3scale:billing-api
+    name: Red Hat 3scale Billing API
+    description: >-
+      The 3scale Billing API enables management of billing and invoicing for
+      API usage within the 3scale platform. It supports creating and managing
+      invoices, payment transactions, and monetization of API subscriptions.
+    humanURL: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/billing
+    baseURL: https://{your-domain}-admin.3scale.net
+    tags:
+      - Billing
+      - Monetization
+      - API Management
+    properties:
+      - type: Documentation
+        url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/billing
+
+  - aid: red-hat-3scale:webhooks-api
+    name: Red Hat 3scale Webhooks
+    description: >-
+      3scale Webhooks allow API providers to receive real-time notifications
+      about account, application, and user events within the 3scale platform.
+      Webhooks can be configured to trigger external systems when subscriptions
+      change or new developers sign up.
+    humanURL: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/webhooks
+    tags:
+      - Webhooks
+      - Events
+      - API Management
+    properties:
+      - type: Documentation
+        url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/webhooks
+
+common:
+  - type: Website
+    url: https://www.redhat.com/en/technologies/jboss-middleware/3scale
+  - type: Documentation
+    url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management
+  - type: Getting Started
+    url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/getting_started/index
+  - type: Portal
+    url: https://access.redhat.com/products/red-hat-3scale-api-management
+  - type: GitHub Organization
+    url: https://github.com/3scale
+  - type: GitHubRepository
+    url: https://github.com/3scale/APIcast
+  - type: Blog
+    url: https://www.redhat.com/en/blog/channel/red-hat-middleware
+  - type: Support
+    url: https://access.redhat.com/support
+  - type: Terms of Service
+    url: https://www.redhat.com/en/about/agreements
+  - type: Privacy Policy
+    url: https://www.redhat.com/en/about/privacy-policy
+  - type: Status
+    url: https://status.redhat.com/
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
