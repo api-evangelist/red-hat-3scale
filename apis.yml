@@ -9,10 +9,10 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - API Management
   - API Gateway
-  - Red Hat
+  - API Management
   - Enterprise
+  - Red Hat
 url: >-
   https://raw.githubusercontent.com/api-evangelist/red-hat-3scale/refs/heads/main/apis.yml
 created: '2026-03-16'
@@ -29,8 +29,8 @@ apis:
     humanURL: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management
     baseURL: https://su1.3scale.net
     tags:
-      - API Management
       - Access Control
+      - API Management
       - Traffic Management
     properties:
       - type: Documentation
@@ -49,8 +49,8 @@ apis:
     baseURL: https://{your-domain}-admin.3scale.net
     tags:
       - Account Management
-      - Developer Portal
       - API Management
+      - Developer Portal
     properties:
       - type: Documentation
         url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
@@ -68,8 +68,8 @@ apis:
     baseURL: https://{your-domain}-admin.3scale.net
     tags:
       - Analytics
-      - Reporting
       - API Management
+      - Reporting
     properties:
       - type: Documentation
         url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/analytics
@@ -83,9 +83,9 @@ apis:
     humanURL: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/billing
     baseURL: https://{your-domain}-admin.3scale.net
     tags:
+      - API Management
       - Billing
       - Monetization
-      - API Management
     properties:
       - type: Documentation
         url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/billing
@@ -99,9 +99,9 @@ apis:
       change or new developers sign up.
     humanURL: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/webhooks
     tags:
-      - Webhooks
-      - Events
       - API Management
+      - Events
+      - Webhooks
     properties:
       - type: Documentation
         url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/webhooks
