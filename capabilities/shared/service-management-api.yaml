@@ -1,0 +1,149 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Red Hat 3scale Service Management API"
+  description: "Authorizes and reports API calls via the 3scale Service Management API. Used by APIcast gateways to authorize application traffic in real time."
+  tags:
+    - API Management
+    - Authorization
+    - Red Hat
+    - Traffic Management
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      THREESCALE_PROVIDER_KEY: THREESCALE_PROVIDER_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: threescale-service-mgmt
+      baseUri: https://su1.3scale.net
+      description: "3scale Service Management API for API call authorization and reporting"
+      authentication:
+        type: apikey
+        key: provider_key
+        value: "{{THREESCALE_PROVIDER_KEY}}"
+        placement: query
+      resources:
+        - name: authorization
+          path: /transactions
+          description: "API call authorization and usage reporting"
+          operations:
+            - name: authorize-transaction
+              method: GET
+              description: "Authorize an API call by checking usage limits"
+              inputParameters:
+                - name: user_key
+                  in: query
+                  type: string
+                  required: true
+                  description: "The API key of the application"
+                - name: service_id
+                  in: query
+                  type: string
+                  required: false
+                  description: "The service ID"
+              outputRawFormat: xml
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: authorize-and-report
+              method: GET
+              description: "Authorize and report usage in a single call"
+              inputParameters:
+                - name: user_key
+                  in: query
+                  type: string
+                  required: true
+                  description: "The API key of the application"
+                - name: service_id
+                  in: query
+                  type: string
+                  required: false
+                  description: "The service ID"
+                - name: usage_hits
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of hits to report"
+              outputRawFormat: xml
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: report-transactions
+              method: POST
+              description: "Report multiple API usage transactions in batch"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: form
+                data:
+                  provider_key: "{{THREESCALE_PROVIDER_KEY}}"
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: threescale-service-mgmt-rest
+      resources:
+        - path: /v1/authorize
+          name: authorization
+          description: "API call authorization endpoint"
+          operations:
+            - method: GET
+              name: authorize-transaction
+              description: "Authorize an API call"
+              call: "threescale-service-mgmt.authorize-transaction"
+              with:
+                user_key: "rest.user_key"
+                service_id: "rest.service_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/authrep
+          name: authrep
+          description: "Authorize and report endpoint"
+          operations:
+            - method: GET
+              name: authorize-and-report
+              description: "Authorize and report API usage"
+              call: "threescale-service-mgmt.authorize-and-report"
+              with:
+                user_key: "rest.user_key"
+                service_id: "rest.service_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: threescale-service-mgmt-mcp
+      transport: http
+      tools:
+        - name: authorize-api-call
+          description: "Authorize an API call against 3scale usage limits"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "threescale-service-mgmt.authorize-transaction"
+          with:
+            user_key: "tools.user_key"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: report-api-usage
+          description: "Report API usage transactions to 3scale"
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "threescale-service-mgmt.report-transactions"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,136 @@
+extends: spectral:oas
+rules:
+  # 3scale uses admin access tokens - require access_token in query parameters
+  3scale-access-token-required:
+    description: >-
+      3scale Account Management API endpoints require an access_token query
+      parameter for authentication. All endpoints on the admin domain must
+      include this parameter.
+    severity: error
+    given: $.paths[*][get,post,put,delete,patch].parameters[*]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "^access_token$"
+
+  # 3scale API responses should return JSON
+  3scale-json-responses:
+    description: >-
+      3scale management endpoints should return application/json content type
+      for consistency with REST API conventions.
+    severity: warn
+    given: $.paths[*][get,post,put,patch].responses[200,201].content
+    then:
+      field: application/json
+      function: truthy
+
+  # Operation IDs are required for SDK generation
+  3scale-operation-id-required:
+    description: >-
+      All operations must have an operationId to support SDK code generation
+      and documentation linking.
+    severity: error
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: operationId
+      function: truthy
+
+  # Operation IDs must use camelCase
+  3scale-operation-id-camel-case:
+    description: >-
+      3scale API operation IDs must use camelCase naming convention
+      (e.g., listAccounts, createApplication).
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  # Summaries must use Title Case
+  3scale-summary-title-case:
+    description: >-
+      Operation summaries must use Title Case formatting to match the
+      3scale documentation style.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9 ]+$"
+
+  # Tags must be defined in the global tags section
+  3scale-tags-defined:
+    description: >-
+      All operation tags must reference tags defined in the global tags array
+      for consistency.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].tags[*]
+    then:
+      function: truthy
+
+  # All paths must include descriptions
+  3scale-operation-description-required:
+    description: >-
+      All operations must include a description explaining what the endpoint
+      does, required parameters, and expected behavior.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: description
+      function: truthy
+
+  # Version in path or info should be present
+  3scale-api-versioned:
+    description: >-
+      API info must include a version number following semantic versioning
+      conventions.
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  # Parameters must have descriptions
+  3scale-parameter-descriptions:
+    description: >-
+      All parameters must include a description to help API consumers understand
+      what values to provide.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  # Schema properties must have descriptions
+  3scale-schema-property-descriptions:
+    description: >-
+      Schema properties in response bodies should include descriptions to
+      document the meaning of each field.
+    severity: info
+    given: $.components.schemas[*].properties[*]
+    then:
+      field: description
+      function: defined
+
+  # 404 responses for parameterized paths
+  3scale-not-found-response:
+    description: >-
+      Endpoints with path parameters should include a 404 response to handle
+      the case where the specified resource does not exist.
+    severity: warn
+    given: $.paths[*~@contains('{')][get,put,delete]
+    then:
+      field: responses.404
+      function: truthy
+
+  # Use structured pagination
+  3scale-pagination-parameters:
+    description: >-
+      List endpoints should support pagination via page and per_page parameters
+      to control result set size.
+    severity: info
+    given: $.paths[?@property.endsWith('.json')][get]
+    then:
+      function: truthy

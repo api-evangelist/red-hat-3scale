@@ -1,0 +1,272 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale Analytics API
+  description: >-
+    The 3scale Analytics API provides access to API usage data, traffic metrics,
+    hit counts, and reporting for APIs managed through the 3scale platform. It
+    enables operators to retrieve usage statistics, query by time period and
+    granularity, and integrate analytics data into external dashboards.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+externalDocs:
+  description: Red Hat 3scale Analytics Documentation
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/analytics
+servers:
+  - url: https://{domain}-admin.3scale.net/stats
+    description: 3scale Analytics API
+    variables:
+      domain:
+        default: your-domain
+        description: Your 3scale tenant domain
+tags:
+  - name: Applications
+    description: Usage statistics for individual applications
+  - name: Services
+    description: Usage statistics for API services
+security:
+  - access_token: []
+paths:
+  /services/{service_id}/usage.json:
+    get:
+      operationId: getServiceUsage
+      summary: Get Service Usage
+      description: >-
+        Returns usage statistics for a specific API service. Supports
+        filtering by metric, time period, granularity, and date range.
+        Results include hit counts, response time, and other tracked metrics.
+      tags:
+        - Services
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: service_id
+          in: path
+          required: true
+          description: The ID of the API service
+          schema:
+            type: integer
+        - name: metric_name
+          in: query
+          required: true
+          description: The name of the metric to retrieve (e.g., hits)
+          schema:
+            type: string
+        - name: period
+          in: query
+          required: true
+          description: The time period for the statistics
+          schema:
+            type: string
+            enum:
+              - hour
+              - day
+              - week
+              - month
+              - year
+              - eternity
+        - name: since
+          in: query
+          description: Start date for custom date range (ISO 8601 format)
+          schema:
+            type: string
+            format: date-time
+        - name: until
+          in: query
+          description: End date for custom date range (ISO 8601 format)
+          schema:
+            type: string
+            format: date-time
+        - name: granularity
+          in: query
+          description: Granularity of data points within the period
+          schema:
+            type: string
+            enum:
+              - hour
+              - day
+              - month
+        - name: skip_change
+          in: query
+          description: Skip change data in response
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Usage statistics returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageStats'
+        '404':
+          description: Service or metric not found
+  /applications/{application_id}/usage.json:
+    get:
+      operationId: getApplicationUsage
+      summary: Get Application Usage
+      description: >-
+        Returns usage statistics for a specific application. Supports
+        filtering by metric, time period, and date range.
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: application_id
+          in: path
+          required: true
+          description: The application ID
+          schema:
+            type: integer
+        - name: metric_name
+          in: query
+          required: true
+          description: The name of the metric to retrieve
+          schema:
+            type: string
+        - name: period
+          in: query
+          required: true
+          description: The time period for the statistics
+          schema:
+            type: string
+            enum:
+              - hour
+              - day
+              - week
+              - month
+              - year
+              - eternity
+        - name: since
+          in: query
+          description: Start date for custom date range
+          schema:
+            type: string
+            format: date-time
+        - name: until
+          in: query
+          description: End date for custom date range
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Application usage statistics returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageStats'
+        '404':
+          description: Application not found
+  /services/{service_id}/top_applications.json:
+    get:
+      operationId: getTopApplications
+      summary: Get Top Applications by Usage
+      description: >-
+        Returns the top applications for a service ranked by usage volume
+        for a given metric and time period.
+      tags:
+        - Services
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: service_id
+          in: path
+          required: true
+          description: The ID of the API service
+          schema:
+            type: integer
+        - name: metric_name
+          in: query
+          required: true
+          description: The metric to rank by
+          schema:
+            type: string
+        - name: period
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - hour
+              - day
+              - week
+              - month
+              - year
+      responses:
+        '200':
+          description: Top applications returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopApplicationsList'
+components:
+  securitySchemes:
+    access_token:
+      type: apiKey
+      in: query
+      name: access_token
+  parameters:
+    accessToken:
+      name: access_token
+      in: query
+      required: true
+      description: Admin API access token
+      schema:
+        type: string
+  schemas:
+    UsageStats:
+      type: object
+      properties:
+        metric:
+          type: string
+          description: The metric name
+        period:
+          type: string
+          description: The time period
+        period_start:
+          type: string
+          format: date-time
+        period_end:
+          type: string
+          format: date-time
+        total:
+          type: integer
+          description: Total value for the period
+        values:
+          type: array
+          description: Time-series data points
+          items:
+            type: array
+            items:
+              oneOf:
+                - type: string
+                  format: date-time
+                - type: integer
+    TopApplicationsList:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopApplication'
+    TopApplication:
+      type: object
+      properties:
+        application:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            account:
+              type: object
+              properties:
+                id:
+                  type: integer
+                org_name:
+                  type: string
+        total:
+          type: integer
+          description: Total usage for this application in the period

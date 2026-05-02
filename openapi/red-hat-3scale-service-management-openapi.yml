@@ -1,0 +1,278 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale Service Management API
+  description: >-
+    The 3scale Service Management API allows API providers to control and manage
+    access to their APIs, track usage, and enforce traffic policies. It is used
+    by the APIcast API gateway to authorize and report API calls in real time.
+    The API supports both API key and OAuth 2.0 based authorization flows.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+externalDocs:
+  description: Red Hat 3scale API Authentication Documentation
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/api_authentication/index
+servers:
+  - url: https://su1.3scale.net
+    description: 3scale Service Management API
+tags:
+  - name: Authorization
+    description: Authorize API calls and check access permissions
+  - name: Reporting
+    description: Report API usage back to 3scale for analytics and rate limiting
+  - name: OAuth
+    description: OAuth 2.0 token authorization endpoints
+security:
+  - providerKey: []
+paths:
+  /transactions/authorize.xml:
+    get:
+      operationId: authorizeTransaction
+      summary: Authorize API Transaction
+      description: >-
+        Authorizes an API call by checking whether the application identified
+        by the user key is within its usage limits. Returns success or failure
+        along with current usage data. Used by APIcast before forwarding
+        requests to the backend API.
+      tags:
+        - Authorization
+      parameters:
+        - name: provider_key
+          in: query
+          required: true
+          description: The provider key identifying your 3scale account
+          schema:
+            type: string
+        - name: user_key
+          in: query
+          required: true
+          description: The API key of the application making the call
+          schema:
+            type: string
+        - name: service_id
+          in: query
+          required: false
+          description: The ID of the service being accessed
+          schema:
+            type: string
+        - name: usage[hits]
+          in: query
+          required: false
+          description: Number of hits to report with this authorization
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Authorization response (success or failure)
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizeResponse'
+        '403':
+          description: Authorization denied
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizeErrorResponse'
+        '404':
+          description: Application not found
+  /transactions/authrep.xml:
+    get:
+      operationId: authorizeAndReport
+      summary: Authorize and Report API Transaction
+      description: >-
+        Combines authorization and reporting in a single call. Authorizes the
+        API call and simultaneously reports usage metrics to 3scale. This is
+        the recommended approach for reporting hits and other metrics.
+      tags:
+        - Authorization
+        - Reporting
+      parameters:
+        - name: provider_key
+          in: query
+          required: true
+          description: The provider key identifying your 3scale account
+          schema:
+            type: string
+        - name: user_key
+          in: query
+          required: true
+          description: The API key of the application making the call
+          schema:
+            type: string
+        - name: service_id
+          in: query
+          required: false
+          description: The ID of the service being accessed
+          schema:
+            type: string
+        - name: usage[hits]
+          in: query
+          required: false
+          description: Number of hits to report
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Authorization and report successful
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizeResponse'
+        '403':
+          description: Authorization denied or limits exceeded
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizeErrorResponse'
+  /transactions.xml:
+    post:
+      operationId: reportTransactions
+      summary: Report API Transactions
+      description: >-
+        Reports multiple API usage transactions in batch to 3scale. Used to
+        asynchronously report usage metrics after API calls have already been
+        processed. Supports reporting for multiple application keys in a single
+        call.
+      tags:
+        - Reporting
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportRequest'
+      responses:
+        '202':
+          description: Transactions accepted for processing
+        '403':
+          description: Reporting denied - invalid provider key
+        '422':
+          description: Invalid transaction data
+  /transactions/oauth_authorize.xml:
+    get:
+      operationId: oauthAuthorize
+      summary: Authorize OAuth Token
+      description: >-
+        Authorizes an OAuth 2.0 access token against the 3scale service,
+        checking whether the token is valid and within usage limits. Returns
+        the application and plan details associated with the token.
+      tags:
+        - OAuth
+      parameters:
+        - name: provider_key
+          in: query
+          required: true
+          description: The provider key identifying your 3scale account
+          schema:
+            type: string
+        - name: access_token
+          in: query
+          required: true
+          description: The OAuth 2.0 access token to authorize
+          schema:
+            type: string
+        - name: service_id
+          in: query
+          required: false
+          description: The ID of the service being accessed
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OAuth token authorized successfully
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAuthAuthorizeResponse'
+        '403':
+          description: Token invalid or limits exceeded
+components:
+  securitySchemes:
+    providerKey:
+      type: apiKey
+      in: query
+      name: provider_key
+  schemas:
+    AuthorizeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - success
+            - failure
+        plan:
+          type: string
+          description: Name of the application plan
+        usage_reports:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageReport'
+    AuthorizeErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - failure
+        code:
+          type: string
+          description: Error code (e.g. user.exceeded_limits)
+        message:
+          type: string
+          description: Human-readable error message
+    OAuthAuthorizeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        application:
+          type: object
+          properties:
+            id:
+              type: string
+            key:
+              type: string
+            redirect_url:
+              type: string
+    UsageReport:
+      type: object
+      properties:
+        metric:
+          type: string
+          description: The metric name (e.g. hits)
+        period:
+          type: string
+          description: The time period (minute, hour, day, month, year, eternity)
+        period_start:
+          type: string
+          format: date-time
+        period_end:
+          type: string
+          format: date-time
+        max_value:
+          type: integer
+          description: Maximum allowed value for this period
+        current_value:
+          type: integer
+          description: Current usage value for this period
+    ReportRequest:
+      type: object
+      required:
+        - provider_key
+      properties:
+        provider_key:
+          type: string
+          description: The provider key
+        service_id:
+          type: string
+          description: The service ID
+        transactions:
+          type: array
+          description: Array of transaction objects to report
+          items:
+            type: object

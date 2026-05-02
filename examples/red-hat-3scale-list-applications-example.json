@@ -1,0 +1,33 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://your-domain-admin.3scale.net/admin/api/accounts/12345/applications.json",
+    "parameters": {
+      "access_token": "admin_token_abc123"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "applications": [
+        {
+          "application": {
+            "id": 98765,
+            "created_at": "2026-04-01T09:00:00Z",
+            "updated_at": "2026-04-15T12:30:00Z",
+            "state": "live",
+            "user_account_id": 12345,
+            "name": "Acme Production App",
+            "description": "Production integration with our API gateway",
+            "user_key": "app_key_abc123xyz789",
+            "plan": {
+              "id": 55,
+              "name": "Professional",
+              "system_name": "professional"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

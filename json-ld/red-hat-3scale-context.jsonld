@@ -1,0 +1,91 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "threescale": "https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/",
+    "Account": {
+      "@id": "schema:Organization",
+      "@type": "schema:Organization"
+    },
+    "Application": {
+      "@id": "schema:SoftwareApplication",
+      "@type": "schema:SoftwareApplication"
+    },
+    "ApplicationPlan": {
+      "@id": "schema:OfferCatalog",
+      "@type": "schema:OfferCatalog"
+    },
+    "id": "@id",
+    "name": "schema:name",
+    "description": "schema:description",
+    "org_name": {
+      "@id": "schema:legalName",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "schema:actionStatus",
+      "@type": "xsd:string"
+    },
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "user_key": {
+      "@id": "schema:accessCode",
+      "@type": "xsd:string"
+    },
+    "plan": {
+      "@id": "schema:Offer",
+      "@type": "schema:Offer"
+    },
+    "setup_fee": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "cost_per_month": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "hits": {
+      "@id": "schema:numberOfItems",
+      "@type": "xsd:integer"
+    },
+    "metric": {
+      "@id": "schema:measurementTechnique",
+      "@type": "xsd:string"
+    },
+    "period": {
+      "@id": "schema:temporalCoverage",
+      "@type": "xsd:string"
+    },
+    "Invoice": {
+      "@id": "schema:Invoice",
+      "@type": "schema:Invoice"
+    },
+    "invoice_id": {
+      "@id": "schema:identifier",
+      "@type": "xsd:string"
+    },
+    "amount": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "currency": {
+      "@id": "schema:priceCurrency",
+      "@type": "xsd:string"
+    },
+    "provider_key": {
+      "@id": "schema:accessCode",
+      "@type": "xsd:string"
+    },
+    "service_id": {
+      "@id": "schema:identifier",
+      "@type": "xsd:string"
+    }
+  }
+}

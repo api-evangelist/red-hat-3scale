@@ -1,0 +1,27 @@
+{
+  "name": "Account",
+  "description": "Developer account structure in 3scale API Management",
+  "fields": [
+    { "name": "id", "type": "integer", "description": "Unique account identifier" },
+    { "name": "state", "type": "string", "enum": ["approved", "pending", "rejected"], "description": "Approval state" },
+    { "name": "org_name", "type": "string", "description": "Organization name" },
+    { "name": "created_at", "type": "datetime", "description": "Creation timestamp" },
+    { "name": "updated_at", "type": "datetime", "description": "Last update timestamp" },
+    { "name": "extra_fields", "type": "object", "description": "Custom portal fields" },
+    {
+      "name": "applications",
+      "type": "array",
+      "description": "Applications belonging to this account",
+      "items": {
+        "name": "Application",
+        "fields": [
+          { "name": "id", "type": "integer", "description": "Application ID" },
+          { "name": "name", "type": "string", "description": "Application name" },
+          { "name": "state", "type": "string", "description": "live or suspended" },
+          { "name": "user_key", "type": "string", "description": "API key credential" },
+          { "name": "plan", "type": "object", "description": "Subscribed application plan" }
+        ]
+      }
+    }
+  ]
+}

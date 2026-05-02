@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://su1.3scale.net/transactions/authorize.xml",
+    "parameters": {
+      "provider_key": "abc123def456",
+      "user_key": "user_key_789xyz",
+      "service_id": "2555417785739",
+      "usage[hits]": "1"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><status><authorized>true</authorized><plan>Basic</plan><usage_reports><usage_report metric=\"hits\" period=\"minute\"><period_start>2026-05-02 10:00:00 +0000</period_start><period_end>2026-05-02 10:01:00 +0000</period_end><max_value>50</max_value><current_value>10</current_value></usage_report></usage_reports></status>"
+  }
+}

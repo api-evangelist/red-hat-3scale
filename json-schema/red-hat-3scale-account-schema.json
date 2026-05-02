@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/red-hat-3scale/json-schema/red-hat-3scale-account-schema.json",
+  "title": "Red Hat 3scale Account",
+  "description": "Schema for a developer account in Red Hat 3scale API Management.",
+  "type": "object",
+  "required": ["id", "state", "org_name"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique account identifier"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Account creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Account last updated timestamp"
+    },
+    "state": {
+      "type": "string",
+      "enum": ["approved", "pending", "rejected"],
+      "description": "Account approval state"
+    },
+    "org_name": {
+      "type": "string",
+      "description": "Organization name for the developer account",
+      "minLength": 1
+    },
+    "extra_fields": {
+      "type": "object",
+      "description": "Custom fields defined in the developer portal",
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,148 @@
+name: Red Hat 3scale API Management Vocabulary
+description: >-
+  Core vocabulary and terminology for Red Hat 3scale API Management including
+  API lifecycle management, developer portal, traffic policies, and billing concepts.
+created: '2026-05-02'
+modified: '2026-05-02'
+terms:
+  - term: Account
+    definition: >-
+      A developer account in the 3scale developer portal representing an organization
+      or individual API consumer. Accounts hold applications and billing information.
+    tags:
+      - Developer Portal
+      - Identity
+
+  - term: Application
+    definition: >-
+      An API client credential set (API key, OAuth client, or App ID/App Key pair)
+      associated with a developer account and subscribed to an application plan.
+    tags:
+      - Credentials
+      - Developer Portal
+
+  - term: Application Plan
+    definition: >-
+      A pricing and access tier that defines usage limits, rate limits, features,
+      and pricing for API consumers. Applications subscribe to application plans.
+    tags:
+      - Monetization
+      - Traffic Management
+
+  - term: APIcast
+    definition: >-
+      The 3scale API gateway (NGINX/OpenResty based) that enforces traffic policies,
+      authentication, rate limiting, and usage reporting for managed APIs.
+    tags:
+      - API Gateway
+      - Infrastructure
+
+  - term: Service
+    definition: >-
+      An API service in 3scale that represents a backend API being managed.
+      Each service has authentication settings, application plans, and policies.
+    tags:
+      - API Management
+
+  - term: Metric
+    definition: >-
+      A quantitative measure of API usage tracked by 3scale (e.g., hits, storage,
+      bandwidth). Metrics are used for rate limiting and billing calculations.
+    tags:
+      - Analytics
+      - Traffic Management
+
+  - term: Method
+    definition: >-
+      A subset of the hits metric that represents a specific API endpoint or operation.
+      Methods allow granular usage tracking and rate limiting per endpoint.
+    tags:
+      - Analytics
+      - Traffic Management
+
+  - term: Policy
+    definition: >-
+      A configurable behavior applied to API traffic at the gateway level, such as
+      caching, rate limiting, JWT validation, CORS, or custom transformations.
+    tags:
+      - API Gateway
+      - Configuration
+
+  - term: Policy Chain
+    definition: >-
+      An ordered sequence of policies applied to API requests and responses as
+      they pass through the APIcast gateway.
+    tags:
+      - API Gateway
+      - Configuration
+
+  - term: Developer Portal
+    definition: >-
+      A customizable web portal for API consumers to discover APIs, register accounts,
+      subscribe to plans, manage credentials, and view documentation.
+    tags:
+      - Developer Experience
+      - Portal
+
+  - term: ActiveDocs
+    definition: >-
+      3scale's implementation of interactive API documentation based on the OpenAPI
+      (Swagger) specification. ActiveDocs allow developers to try APIs in the browser.
+    tags:
+      - Documentation
+      - Developer Experience
+
+  - term: Tenant
+    definition: >-
+      A 3scale deployment instance with its own admin portal, developer portal,
+      APIs, and accounts. Also called an organization in SaaS context.
+    tags:
+      - Multi-Tenancy
+
+  - term: Provider Key
+    definition: >-
+      A secret key that authenticates the 3scale API gateway to the 3scale management
+      API for authorization and reporting calls.
+    tags:
+      - Authentication
+      - Security
+
+  - term: User Key
+    definition: >-
+      An API key credential issued to an application for API key authentication mode.
+      Passed by API consumers in requests to the API gateway.
+    tags:
+      - Authentication
+      - Credentials
+
+  - term: Rate Limiting
+    definition: >-
+      Traffic control that restricts the number of API calls an application can
+      make within a defined period (minute, hour, day, month) as specified in the plan.
+    tags:
+      - Traffic Management
+      - Policies
+
+  - term: Webhook
+    definition: >-
+      An HTTP callback notification sent by 3scale to a configured endpoint when
+      account, application, or subscription events occur.
+    tags:
+      - Events
+      - Integration
+
+  - term: Toolbox
+    definition: >-
+      A command-line interface (CLI) for automating 3scale configuration tasks,
+      including copying APIs between tenants and importing OpenAPI specifications.
+    tags:
+      - Automation
+      - CLI
+
+  - term: Billing Period
+    definition: >-
+      The recurring interval (monthly) at which usage-based charges are calculated
+      and invoices are generated for developer accounts.
+    tags:
+      - Billing
+      - Monetization
