@@ -1,0 +1,13 @@
+{
+  "repo": "red-hat-3scale",
+  "feeds": [
+    {
+      "source": "https://www.redhat.com/en/blog/channel/red-hat-middleware",
+      "feed_url": "https://www.redhat.com/en/rss.xml",
+      "saved": 7,
+      "title": "Red Hat"
+    }
+  ],
+  "post_count": 7,
+  "fetched": "2026-05-03T23:35:20Z"
+}
