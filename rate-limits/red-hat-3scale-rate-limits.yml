@@ -4,116 +4,39 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Red Hat 3scale
 providerId: red-hat-3scale
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - API Gateway
   - API Management
-  - Developer Portal
-  - Enterprise
-  - Red Hat
+  - Gateway
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Red Hat 3scale API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: 3scale is itself an API-management product; rate limits are configured by the customer
+  per managed API rather than imposed on consumers of 3scale itself. The Red Hat 3scale product
+  page does not publish a platform-wide call ceiling, so the limit values below describe the
+  policy shape, not numeric thresholds.
+sources:
+  - https://www.redhat.com/en/technologies/jboss-middleware/3scale
+notes: 3scale enforces customer-defined plans (per-app, per-method, per-time-window). No platform
+  ceiling is published; values are set per customer deployment.
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
+  - name: Customer-defined application plan
     scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Red Hat 3scale Service Management API
-      - Red Hat 3scale Account Management API
-      - Red Hat 3scale Analytics API
-      - Red Hat 3scale Billing API
-      - Red Hat 3scale Webhooks
-      - Red Hat 3scale APIcast Management API
-      - Red Hat 3scale Toolbox CLI
-  - tier: free
-    name: Free Tier Monthly Quota
+    metric: varies
+    limit: 'configured per application plan in the 3scale admin portal'
+  - name: Customer-defined per-method limit
     scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Red Hat 3scale Service Management API
-      - Red Hat 3scale Account Management API
-      - Red Hat 3scale Analytics API
-      - Red Hat 3scale Billing API
-      - Red Hat 3scale Webhooks
-      - Red Hat 3scale APIcast Management API
-      - Red Hat 3scale Toolbox CLI
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Red Hat 3scale Service Management API
-      - Red Hat 3scale Account Management API
-      - Red Hat 3scale Analytics API
-      - Red Hat 3scale Billing API
-      - Red Hat 3scale Webhooks
-      - Red Hat 3scale APIcast Management API
-      - Red Hat 3scale Toolbox CLI
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Red Hat 3scale Service Management API
-      - Red Hat 3scale Account Management API
-      - Red Hat 3scale Analytics API
-      - Red Hat 3scale Billing API
-      - Red Hat 3scale Webhooks
-      - Red Hat 3scale APIcast Management API
-      - Red Hat 3scale Toolbox CLI
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Red Hat 3scale Service Management API
-      - Red Hat 3scale Account Management API
-      - Red Hat 3scale Analytics API
-      - Red Hat 3scale Billing API
-      - Red Hat 3scale Webhooks
-      - Red Hat 3scale APIcast Management API
-      - Red Hat 3scale Toolbox CLI
+    metric: varies
+    limit: 'configured per method in the 3scale admin portal'
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Application Plans
+    description: 3scale administrators define application plans with per-app, per-method, and
+      per-window limits; consumers of the managed APIs receive 429 responses when those plans
+      are exceeded.
+  - name: Customer Configuration
+    description: All quota and throttling values are set by the 3scale operator, not by Red Hat;
+      there is no published platform-wide ceiling.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
