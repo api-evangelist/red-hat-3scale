@@ -3,11 +3,11 @@
   "feeds": [
     {
       "source": "https://www.redhat.com/en/blog/channel/red-hat-middleware",
-      "feed_url": "https://www.redhat.com/en/rss.xml",
-      "saved": 7,
-      "title": "Red Hat"
+      "feed_url": "https://www.redhat.com/rss.xml",
+      "title": "Red Hat",
+      "saved": 0
     }
   ],
   "post_count": 7,
-  "fetched": "2026-05-03T23:35:20Z"
+  "fetched": "2026-05-09T20:17:51Z"
 }
