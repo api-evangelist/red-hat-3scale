@@ -177,11 +177,11 @@ common:
     url: https://www.redhat.com/en/technologies/jboss-middleware/3scale
   - type: Documentation
     url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management
-  - type: Getting Started
+  - type: GettingStarted
     url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/getting_started/index
   - type: Portal
     url: https://access.redhat.com/products/red-hat-3scale-api-management
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/3scale
   - type: GitHubRepository
     url: https://github.com/3scale/APIcast
@@ -193,13 +193,13 @@ common:
     url: https://www.redhat.com/en/blog/channel/red-hat-middleware
   - type: Support
     url: https://access.redhat.com/support
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.redhat.com/en/about/agreements
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.redhat.com/en/about/privacy-policy
-  - type: Status
+  - type: StatusPage
     url: https://status.redhat.com/
-  - type: Changelog
+  - type: ChangeLog
     url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/release_notes/index
   - type: OpenAPI
     url: openapi/red-hat-3scale-service-management-openapi.yml
