@@ -1,0 +1,162 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Red Hat 3scale Service Management API — Authorization
+  description: 'Red Hat 3scale Service Management API — Authorization. 2 operations. Lead operation: Authorize API Transaction.
+    Self-contained Naftiko capability covering one Red Hat 3scale business surface.'
+  tags:
+  - Red Hat 3scale
+  - Authorization
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RED_HAT_3SCALE_API_KEY: RED_HAT_3SCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: service-management-authorization
+    baseUri: https://su1.3scale.net
+    description: Red Hat 3scale Service Management API — Authorization business capability. Self-contained, no shared references.
+    resources:
+    - name: transactions-authorize.xml
+      path: /transactions/authorize.xml
+      operations:
+      - name: authorizetransaction
+        method: GET
+        description: Authorize API Transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: provider_key
+          in: query
+          type: string
+          description: The provider key identifying your 3scale account
+          required: true
+        - name: user_key
+          in: query
+          type: string
+          description: The API key of the application making the call
+          required: true
+        - name: service_id
+          in: query
+          type: string
+          description: The ID of the service being accessed
+        - name: usage[hits]
+          in: query
+          type: integer
+          description: Number of hits to report with this authorization
+    - name: transactions-authrep.xml
+      path: /transactions/authrep.xml
+      operations:
+      - name: authorizeandreport
+        method: GET
+        description: Authorize and Report API Transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: provider_key
+          in: query
+          type: string
+          description: The provider key identifying your 3scale account
+          required: true
+        - name: user_key
+          in: query
+          type: string
+          description: The API key of the application making the call
+          required: true
+        - name: service_id
+          in: query
+          type: string
+          description: The ID of the service being accessed
+        - name: usage[hits]
+          in: query
+          type: integer
+          description: Number of hits to report
+    authentication:
+      type: apikey
+      key: provider_key
+      value: '{{env.RED_HAT_3SCALE_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: service-management-authorization-rest
+    port: 8080
+    description: REST adapter for Red Hat 3scale Service Management API — Authorization. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/transactions/authorize-xml
+      name: transactions-authorize-xml
+      description: REST surface for transactions-authorize.xml.
+      operations:
+      - method: GET
+        name: authorizetransaction
+        description: Authorize API Transaction
+        call: service-management-authorization.authorizetransaction
+        with:
+          provider_key: rest.provider_key
+          user_key: rest.user_key
+          service_id: rest.service_id
+          usage[hits]: rest.usage[hits]
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/transactions/authrep-xml
+      name: transactions-authrep-xml
+      description: REST surface for transactions-authrep.xml.
+      operations:
+      - method: GET
+        name: authorizeandreport
+        description: Authorize and Report API Transaction
+        call: service-management-authorization.authorizeandreport
+        with:
+          provider_key: rest.provider_key
+          user_key: rest.user_key
+          service_id: rest.service_id
+          usage[hits]: rest.usage[hits]
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: service-management-authorization-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Red Hat 3scale Service Management API — Authorization. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: authorize-api-transaction
+      description: Authorize API Transaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: service-management-authorization.authorizetransaction
+      with:
+        provider_key: tools.provider_key
+        user_key: tools.user_key
+        service_id: tools.service_id
+        usage[hits]: tools.usage[hits]
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: authorize-and-report-api-transaction
+      description: Authorize and Report API Transaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: service-management-authorization.authorizeandreport
+      with:
+        provider_key: tools.provider_key
+        user_key: tools.user_key
+        service_id: tools.service_id
+        usage[hits]: tools.usage[hits]
+      outputParameters:
+      - type: object
+        mapping: $.

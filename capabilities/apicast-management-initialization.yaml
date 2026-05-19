@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Red Hat 3scale APIcast Management API — Initialization
+  description: 'Red Hat 3scale APIcast Management API — Initialization. 1 operations. Lead operation: Boot Gateway. Self-contained
+    Naftiko capability covering one Red Hat 3scale business surface.'
+  tags:
+  - Red Hat 3scale
+  - Initialization
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RED_HAT_3SCALE_API_KEY: RED_HAT_3SCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apicast-management-initialization
+    baseUri: http://localhost:8090
+    description: Red Hat 3scale APIcast Management API — Initialization business capability. Self-contained, no shared references.
+    resources:
+    - name: boot
+      path: /boot
+      operations:
+      - name: bootgateway
+        method: POST
+        description: Boot Gateway
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: apicast-management-initialization-rest
+    port: 8080
+    description: REST adapter for Red Hat 3scale APIcast Management API — Initialization. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/boot
+      name: boot
+      description: REST surface for boot.
+      operations:
+      - method: POST
+        name: bootgateway
+        description: Boot Gateway
+        call: apicast-management-initialization.bootgateway
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: apicast-management-initialization-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Red Hat 3scale APIcast Management API — Initialization. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: boot-gateway
+      description: Boot Gateway
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: apicast-management-initialization.bootgateway
+      outputParameters:
+      - type: object
+        mapping: $.

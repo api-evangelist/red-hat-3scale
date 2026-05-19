@@ -1,0 +1,131 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Red Hat 3scale APIcast Management API — Health
+  description: 'Red Hat 3scale APIcast Management API — Health. 3 operations. Lead operation: Get Status Information. Self-contained
+    Naftiko capability covering one Red Hat 3scale business surface.'
+  tags:
+  - Red Hat 3scale
+  - Health
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RED_HAT_3SCALE_API_KEY: RED_HAT_3SCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apicast-management-health
+    baseUri: http://localhost:8090
+    description: Red Hat 3scale APIcast Management API — Health business capability. Self-contained, no shared references.
+    resources:
+    - name: status-info
+      path: /status/info
+      operations:
+      - name: getstatusinfo
+        method: GET
+        description: Get Status Information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: status-live
+      path: /status/live
+      operations:
+      - name: getliveness
+        method: GET
+        description: Check Liveness
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: status-ready
+      path: /status/ready
+      operations:
+      - name: getreadiness
+        method: GET
+        description: Check Readiness
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: apicast-management-health-rest
+    port: 8080
+    description: REST adapter for Red Hat 3scale APIcast Management API — Health. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/status/info
+      name: status-info
+      description: REST surface for status-info.
+      operations:
+      - method: GET
+        name: getstatusinfo
+        description: Get Status Information
+        call: apicast-management-health.getstatusinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/status/live
+      name: status-live
+      description: REST surface for status-live.
+      operations:
+      - method: GET
+        name: getliveness
+        description: Check Liveness
+        call: apicast-management-health.getliveness
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/status/ready
+      name: status-ready
+      description: REST surface for status-ready.
+      operations:
+      - method: GET
+        name: getreadiness
+        description: Check Readiness
+        call: apicast-management-health.getreadiness
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: apicast-management-health-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Red Hat 3scale APIcast Management API — Health. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-status-information
+      description: Get Status Information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: apicast-management-health.getstatusinfo
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-liveness
+      description: Check Liveness
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: apicast-management-health.getliveness
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-readiness
+      description: Check Readiness
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: apicast-management-health.getreadiness
+      outputParameters:
+      - type: object
+        mapping: $.

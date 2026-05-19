@@ -1,0 +1,95 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Red Hat 3scale Service Management API — OAuth
+  description: 'Red Hat 3scale Service Management API — OAuth. 1 operations. Lead operation: Authorize OAuth Token. Self-contained
+    Naftiko capability covering one Red Hat 3scale business surface.'
+  tags:
+  - Red Hat 3scale
+  - OAuth
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RED_HAT_3SCALE_API_KEY: RED_HAT_3SCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: service-management-oauth
+    baseUri: https://su1.3scale.net
+    description: Red Hat 3scale Service Management API — OAuth business capability. Self-contained, no shared references.
+    resources:
+    - name: transactions-oauth_authorize.xml
+      path: /transactions/oauth_authorize.xml
+      operations:
+      - name: oauthauthorize
+        method: GET
+        description: Authorize OAuth Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: provider_key
+          in: query
+          type: string
+          description: The provider key identifying your 3scale account
+          required: true
+        - name: access_token
+          in: query
+          type: string
+          description: The OAuth 2.0 access token to authorize
+          required: true
+        - name: service_id
+          in: query
+          type: string
+          description: The ID of the service being accessed
+    authentication:
+      type: apikey
+      key: provider_key
+      value: '{{env.RED_HAT_3SCALE_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: service-management-oauth-rest
+    port: 8080
+    description: REST adapter for Red Hat 3scale Service Management API — OAuth. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/transactions/oauth-authorize-xml
+      name: transactions-oauth-authorize-xml
+      description: REST surface for transactions-oauth_authorize.xml.
+      operations:
+      - method: GET
+        name: oauthauthorize
+        description: Authorize OAuth Token
+        call: service-management-oauth.oauthauthorize
+        with:
+          provider_key: rest.provider_key
+          access_token: rest.access_token
+          service_id: rest.service_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: service-management-oauth-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Red Hat 3scale Service Management API — OAuth. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: authorize-oauth-token
+      description: Authorize OAuth Token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: service-management-oauth.oauthauthorize
+      with:
+        provider_key: tools.provider_key
+        access_token: tools.access_token
+        service_id: tools.service_id
+      outputParameters:
+      - type: object
+        mapping: $.

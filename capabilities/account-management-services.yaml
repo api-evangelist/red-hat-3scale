@@ -1,0 +1,127 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Red Hat 3scale Account Management API — Services
+  description: 'Red Hat 3scale Account Management API — Services. 2 operations. Lead operation: List Services. Self-contained
+    Naftiko capability covering one Red Hat 3scale business surface.'
+  tags:
+  - Red Hat 3scale
+  - Services
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RED_HAT_3SCALE_API_KEY: RED_HAT_3SCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: account-management-services
+    baseUri: https://{domain}-admin.3scale.net/admin/api
+    description: Red Hat 3scale Account Management API — Services business capability. Self-contained, no shared references.
+    resources:
+    - name: services.json
+      path: /services.json
+      operations:
+      - name: listservices
+        method: GET
+        description: List Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+        - name: per_page
+          in: query
+          type: integer
+    - name: services-id}.json
+      path: /services/{id}.json
+      operations:
+      - name: getservice
+        method: GET
+        description: Get Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The service ID
+          required: true
+    authentication:
+      type: apikey
+      key: access_token
+      value: '{{env.RED_HAT_3SCALE_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: account-management-services-rest
+    port: 8080
+    description: REST adapter for Red Hat 3scale Account Management API — Services. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/services-json
+      name: services-json
+      description: REST surface for services.json.
+      operations:
+      - method: GET
+        name: listservices
+        description: List Services
+        call: account-management-services.listservices
+        with:
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services/id-json
+      name: services-id-json
+      description: REST surface for services-id}.json.
+      operations:
+      - method: GET
+        name: getservice
+        description: Get Service
+        call: account-management-services.getservice
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: account-management-services-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Red Hat 3scale Account Management API — Services. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-services
+      description: List Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: account-management-services.listservices
+      with:
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-service
+      description: Get Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: account-management-services.getservice
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

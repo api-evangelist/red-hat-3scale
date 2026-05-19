@@ -1,0 +1,247 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Red Hat 3scale Account Management API — Accounts
+  description: 'Red Hat 3scale Account Management API — Accounts. 5 operations. Lead operation: List Developer Accounts. Self-contained
+    Naftiko capability covering one Red Hat 3scale business surface.'
+  tags:
+  - Red Hat 3scale
+  - Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RED_HAT_3SCALE_API_KEY: RED_HAT_3SCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: account-management-accounts
+    baseUri: https://{domain}-admin.3scale.net/admin/api
+    description: Red Hat 3scale Account Management API — Accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts.json
+      path: /accounts.json
+      operations:
+      - name: listaccounts
+        method: GET
+        description: List Developer Accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: state
+          in: query
+          type: string
+          description: Filter accounts by state
+        - name: page
+          in: query
+          type: integer
+          description: Page number for pagination
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of results per page (max 500)
+      - name: createaccount
+        method: POST
+        description: Create Developer Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: accounts-id}.json
+      path: /accounts/{id}.json
+      operations:
+      - name: getaccount
+        method: GET
+        description: Get Developer Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID of the account
+          required: true
+      - name: updateaccount
+        method: PUT
+        description: Update Developer Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID of the account
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteaccount
+        method: DELETE
+        description: Delete Developer Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID of the account to delete
+          required: true
+    authentication:
+      type: apikey
+      key: access_token
+      value: '{{env.RED_HAT_3SCALE_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: account-management-accounts-rest
+    port: 8080
+    description: REST adapter for Red Hat 3scale Account Management API — Accounts. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/accounts-json
+      name: accounts-json
+      description: REST surface for accounts.json.
+      operations:
+      - method: GET
+        name: listaccounts
+        description: List Developer Accounts
+        call: account-management-accounts.listaccounts
+        with:
+          state: rest.state
+          page: rest.page
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createaccount
+        description: Create Developer Account
+        call: account-management-accounts.createaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/id-json
+      name: accounts-id-json
+      description: REST surface for accounts-id}.json.
+      operations:
+      - method: GET
+        name: getaccount
+        description: Get Developer Account
+        call: account-management-accounts.getaccount
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateaccount
+        description: Update Developer Account
+        call: account-management-accounts.updateaccount
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteaccount
+        description: Delete Developer Account
+        call: account-management-accounts.deleteaccount
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: account-management-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Red Hat 3scale Account Management API — Accounts. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-developer-accounts
+      description: List Developer Accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: account-management-accounts.listaccounts
+      with:
+        state: tools.state
+        page: tools.page
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-developer-account
+      description: Create Developer Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: account-management-accounts.createaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-developer-account
+      description: Get Developer Account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: account-management-accounts.getaccount
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-developer-account
+      description: Update Developer Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: account-management-accounts.updateaccount
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-developer-account
+      description: Delete Developer Account
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: account-management-accounts.deleteaccount
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

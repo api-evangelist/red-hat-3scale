@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Red Hat 3scale Account Management API — Plans
+  description: 'Red Hat 3scale Account Management API — Plans. 1 operations. Lead operation: List Application Plans. Self-contained
+    Naftiko capability covering one Red Hat 3scale business surface.'
+  tags:
+  - Red Hat 3scale
+  - Plans
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RED_HAT_3SCALE_API_KEY: RED_HAT_3SCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: account-management-plans
+    baseUri: https://{domain}-admin.3scale.net/admin/api
+    description: Red Hat 3scale Account Management API — Plans business capability. Self-contained, no shared references.
+    resources:
+    - name: application_plans.json
+      path: /application_plans.json
+      operations:
+      - name: listapplicationplans
+        method: GET
+        description: List Application Plans
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: access_token
+      value: '{{env.RED_HAT_3SCALE_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: account-management-plans-rest
+    port: 8080
+    description: REST adapter for Red Hat 3scale Account Management API — Plans. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/application-plans-json
+      name: application-plans-json
+      description: REST surface for application_plans.json.
+      operations:
+      - method: GET
+        name: listapplicationplans
+        description: List Application Plans
+        call: account-management-plans.listapplicationplans
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: account-management-plans-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Red Hat 3scale Account Management API — Plans. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-application-plans
+      description: List Application Plans
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: account-management-plans.listapplicationplans
+      outputParameters:
+      - type: object
+        mapping: $.

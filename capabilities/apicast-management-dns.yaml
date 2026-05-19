@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Red Hat 3scale APIcast Management API — DNS
+  description: 'Red Hat 3scale APIcast Management API — DNS. 1 operations. Lead operation: Get DNS Cache. Self-contained Naftiko
+    capability covering one Red Hat 3scale business surface.'
+  tags:
+  - Red Hat 3scale
+  - DNS
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    RED_HAT_3SCALE_API_KEY: RED_HAT_3SCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apicast-management-dns
+    baseUri: http://localhost:8090
+    description: Red Hat 3scale APIcast Management API — DNS business capability. Self-contained, no shared references.
+    resources:
+    - name: dns-cache
+      path: /dns/cache
+      operations:
+      - name: getdnscache
+        method: GET
+        description: Get DNS Cache
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: apicast-management-dns-rest
+    port: 8080
+    description: REST adapter for Red Hat 3scale APIcast Management API — DNS. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/dns/cache
+      name: dns-cache
+      description: REST surface for dns-cache.
+      operations:
+      - method: GET
+        name: getdnscache
+        description: Get DNS Cache
+        call: apicast-management-dns.getdnscache
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: apicast-management-dns-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Red Hat 3scale APIcast Management API — DNS. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-dns-cache
+      description: Get DNS Cache
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: apicast-management-dns.getdnscache
+      outputParameters:
+      - type: object
+        mapping: $.
