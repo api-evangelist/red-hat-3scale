@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DnsCacheResponse",
+  "title": "DnsCacheResponse",
+  "type": "object",
+  "properties": {
+    "dns_cache": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The DNS hostname"
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Resolved IP addresses"
+          },
+          "expire": {
+            "type": "number",
+            "description": "Expiration time in seconds"
+          }
+        }
+      }
+    }
+  }
+}

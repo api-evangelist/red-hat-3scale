@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Invoice",
+  "title": "Invoice",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "open",
+        "pending",
+        "unpaid",
+        "paid",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "friendly_id": {
+      "type": "string",
+      "description": "Human-readable invoice ID (e.g., 2026-00000001)"
+    },
+    "month": {
+      "type": "string",
+      "description": "Billing month in YYYY-MM format"
+    },
+    "due_on": {
+      "type": "string",
+      "format": "date"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "cost": {
+      "type": "number",
+      "format": "float",
+      "description": "Invoice total amount"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code"
+    },
+    "account": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "org_name": {
+          "type": "string"
+        }
+      }
+    },
+    "line_items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/InvoiceLineItem"
+      }
+    }
+  }
+}

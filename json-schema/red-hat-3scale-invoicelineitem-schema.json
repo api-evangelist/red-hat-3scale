@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/InvoiceLineItem",
+  "title": "InvoiceLineItem",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string",
+      "description": "Description of the line item"
+    },
+    "cost": {
+      "type": "number",
+      "description": "Cost for this line item"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Quantity consumed"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of charge (setup, recurring, variable)"
+    }
+  }
+}

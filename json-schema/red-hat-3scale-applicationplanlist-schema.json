@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApplicationPlanList",
+  "title": "ApplicationPlanList",
+  "type": "object",
+  "properties": {
+    "plans": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ApplicationPlan"
+      }
+    }
+  }
+}

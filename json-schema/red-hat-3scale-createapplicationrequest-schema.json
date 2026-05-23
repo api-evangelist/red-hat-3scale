@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateApplicationRequest",
+  "title": "CreateApplicationRequest",
+  "type": "object",
+  "required": [
+    "plan_id",
+    "name"
+  ],
+  "properties": {
+    "plan_id": {
+      "type": "integer",
+      "description": "The ID of the application plan to subscribe to"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the application"
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

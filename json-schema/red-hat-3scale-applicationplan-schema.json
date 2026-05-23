@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApplicationPlan",
+  "title": "ApplicationPlan",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "system_name": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "published",
+        "hidden"
+      ]
+    },
+    "approval_required": {
+      "type": "boolean"
+    },
+    "setup_fee": {
+      "type": "number"
+    },
+    "cost_per_month": {
+      "type": "number"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AuthorizeErrorResponse",
+  "title": "AuthorizeErrorResponse",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "failure"
+      ]
+    },
+    "code": {
+      "type": "string",
+      "description": "Error code (e.g. user.exceeded_limits)"
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable error message"
+    }
+  }
+}

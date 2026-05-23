@@ -1,0 +1,200 @@
+{
+  "provider": "Red Hat 3scale",
+  "providerId": "red-hat-3scale",
+  "kind": "json-structure",
+  "description": "Structural overview of the Red Hat 3scale API surface; extracted from openapi/.",
+  "schemaCount": 12,
+  "operationCount": 12,
+  "schemas": [
+    {
+      "name": "AccountList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Account",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "CreateAccountRequest",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "org_name",
+        "username",
+        "email",
+        "password"
+      ]
+    },
+    {
+      "name": "UpdateAccountRequest",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "ApplicationList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Application",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "CreateApplicationRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "plan_id",
+        "name"
+      ]
+    },
+    {
+      "name": "UpdateApplicationRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ServiceList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Service",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "ApplicationPlanList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "ApplicationPlan",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/accounts.json",
+      "operationId": "listAccounts",
+      "summary": "List Developer Accounts",
+      "tags": [
+        "Accounts"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/accounts.json",
+      "operationId": "createAccount",
+      "summary": "Create Developer Account",
+      "tags": [
+        "Accounts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/accounts/{id}.json",
+      "operationId": "getAccount",
+      "summary": "Get Developer Account",
+      "tags": [
+        "Accounts"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/accounts/{id}.json",
+      "operationId": "updateAccount",
+      "summary": "Update Developer Account",
+      "tags": [
+        "Accounts"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/accounts/{id}.json",
+      "operationId": "deleteAccount",
+      "summary": "Delete Developer Account",
+      "tags": [
+        "Accounts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/accounts/{account_id}/applications.json",
+      "operationId": "listApplications",
+      "summary": "List Applications for Account",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/accounts/{account_id}/applications.json",
+      "operationId": "createApplication",
+      "summary": "Create Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/accounts/{account_id}/applications/{id}.json",
+      "operationId": "getApplication",
+      "summary": "Get Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/accounts/{account_id}/applications/{id}.json",
+      "operationId": "updateApplication",
+      "summary": "Update Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/services.json",
+      "operationId": "listServices",
+      "summary": "List Services",
+      "tags": [
+        "Services"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/services/{id}.json",
+      "operationId": "getService",
+      "summary": "Get Service",
+      "tags": [
+        "Services"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/application_plans.json",
+      "operationId": "listApplicationPlans",
+      "summary": "List Application Plans",
+      "tags": [
+        "Plans"
+      ]
+    }
+  ]
+}

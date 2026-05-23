@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Service",
+  "title": "Service",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "system_name": {
+      "type": "string"
+    },
+    "backend_version": {
+      "type": "string",
+      "description": "Authentication mode (1=API Key, 2=App ID/Key, oidc=OAuth/OIDC)"
+    },
+    "deployment_option": {
+      "type": "string"
+    }
+  }
+}

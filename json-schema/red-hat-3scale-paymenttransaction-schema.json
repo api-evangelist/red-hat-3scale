@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PaymentTransaction",
+  "title": "PaymentTransaction",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "invoice_id": {
+      "type": "integer"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reference": {
+      "type": "string",
+      "description": "Payment gateway reference or transaction ID"
+    },
+    "message": {
+      "type": "string",
+      "description": "Payment gateway response message"
+    }
+  }
+}

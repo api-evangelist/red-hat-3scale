@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TopApplication",
+  "title": "TopApplication",
+  "type": "object",
+  "properties": {
+    "application": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "account": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "org_name": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total usage for this application in the period"
+    }
+  }
+}

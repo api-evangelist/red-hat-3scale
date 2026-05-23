@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UsageReport",
+  "title": "UsageReport",
+  "type": "object",
+  "properties": {
+    "metric": {
+      "type": "string",
+      "description": "The metric name (e.g. hits)"
+    },
+    "period": {
+      "type": "string",
+      "description": "The time period (minute, hour, day, month, year, eternity)"
+    },
+    "period_start": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "period_end": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "max_value": {
+      "type": "integer",
+      "description": "Maximum allowed value for this period"
+    },
+    "current_value": {
+      "type": "integer",
+      "description": "Current usage value for this period"
+    }
+  }
+}

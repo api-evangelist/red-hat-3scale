@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/StatusInfo",
+  "title": "StatusInfo",
+  "type": "object",
+  "properties": {
+    "timers": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "workers": {
+      "type": "integer",
+      "description": "Number of worker processes"
+    }
+  }
+}

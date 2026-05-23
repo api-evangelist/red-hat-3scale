@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LivenessStatus",
+  "title": "LivenessStatus",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    }
+  }
+}

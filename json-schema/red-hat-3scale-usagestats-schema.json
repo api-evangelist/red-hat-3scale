@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UsageStats",
+  "title": "UsageStats",
+  "type": "object",
+  "properties": {
+    "metric": {
+      "type": "string",
+      "description": "The metric name"
+    },
+    "period": {
+      "type": "string",
+      "description": "The time period"
+    },
+    "period_start": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "period_end": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total value for the period"
+    },
+    "values": {
+      "type": "array",
+      "description": "Time-series data points",
+      "items": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

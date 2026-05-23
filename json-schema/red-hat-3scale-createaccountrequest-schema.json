@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateAccountRequest",
+  "title": "CreateAccountRequest",
+  "type": "object",
+  "required": [
+    "org_name",
+    "username",
+    "email",
+    "password"
+  ],
+  "properties": {
+    "org_name": {
+      "type": "string"
+    },
+    "username": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "password": {
+      "type": "string"
+    }
+  }
+}

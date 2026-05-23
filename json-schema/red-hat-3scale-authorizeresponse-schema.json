@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AuthorizeResponse",
+  "title": "AuthorizeResponse",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ]
+    },
+    "plan": {
+      "type": "string",
+      "description": "Name of the application plan"
+    },
+    "usage_reports": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/UsageReport"
+      }
+    }
+  }
+}

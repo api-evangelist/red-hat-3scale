@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReportRequest",
+  "title": "ReportRequest",
+  "type": "object",
+  "required": [
+    "provider_key"
+  ],
+  "properties": {
+    "provider_key": {
+      "type": "string",
+      "description": "The provider key"
+    },
+    "service_id": {
+      "type": "string",
+      "description": "The service ID"
+    },
+    "transactions": {
+      "type": "array",
+      "description": "Array of transaction objects to report",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}
