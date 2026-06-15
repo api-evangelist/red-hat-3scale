@@ -1,0 +1,821 @@
+{
+  "item": [
+    {
+      "id": "7d7dc5c2-6fe2-48b8-bb2d-e27244f14756",
+      "name": "Configuration",
+      "description": {
+        "content": "Retrieve and update APIcast gateway configuration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eaa693d9-b5df-4c23-9893-6438eebf0106",
+          "name": "Get Gateway Configuration",
+          "request": {
+            "name": "Get Gateway Configuration",
+            "description": {
+              "content": "Returns the current APIcast configuration in JSON format. This includes the loaded service configurations, proxy settings, and policy chains currently active in the gateway.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a56c6bdd-5efd-4e2e-b1ff-d1311cb8205b",
+              "name": "Current configuration returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"services\": [\n    {\n      \"id\": 7500,\n      \"proxy\": {}\n    },\n    {\n      \"id\": 5041,\n      \"proxy\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36ce7ce1-ed2e-471f-a0b3-7f6ba8d215b3",
+              "name": "No configuration loaded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "676b237c-f9d2-4b3c-91a6-3e81ec27c008",
+          "name": "Update Gateway Configuration (POST)",
+          "request": {
+            "name": "Update Gateway Configuration (POST)",
+            "description": {
+              "content": "Updates the APIcast configuration by replacing it with the JSON payload provided in the request body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"services\": [\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": \"<object>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": \"<object>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d0188711-f706-428c-b0d8-79924baa454b",
+              "name": "Configuration updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"services\": [\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": \"<object>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": \"<object>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"services\": [\n    {\n      \"id\": 7500,\n      \"proxy\": {}\n    },\n    {\n      \"id\": 5041,\n      \"proxy\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0257d7f8-cb9a-40da-baa2-174ff6b54ee2",
+          "name": "Update Gateway Configuration (PUT)",
+          "request": {
+            "name": "Update Gateway Configuration (PUT)",
+            "description": {
+              "content": "Updates the APIcast configuration by replacing it with the JSON payload provided in the request body (idempotent).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"services\": [\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": \"<object>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": \"<object>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0c90ecbd-245a-459a-af89-1bb2a6d84e0d",
+              "name": "Configuration updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"services\": [\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": \"<object>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": \"<object>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"services\": [\n    {\n      \"id\": 7500,\n      \"proxy\": {}\n    },\n    {\n      \"id\": 5041,\n      \"proxy\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65cee5be-a284-41f1-979a-756b70ed15e3",
+          "name": "Delete Gateway Configuration",
+          "request": {
+            "name": "Delete Gateway Configuration",
+            "description": {
+              "content": "Deletes the current APIcast configuration, resetting the gateway.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16f1b4f2-cd98-4766-8202-46516b732dd0",
+              "name": "Configuration deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c55dfd6a-e8d7-40b3-b06b-43eb458b0e7b",
+              "name": "No configuration loaded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "bc99c818-2d01-44e0-9289-8ea6bc0c4d1d",
+      "name": "DNS",
+      "description": {
+        "content": "Inspect and manage DNS cache state",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "58c50664-6879-4827-98ee-b3851bd83daa",
+          "name": "Get DNS Cache",
+          "request": {
+            "name": "Get DNS Cache",
+            "description": {
+              "content": "Returns the current state of the APIcast DNS cache including cached records, their expiration times, and resolved IP addresses. Useful for debugging DNS resolution issues.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dns",
+                "cache"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "307db961-cb82-403c-9ef5-7c6838fb60e0",
+              "name": "DNS cache contents returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dns",
+                    "cache"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dns_cache\": [\n    {\n      \"name\": \"string\",\n      \"addresses\": [\n        \"string\",\n        \"string\"\n      ],\n      \"expire\": 4545.682129580392\n    },\n    {\n      \"name\": \"string\",\n      \"addresses\": [\n        \"string\",\n        \"string\"\n      ],\n      \"expire\": 6250.743505816567\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3d45dd28-c1c4-484b-9233-742e9b5ec7da",
+      "name": "Health",
+      "description": {
+        "content": "Health check and liveness/readiness probes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "917ba058-e8e5-4117-ac44-a319c17f5b4e",
+          "name": "Check Readiness",
+          "request": {
+            "name": "Check Readiness",
+            "description": {
+              "content": "Returns the readiness status of the APIcast gateway. Used as a Kubernetes readiness probe. Returns 200 when the gateway is ready to accept traffic, non-200 when not ready.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "status",
+                "ready"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "41af18fe-08c3-4efe-b509-78528758d4b8",
+              "name": "Gateway is ready",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status",
+                    "ready"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"status\": \"not_ready\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a55bcd9-06bb-4e7c-8093-0e6d4853c5bc",
+              "name": "Gateway is not ready",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status",
+                    "ready"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1892ab98-81e7-4b37-88a6-698e15fc2a66",
+          "name": "Check Liveness",
+          "request": {
+            "name": "Check Liveness",
+            "description": {
+              "content": "Returns the liveness status of the APIcast gateway. Used as a Kubernetes liveness probe. Returns 200 if the process is alive.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "status",
+                "live"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a8b3cb3-f4b4-4bcb-934a-c7f2e040ea4f",
+              "name": "Gateway is alive",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status",
+                    "live"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "782a474c-162b-41cd-87ca-8fb3077afbd7",
+          "name": "Get Status Information",
+          "request": {
+            "name": "Get Status Information",
+            "description": {
+              "content": "Returns internal information about the APIcast gateway including timer states, worker process counts, and internal configuration parameters useful for debugging.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "status",
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "19cad0bd-7127-473d-9409-3fbdddec9612",
+              "name": "Status information returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "status",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timers\": {\n    \"key_0\": 1424,\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"workers\": 3514\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "cbeb195e-6afa-4adb-b227-c75b26eb0152",
+      "name": "Initialization",
+      "description": {
+        "content": "Bootstrap and initialization endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d355a03b-f5bc-4872-83bf-0d4547358129",
+          "name": "Boot Gateway",
+          "request": {
+            "name": "Boot Gateway",
+            "description": {
+              "content": "Triggers the APIcast initialization process, causing the gateway to attempt to download a new configuration from the 3scale management API. This is useful for forcing a configuration refresh.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "boot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f339d65-023e-42aa-84d7-6a97a8b4d84f",
+              "name": "Boot process initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "boot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8090",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ead5223b-02ff-43b2-8018-d4ee5b22cad3",
+    "name": "Red Hat 3scale APIcast Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The APIcast Management API is an HTTP REST interface exposed by the APIcast API gateway on port 8090 for debugging and runtime configuration management. It provides endpoints to retrieve and update the gateway configuration, inspect DNS cache state, trigger boot/initialization sequences, and check readiness and liveness health status. Access level is controlled via the APICAST_MANAGEMENT_API environment variable (debug, status, or disabled). This API is intended for debugging and is not production-hardened.\n\nContact Support:\n Name: Red Hat 3scale Support",
+      "type": "text/plain"
+    }
+  }
+}

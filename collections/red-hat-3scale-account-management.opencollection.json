@@ -1,0 +1,365 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red Hat 3scale Account Management API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Developer Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/accounts.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter accounts by state"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 500)"
+              }
+            ]
+          },
+          "docs": "Returns a list of developer accounts in the 3scale admin portal. Supports filtering by state (approved, pending, rejected) and pagination with per_page and page parameters."
+        },
+        {
+          "info": {
+            "name": "Create Developer Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}-admin.3scale.net/admin/api/accounts.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new developer account in the 3scale developer portal. The account requires an organization name and a user with email and password. The account state defaults to pending unless auto-approval is enabled."
+        },
+        {
+          "info": {
+            "name": "Get Developer Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/accounts/:id.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account"
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific developer account by ID."
+        },
+        {
+          "info": {
+            "name": "Update Developer Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{domain}-admin.3scale.net/admin/api/accounts/:id.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the details of a specific developer account."
+        },
+        {
+          "info": {
+            "name": "Delete Developer Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{domain}-admin.3scale.net/admin/api/accounts/:id.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account to delete"
+              }
+            ]
+          },
+          "docs": "Deletes a developer account and all associated applications."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Applications for Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/accounts/:account_id/applications.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the developer account"
+              }
+            ]
+          },
+          "docs": "Returns all applications belonging to a specific developer account. Applications represent individual API credentials (keys or OAuth clients)."
+        },
+        {
+          "info": {
+            "name": "Create Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}-admin.3scale.net/admin/api/accounts/:account_id/applications.json",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the developer account"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new application for a developer account, subscribing it to a specific application plan. The application will be assigned API keys or OAuth client credentials based on the service authentication mode."
+        },
+        {
+          "info": {
+            "name": "Get Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/accounts/:account_id/applications/:id.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The application ID"
+              }
+            ]
+          },
+          "docs": "Returns details for a specific application including keys and credentials."
+        },
+        {
+          "info": {
+            "name": "Update Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{domain}-admin.3scale.net/admin/api/accounts/:account_id/applications/:id.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates an application's name, description, or plan assignment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/services.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of all API services configured in the 3scale admin portal."
+        },
+        {
+          "info": {
+            "name": "Get Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/services/:id.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The service ID"
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific API service."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Application Plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/application_plans.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              }
+            ]
+          },
+          "docs": "Returns all application plans across all services."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

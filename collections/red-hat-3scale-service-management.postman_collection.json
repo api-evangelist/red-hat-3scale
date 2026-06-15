@@ -1,0 +1,1088 @@
+{
+  "item": [
+    {
+      "id": "39012039-14a2-4e2f-bf60-05329be76d26",
+      "name": "Authorization",
+      "description": {
+        "content": "Authorize API calls and check access permissions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "be71aeaf-77eb-4409-8b3a-5e6efedddfad",
+          "name": "Authorize API Transaction",
+          "request": {
+            "name": "Authorize API Transaction",
+            "description": {
+              "content": "Authorizes an API call by checking whether the application identified by the user key is within its usage limits. Returns success or failure along with current usage data. Used by APIcast before forwarding requests to the backend API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "authorize.xml"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider_key",
+                  "value": "<string>",
+                  "description": "(Required) The provider key identifying your 3scale account"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_key",
+                  "value": "<string>",
+                  "description": "(Required) The API key of the application making the call"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_id",
+                  "value": "<string>",
+                  "description": "The ID of the service being accessed"
+                },
+                {
+                  "disabled": false,
+                  "key": "usage[hits]",
+                  "value": "<integer>",
+                  "description": "Number of hits to report with this authorization"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62b6e8ed-15dd-43ac-93e8-11342dd7e588",
+              "name": "Authorization response (success or failure)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "authorize.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "usage[hits]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "provider_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <plan>(string)</plan>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "9c5e5c51-d1a1-4ffc-8450-903c9b81c52f",
+              "name": "Authorization denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "authorize.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "usage[hits]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "provider_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <code>(string)</code>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "312eb60d-0a90-4fe6-8948-216a10ecd3b6",
+              "name": "Application not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "authorize.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "usage[hits]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "provider_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "570f053c-fc64-4a3a-9eb3-adbe123ba591",
+          "name": "Authorize and Report API Transaction",
+          "request": {
+            "name": "Authorize and Report API Transaction",
+            "description": {
+              "content": "Combines authorization and reporting in a single call. Authorizes the API call and simultaneously reports usage metrics to 3scale. This is the recommended approach for reporting hits and other metrics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "authrep.xml"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider_key",
+                  "value": "<string>",
+                  "description": "(Required) The provider key identifying your 3scale account"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_key",
+                  "value": "<string>",
+                  "description": "(Required) The API key of the application making the call"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_id",
+                  "value": "<string>",
+                  "description": "The ID of the service being accessed"
+                },
+                {
+                  "disabled": false,
+                  "key": "usage[hits]",
+                  "value": "1",
+                  "description": "Number of hits to report"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0e57f68-8edb-48af-be3a-b60baa686423",
+              "name": "Authorization and report successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "authrep.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "usage[hits]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "provider_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <plan>(string)</plan>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "60d18e65-c876-4240-931a-82987ea52f21",
+              "name": "Authorization denied or limits exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "authrep.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "usage[hits]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "provider_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <code>(string)</code>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5d0b22de-a2fa-47db-973f-02434be9fb5d",
+      "name": "Reporting",
+      "description": {
+        "content": "Report API usage back to 3scale for analytics and rate limiting",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ba988bb7-9567-46a6-9b6a-965450e0fd14",
+          "name": "Authorize and Report API Transaction",
+          "request": {
+            "name": "Authorize and Report API Transaction",
+            "description": {
+              "content": "Combines authorization and reporting in a single call. Authorizes the API call and simultaneously reports usage metrics to 3scale. This is the recommended approach for reporting hits and other metrics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "authrep.xml"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider_key",
+                  "value": "<string>",
+                  "description": "(Required) The provider key identifying your 3scale account"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_key",
+                  "value": "<string>",
+                  "description": "(Required) The API key of the application making the call"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_id",
+                  "value": "<string>",
+                  "description": "The ID of the service being accessed"
+                },
+                {
+                  "disabled": false,
+                  "key": "usage[hits]",
+                  "value": "1",
+                  "description": "Number of hits to report"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b89ee055-fd25-4b81-b10a-e00d54a06a8e",
+              "name": "Authorization and report successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "authrep.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "usage[hits]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "provider_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <plan>(string)</plan>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "bc9e415b-12bc-464c-a07a-0fdc28bc304e",
+              "name": "Authorization denied or limits exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "authrep.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "usage[hits]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "provider_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <code>(string)</code>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbf38315-4fe1-4dac-9e26-17a1b145f794",
+          "name": "Report API Transactions",
+          "request": {
+            "name": "Report API Transactions",
+            "description": {
+              "content": "Reports multiple API usage transactions in batch to 3scale. Used to asynchronously report usage metrics after API calls have already been processed. Supports reporting for multiple application keys in a single call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions.xml"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "provider_key",
+                  "value": "<string>",
+                  "description": "(Required) The provider key"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_id",
+                  "value": "<string>",
+                  "description": "The service ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactions",
+                  "value": "<object>",
+                  "description": "Array of transaction objects to report"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactions",
+                  "value": "<object>",
+                  "description": "Array of transaction objects to report"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "669ad565-c9dd-44c6-bc6e-7925eabd8de0",
+              "name": "Transactions accepted for processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The provider key",
+                        "type": "text/plain"
+                      },
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The service ID",
+                        "type": "text/plain"
+                      },
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of transaction objects to report",
+                        "type": "text/plain"
+                      },
+                      "key": "transactions",
+                      "value": "<object>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of transaction objects to report",
+                        "type": "text/plain"
+                      },
+                      "key": "transactions",
+                      "value": "<object>"
+                    }
+                  ]
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff8047a1-35d5-4d0b-9d9a-b0d7daa39a20",
+              "name": "Reporting denied - invalid provider key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The provider key",
+                        "type": "text/plain"
+                      },
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The service ID",
+                        "type": "text/plain"
+                      },
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of transaction objects to report",
+                        "type": "text/plain"
+                      },
+                      "key": "transactions",
+                      "value": "<object>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of transaction objects to report",
+                        "type": "text/plain"
+                      },
+                      "key": "transactions",
+                      "value": "<object>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aee28f20-af8b-4f14-95dd-589c3f9cf422",
+              "name": "Invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The provider key",
+                        "type": "text/plain"
+                      },
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The service ID",
+                        "type": "text/plain"
+                      },
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of transaction objects to report",
+                        "type": "text/plain"
+                      },
+                      "key": "transactions",
+                      "value": "<object>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of transaction objects to report",
+                        "type": "text/plain"
+                      },
+                      "key": "transactions",
+                      "value": "<object>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5e15bb52-8460-42d2-9442-55bc708ce733",
+      "name": "OAuth",
+      "description": {
+        "content": "OAuth 2.0 token authorization endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9ae1a370-af39-4dc8-999d-cceede19588e",
+          "name": "Authorize OAuth Token",
+          "request": {
+            "name": "Authorize OAuth Token",
+            "description": {
+              "content": "Authorizes an OAuth 2.0 access token against the 3scale service, checking whether the token is valid and within usage limits. Returns the application and plan details associated with the token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "oauth_authorize.xml"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider_key",
+                  "value": "<string>",
+                  "description": "(Required) The provider key identifying your 3scale account"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) The OAuth 2.0 access token to authorize"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_id",
+                  "value": "<string>",
+                  "description": "The ID of the service being accessed"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cde23499-3da3-4c50-959d-f15043875b94",
+              "name": "OAuth token authorized successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "oauth_authorize.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <application>\n    <id>(string)</id>\n    <key>(string)</key>\n    <redirect_url>(string)</redirect_url>\n  </application>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "fc443f4f-d071-4437-8a30-d9d758e49d55",
+              "name": "Token invalid or limits exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "oauth_authorize.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://su1.3scale.net",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "provider_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "00dca1db-5614-4b2a-a304-f3b3dcf9121a",
+    "name": "Red Hat 3scale Service Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The 3scale Service Management API allows API providers to control and manage access to their APIs, track usage, and enforce traffic policies. It is used by the APIcast API gateway to authorize and report API calls in real time. The API supports both API key and OAuth 2.0 based authorization flows.\n\nContact Support:\n Name: Red Hat 3scale Support",
+      "type": "text/plain"
+    }
+  }
+}

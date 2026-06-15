@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red Hat 3scale APIcast Management API",
+    "version": "1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Gateway Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8090/config"
+          },
+          "docs": "Returns the current APIcast configuration in JSON format. This includes the loaded service configurations, proxy settings, and policy chains currently active in the gateway."
+        },
+        {
+          "info": {
+            "name": "Update Gateway Configuration (POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8090/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the APIcast configuration by replacing it with the JSON payload provided in the request body."
+        },
+        {
+          "info": {
+            "name": "Update Gateway Configuration (PUT)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://localhost:8090/config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the APIcast configuration by replacing it with the JSON payload provided in the request body (idempotent)."
+        },
+        {
+          "info": {
+            "name": "Delete Gateway Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:8090/config"
+          },
+          "docs": "Deletes the current APIcast configuration, resetting the gateway."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Initialization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Boot Gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8090/boot"
+          },
+          "docs": "Triggers the APIcast initialization process, causing the gateway to attempt to download a new configuration from the 3scale management API. This is useful for forcing a configuration refresh."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "DNS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get DNS Cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8090/dns/cache"
+          },
+          "docs": "Returns the current state of the APIcast DNS cache including cached records, their expiration times, and resolved IP addresses. Useful for debugging DNS resolution issues."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check Readiness",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8090/status/ready"
+          },
+          "docs": "Returns the readiness status of the APIcast gateway. Used as a Kubernetes readiness probe. Returns 200 when the gateway is ready to accept traffic, non-200 when not ready."
+        },
+        {
+          "info": {
+            "name": "Check Liveness",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8090/status/live"
+          },
+          "docs": "Returns the liveness status of the APIcast gateway. Used as a Kubernetes liveness probe. Returns 200 if the process is alive."
+        },
+        {
+          "info": {
+            "name": "Get Status Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8090/status/info"
+          },
+          "docs": "Returns internal information about the APIcast gateway including timer states, worker process counts, and internal configuration parameters useful for debugging."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

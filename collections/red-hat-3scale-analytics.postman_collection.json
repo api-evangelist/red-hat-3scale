@@ -1,0 +1,691 @@
+{
+  "item": [
+    {
+      "id": "4db8ca28-3e47-4f4a-ab0b-a6361048c856",
+      "name": "Applications",
+      "description": {
+        "content": "Usage statistics for individual applications",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ba5352d2-35d1-46c4-bd93-016c5a97473c",
+          "name": "Get Application Usage",
+          "request": {
+            "name": "Get Application Usage",
+            "description": {
+              "content": "Returns usage statistics for a specific application. Supports filtering by metric, time period, and date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":application_id",
+                "usage.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                },
+                {
+                  "disabled": false,
+                  "key": "metric_name",
+                  "value": "<string>",
+                  "description": "(Required) The name of the metric to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "(Required) The time period for the statistics"
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>",
+                  "description": "Start date for custom date range"
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "End date for custom date range"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "application_id",
+                  "description": "(Required) The application ID"
+                },
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b006843a-71e0-4738-8627-577a40d1d54b",
+              "name": "Application usage statistics returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application_id",
+                    "usage.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "application_id",
+                      "description": "(Required) The application ID"
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metric\": \"string\",\n  \"period\": \"string\",\n  \"period_start\": \"1989-04-13T08:22:15.991Z\",\n  \"period_end\": \"1981-08-07T05:34:47.325Z\",\n  \"total\": 560,\n  \"values\": [\n    [\n      \"2015-11-24T09:23:32.218Z\",\n      \"1989-09-18T02:47:45.550Z\"\n    ],\n    [\n      \"1991-10-15T18:31:06.617Z\",\n      \"1997-12-28T16:40:21.558Z\"\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfba99bd-5317-4046-b5af-fa0b92ae6507",
+              "name": "Application not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":application_id",
+                    "usage.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "application_id",
+                      "description": "(Required) The application ID"
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8c48a392-b854-4410-999b-284f872c848e",
+      "name": "Services",
+      "description": {
+        "content": "Usage statistics for API services",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b6006886-3942-4af9-be2a-5937247a98c1",
+          "name": "Get Service Usage",
+          "request": {
+            "name": "Get Service Usage",
+            "description": {
+              "content": "Returns usage statistics for a specific API service. Supports filtering by metric, time period, granularity, and date range. Results include hit counts, response time, and other tracked metrics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":service_id",
+                "usage.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                },
+                {
+                  "disabled": false,
+                  "key": "metric_name",
+                  "value": "<string>",
+                  "description": "(Required) The name of the metric to retrieve (e.g., hits)"
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "(Required) The time period for the statistics"
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>",
+                  "description": "Start date for custom date range (ISO 8601 format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "End date for custom date range (ISO 8601 format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "<string>",
+                  "description": "Granularity of data points within the period"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip_change",
+                  "value": "false",
+                  "description": "Skip change data in response"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "service_id",
+                  "description": "(Required) The ID of the API service"
+                },
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2b75dd1-1be7-4b21-96a4-7f526ce76d08",
+              "name": "Usage statistics returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":service_id",
+                    "usage.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip_change",
+                      "value": "false"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "service_id",
+                      "description": "(Required) The ID of the API service"
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metric\": \"string\",\n  \"period\": \"string\",\n  \"period_start\": \"1989-04-13T08:22:15.991Z\",\n  \"period_end\": \"1981-08-07T05:34:47.325Z\",\n  \"total\": 560,\n  \"values\": [\n    [\n      \"2015-11-24T09:23:32.218Z\",\n      \"1989-09-18T02:47:45.550Z\"\n    ],\n    [\n      \"1991-10-15T18:31:06.617Z\",\n      \"1997-12-28T16:40:21.558Z\"\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2987698-8e9a-4cf8-a1b7-4354a627cef2",
+              "name": "Service or metric not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":service_id",
+                    "usage.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip_change",
+                      "value": "false"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "service_id",
+                      "description": "(Required) The ID of the API service"
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd30dc90-bd91-442a-8ef4-45f304776336",
+          "name": "Get Top Applications by Usage",
+          "request": {
+            "name": "Get Top Applications by Usage",
+            "description": {
+              "content": "Returns the top applications for a service ranked by usage volume for a given metric and time period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                ":service_id",
+                "top_applications.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                },
+                {
+                  "disabled": false,
+                  "key": "metric_name",
+                  "value": "<string>",
+                  "description": "(Required) The metric to rank by"
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "service_id",
+                  "description": "(Required) The ID of the API service"
+                },
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d60db76-2230-48ff-b390-ef58ec92f094",
+              "name": "Top applications returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    ":service_id",
+                    "top_applications.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "service_id",
+                      "description": "(Required) The ID of the API service"
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applications\": [\n    {\n      \"application\": {\n        \"id\": 1697,\n        \"name\": \"string\",\n        \"account\": {\n          \"id\": 6049,\n          \"org_name\": \"string\"\n        }\n      },\n      \"total\": 3142\n    },\n    {\n      \"application\": {\n        \"id\": 7762,\n        \"name\": \"string\",\n        \"account\": {\n          \"id\": 9942,\n          \"org_name\": \"string\"\n        }\n      },\n      \"total\": 523\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your 3scale tenant domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{domain}}-admin.3scale.net/stats",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1177ab1c-df3b-4593-86e7-e0ec3cf3c78e",
+    "name": "Red Hat 3scale Analytics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The 3scale Analytics API provides access to API usage data, traffic metrics, hit counts, and reporting for APIs managed through the 3scale platform. It enables operators to retrieve usage statistics, query by time period and granularity, and integrate analytics data into external dashboards.\n\nContact Support:\n Name: Red Hat 3scale Support",
+      "type": "text/plain"
+    }
+  }
+}

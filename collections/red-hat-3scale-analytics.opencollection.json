@@ -1,0 +1,180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red Hat 3scale Analytics API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Service Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/stats/services/:service_id/usage.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API service"
+              },
+              {
+                "name": "metric_name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the metric to retrieve (e.g., hits)"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "The time period for the statistics"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Start date for custom date range (ISO 8601 format)"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "End date for custom date range (ISO 8601 format)"
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "Granularity of data points within the period"
+              },
+              {
+                "name": "skip_change",
+                "value": "",
+                "type": "query",
+                "description": "Skip change data in response"
+              }
+            ]
+          },
+          "docs": "Returns usage statistics for a specific API service. Supports filtering by metric, time period, granularity, and date range. Results include hit counts, response time, and other tracked metrics."
+        },
+        {
+          "info": {
+            "name": "Get Top Applications by Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/stats/services/:service_id/top_applications.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API service"
+              },
+              {
+                "name": "metric_name",
+                "value": "",
+                "type": "query",
+                "description": "The metric to rank by"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the top applications for a service ranked by usage volume for a given metric and time period."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Application Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/stats/applications/:application_id/usage.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "application_id",
+                "value": "",
+                "type": "path",
+                "description": "The application ID"
+              },
+              {
+                "name": "metric_name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the metric to retrieve"
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "The time period for the statistics"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Start date for custom date range"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "End date for custom date range"
+              }
+            ]
+          },
+          "docs": "Returns usage statistics for a specific application. Supports filtering by metric, time period, and date range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

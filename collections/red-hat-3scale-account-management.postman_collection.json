@@ -1,0 +1,2022 @@
+{
+  "item": [
+    {
+      "id": "518c9d21-1010-448b-af26-46751c79f3fa",
+      "name": "Accounts",
+      "description": {
+        "content": "Manage developer accounts in the 3scale developer portal",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "430fb1f2-9b91-4240-9cb1-bd80cf36d620",
+          "name": "List Developer Accounts",
+          "request": {
+            "name": "List Developer Accounts",
+            "description": {
+              "content": "Returns a list of developer accounts in the 3scale admin portal. Supports filtering by state (approved, pending, rejected) and pagination with per_page and page parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter accounts by state"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Number of results per page (max 500)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14426610-9e85-4a34-bd90-10b7b2cceb91",
+              "name": "List of accounts returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accounts\": [\n    {\n      \"id\": 5121,\n      \"created_at\": \"1959-11-23T09:15:47.865Z\",\n      \"updated_at\": \"2003-04-08T08:44:25.603Z\",\n      \"state\": \"pending\",\n      \"org_name\": \"string\",\n      \"extra_fields\": {\n        \"key_0\": 1346.3459991123339\n      }\n    },\n    {\n      \"id\": 246,\n      \"created_at\": \"1991-10-03T23:37:30.022Z\",\n      \"updated_at\": \"1980-03-31T17:24:18.583Z\",\n      \"state\": \"rejected\",\n      \"org_name\": \"string\",\n      \"extra_fields\": {\n        \"key_0\": false,\n        \"key_1\": 941,\n        \"key_2\": false\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1fc14c2-5d78-450e-ba6b-c3f69ddc3704",
+          "name": "Create Developer Account",
+          "request": {
+            "name": "Create Developer Account",
+            "description": {
+              "content": "Creates a new developer account in the 3scale developer portal. The account requires an organization name and a user with email and password. The account state defaults to pending unless auto-approval is enabled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "org_name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "username",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "password",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "30cb61ea-2a87-4ded-bcc0-4dd781be84af",
+              "name": "Account created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "org_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3873,\n  \"created_at\": \"2020-01-09T12:39:28.875Z\",\n  \"updated_at\": \"1960-08-19T22:40:10.705Z\",\n  \"state\": \"rejected\",\n  \"org_name\": \"string\",\n  \"extra_fields\": {\n    \"key_0\": 6992\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a300f69-cadc-4915-b1aa-3a5136217ef5",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "org_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc578901-6d27-4d6f-bb9b-671e5119fe11",
+          "name": "Get Developer Account",
+          "request": {
+            "name": "Get Developer Account",
+            "description": {
+              "content": "Returns the details of a specific developer account by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2625df00-af05-4edc-ad1e-6fb7dd76bf86",
+              "name": "Account details returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3873,\n  \"created_at\": \"2020-01-09T12:39:28.875Z\",\n  \"updated_at\": \"1960-08-19T22:40:10.705Z\",\n  \"state\": \"rejected\",\n  \"org_name\": \"string\",\n  \"extra_fields\": {\n    \"key_0\": 6992\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b8008ae-d705-489e-b32b-5b13d44a03a7",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a385f0e3-3580-4281-a2d8-5344f5b00696",
+          "name": "Update Developer Account",
+          "request": {
+            "name": "Update Developer Account",
+            "description": {
+              "content": "Updates the details of a specific developer account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "org_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "extra_fields",
+                  "value": "<object>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a328cee4-1b82-45fd-804c-d5a80c2ce9b8",
+              "name": "Account updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "org_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "extra_fields",
+                      "value": "<object>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3873,\n  \"created_at\": \"2020-01-09T12:39:28.875Z\",\n  \"updated_at\": \"1960-08-19T22:40:10.705Z\",\n  \"state\": \"rejected\",\n  \"org_name\": \"string\",\n  \"extra_fields\": {\n    \"key_0\": 6992\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "447c5568-7a05-4a2a-aafb-b06a89980102",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "org_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "extra_fields",
+                      "value": "<object>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6ab5408-8a69-473c-a579-d38c29f9fd9c",
+          "name": "Delete Developer Account",
+          "request": {
+            "name": "Delete Developer Account",
+            "description": {
+              "content": "Deletes a developer account and all associated applications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07b52a9e-0941-455c-bd91-f428dc3a3e19",
+              "name": "Account deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9947c8a1-87bf-480d-aab6-3d7c9604d11e",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b2ef560e-084c-4fca-8330-6548b6c9ebcf",
+      "name": "Applications",
+      "description": {
+        "content": "Manage applications and their API keys and credentials",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "30273efc-23c7-408d-94c5-edd9669509d1",
+          "name": "List Applications for Account",
+          "request": {
+            "name": "List Applications for Account",
+            "description": {
+              "content": "Returns all applications belonging to a specific developer account. Applications represent individual API credentials (keys or OAuth clients).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "applications.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The ID of the developer account"
+                },
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e48b861e-971f-4d85-9427-d8e7ea855ce8",
+              "name": "List of applications returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "applications.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The ID of the developer account"
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"applications\": [\n    {\n      \"id\": 2020,\n      \"created_at\": \"2004-10-19T09:27:50.826Z\",\n      \"updated_at\": \"1957-09-18T09:04:23.964Z\",\n      \"state\": \"suspended\",\n      \"user_account_id\": 7674,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"user_key\": \"string\",\n      \"plan\": {\n        \"id\": 9021,\n        \"name\": \"string\",\n        \"system_name\": \"string\",\n        \"state\": \"hidden\",\n        \"approval_required\": false,\n        \"setup_fee\": 9660.869634673745,\n        \"cost_per_month\": 4115.427544624061\n      }\n    },\n    {\n      \"id\": 6494,\n      \"created_at\": \"2025-08-07T13:30:07.238Z\",\n      \"updated_at\": \"1994-05-26T04:15:14.655Z\",\n      \"state\": \"suspended\",\n      \"user_account_id\": 5088,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"user_key\": \"string\",\n      \"plan\": {\n        \"id\": 7145,\n        \"name\": \"string\",\n        \"system_name\": \"string\",\n        \"state\": \"hidden\",\n        \"approval_required\": false,\n        \"setup_fee\": 7339.124130089532,\n        \"cost_per_month\": 6765.6165882200785\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fdbab71f-59fe-4aa2-be26-c8810b18d443",
+          "name": "Create Application",
+          "request": {
+            "name": "Create Application",
+            "description": {
+              "content": "Creates a new application for a developer account, subscribing it to a specific application plan. The application will be assigned API keys or OAuth client credentials based on the service authentication mode.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "applications.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The ID of the developer account"
+                },
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "plan_id",
+                  "value": "<integer>",
+                  "description": "(Required) The ID of the application plan to subscribe to"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the application"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d851071c-8ab3-4619-a958-087a9b7f3b50",
+              "name": "Application created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "applications.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The ID of the developer account"
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The ID of the application plan to subscribe to",
+                        "type": "text/plain"
+                      },
+                      "key": "plan_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of the application",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1190,\n  \"created_at\": \"2018-06-23T12:59:59.494Z\",\n  \"updated_at\": \"1968-12-23T23:10:35.358Z\",\n  \"state\": \"suspended\",\n  \"user_account_id\": 3860,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"user_key\": \"string\",\n  \"plan\": {\n    \"id\": 4937,\n    \"name\": \"string\",\n    \"system_name\": \"string\",\n    \"state\": \"hidden\",\n    \"approval_required\": false,\n    \"setup_fee\": 3474.6002988922733,\n    \"cost_per_month\": 5267.948198281989\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99f7048e-0296-4877-af5e-bfa1dccfee32",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "applications.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The ID of the developer account"
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The ID of the application plan to subscribe to",
+                        "type": "text/plain"
+                      },
+                      "key": "plan_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of the application",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d21a7951-6743-44f7-8277-a8c6065d4237",
+          "name": "Get Application",
+          "request": {
+            "name": "Get Application",
+            "description": {
+              "content": "Returns details for a specific application including keys and credentials.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "applications",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9045d17c-801d-427d-a2f4-e4da1381542e",
+              "name": "Application details returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "applications",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1190,\n  \"created_at\": \"2018-06-23T12:59:59.494Z\",\n  \"updated_at\": \"1968-12-23T23:10:35.358Z\",\n  \"state\": \"suspended\",\n  \"user_account_id\": 3860,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"user_key\": \"string\",\n  \"plan\": {\n    \"id\": 4937,\n    \"name\": \"string\",\n    \"system_name\": \"string\",\n    \"state\": \"hidden\",\n    \"approval_required\": false,\n    \"setup_fee\": 3474.6002988922733,\n    \"cost_per_month\": 5267.948198281989\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03544377-5288-423a-b2df-aea166be7818",
+              "name": "Application not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "applications",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a973128-28bd-477d-9a89-223edf668ceb",
+          "name": "Update Application",
+          "request": {
+            "name": "Update Application",
+            "description": {
+              "content": "Updates an application's name, description, or plan assignment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "applications",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "plan_id",
+                  "value": "<integer>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "236047e8-6365-4541-907a-c70034d2c251",
+              "name": "Application updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "applications",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "plan_id",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1190,\n  \"created_at\": \"2018-06-23T12:59:59.494Z\",\n  \"updated_at\": \"1968-12-23T23:10:35.358Z\",\n  \"state\": \"suspended\",\n  \"user_account_id\": 3860,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"user_key\": \"string\",\n  \"plan\": {\n    \"id\": 4937,\n    \"name\": \"string\",\n    \"system_name\": \"string\",\n    \"state\": \"hidden\",\n    \"approval_required\": false,\n    \"setup_fee\": 3474.6002988922733,\n    \"cost_per_month\": 5267.948198281989\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "44f4d3cb-f096-45ab-aca5-a480e126e145",
+      "name": "Plans",
+      "description": {
+        "content": "Manage application plans and their features and limits",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "94b1ce7b-516e-4120-b2fc-bb5f052942bf",
+          "name": "List Application Plans",
+          "request": {
+            "name": "List Application Plans",
+            "description": {
+              "content": "Returns all application plans across all services.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "application_plans.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1176a17d-3cde-4cac-8db5-594a42c0fb75",
+              "name": "List of application plans",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "application_plans.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"plans\": [\n    {\n      \"id\": 5275,\n      \"name\": \"string\",\n      \"system_name\": \"string\",\n      \"state\": \"hidden\",\n      \"approval_required\": true,\n      \"setup_fee\": 4808.587051244647,\n      \"cost_per_month\": 9566.766465928087\n    },\n    {\n      \"id\": 9782,\n      \"name\": \"string\",\n      \"system_name\": \"string\",\n      \"state\": \"published\",\n      \"approval_required\": true,\n      \"setup_fee\": 4217.245595386427,\n      \"cost_per_month\": 9913.490059115104\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "696faa59-4daa-4dfc-abe9-efd81463aaee",
+      "name": "Services",
+      "description": {
+        "content": "Manage API services and their settings",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "03d56952-4965-4c1b-a28b-205b65ec9951",
+          "name": "List Services",
+          "request": {
+            "name": "List Services",
+            "description": {
+              "content": "Returns a list of all API services configured in the 3scale admin portal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00bae8a8-2d38-46b6-a28b-e6d62dbf2bb8",
+              "name": "List of services returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"services\": [\n    {\n      \"id\": 7356,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"system_name\": \"string\",\n      \"backend_version\": \"string\",\n      \"deployment_option\": \"string\"\n    },\n    {\n      \"id\": 515,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"system_name\": \"string\",\n      \"backend_version\": \"string\",\n      \"deployment_option\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0e02a51-922f-4301-8011-52cac9bc7e37",
+          "name": "Get Service",
+          "request": {
+            "name": "Get Service",
+            "description": {
+              "content": "Returns the details of a specific API service.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "services",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2cac6255-3e22-41b7-a501-d5f525be9e96",
+              "name": "Service details returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3322,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"system_name\": \"string\",\n  \"backend_version\": \"string\",\n  \"deployment_option\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23b555f4-fc00-4408-a45d-1f45895919fb",
+              "name": "Service not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "services",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e98c5035-245f-4de5-9861-3c3914f6dfc8",
+      "name": "Users",
+      "description": {
+        "content": "Manage users associated with developer accounts",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your 3scale tenant domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The service ID",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "id"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8750e2f9-2f9d-4737-939a-446c3fd02939",
+    "name": "Red Hat 3scale Account Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+      "type": "text/plain"
+    }
+  }
+}
