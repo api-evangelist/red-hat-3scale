@@ -157,6 +157,12 @@ apis:
   - type: GitHub
     url: https://github.com/3scale/3scale_toolbox
 common:
+- type: VulnerabilityDisclosure
+  url: security/red-hat-3scale-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/red-hat-3scale-domain-security.yml
+- type: Authentication
+  url: authentication/red-hat-3scale-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/3scale
 - type: Website

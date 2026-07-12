@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/red-hat-3scale-account-management-openapi.yml, openapi/red-hat-3scale-analytics-openapi.yml,
+  openapi/red-hat-3scale-billing-openapi.yml, openapi/red-hat-3scale-service-management-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: provider_key
+  type: apiKey
+  in: query
+  parameter: access_token
+  sources:
+  - openapi/red-hat-3scale-account-management-openapi.yml
+  - openapi/red-hat-3scale-analytics-openapi.yml
+  - openapi/red-hat-3scale-billing-openapi.yml
+- name: providerKey
+  type: apiKey
+  in: query
+  parameter: provider_key
+  sources:
+  - openapi/red-hat-3scale-service-management-openapi.yml
