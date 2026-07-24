@@ -1,0 +1,81 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale Account Management Accounts OAuth API
+  description: The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+servers:
+- url: https://{domain}-admin.3scale.net/admin/api
+  description: 3scale Account Management API
+  variables:
+    domain:
+      default: your-domain
+      description: Your 3scale tenant domain
+security:
+- provider_key: []
+tags:
+- name: OAuth
+  description: OAuth 2.0 token authorization endpoints
+paths:
+  /transactions/oauth_authorize.xml:
+    get:
+      operationId: oauthAuthorize
+      summary: Authorize OAuth Token
+      description: Authorizes an OAuth 2.0 access token against the 3scale service, checking whether the token is valid and within usage limits. Returns the application and plan details associated with the token.
+      tags:
+      - OAuth
+      parameters:
+      - name: provider_key
+        in: query
+        required: true
+        description: The provider key identifying your 3scale account
+        schema:
+          type: string
+      - name: access_token
+        in: query
+        required: true
+        description: The OAuth 2.0 access token to authorize
+        schema:
+          type: string
+      - name: service_id
+        in: query
+        required: false
+        description: The ID of the service being accessed
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OAuth token authorized successfully
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/OAuthAuthorizeResponse'
+        '403':
+          description: Token invalid or limits exceeded
+components:
+  schemas:
+    OAuthAuthorizeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        application:
+          type: object
+          properties:
+            id:
+              type: string
+            key:
+              type: string
+            redirect_url:
+              type: string
+  securitySchemes:
+    provider_key:
+      type: apiKey
+      in: query
+      name: access_token
+externalDocs:
+  description: Red Hat 3scale Admin Portal Guide
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index

@@ -1,0 +1,65 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale Account Management Accounts DNS API
+  description: The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+servers:
+- url: https://{domain}-admin.3scale.net/admin/api
+  description: 3scale Account Management API
+  variables:
+    domain:
+      default: your-domain
+      description: Your 3scale tenant domain
+security:
+- provider_key: []
+tags:
+- name: DNS
+  description: Inspect and manage DNS cache state
+paths:
+  /dns/cache:
+    get:
+      operationId: getDnsCache
+      summary: Get DNS Cache
+      description: Returns the current state of the APIcast DNS cache including cached records, their expiration times, and resolved IP addresses. Useful for debugging DNS resolution issues.
+      tags:
+      - DNS
+      responses:
+        '200':
+          description: DNS cache contents returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DnsCacheResponse'
+components:
+  schemas:
+    DnsCacheResponse:
+      type: object
+      properties:
+        dns_cache:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The DNS hostname
+              addresses:
+                type: array
+                items:
+                  type: string
+                description: Resolved IP addresses
+              expire:
+                type: number
+                description: Expiration time in seconds
+  securitySchemes:
+    provider_key:
+      type: apiKey
+      in: query
+      name: access_token
+externalDocs:
+  description: Red Hat 3scale Admin Portal Guide
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index

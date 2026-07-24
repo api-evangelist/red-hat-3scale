@@ -1,0 +1,228 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale Account Management Accounts API
+  description: The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+servers:
+- url: https://{domain}-admin.3scale.net/admin/api
+  description: 3scale Account Management API
+  variables:
+    domain:
+      default: your-domain
+      description: Your 3scale tenant domain
+security:
+- provider_key: []
+tags:
+- name: Accounts
+  description: Manage developer accounts in the 3scale developer portal
+paths:
+  /accounts.json:
+    get:
+      operationId: listAccounts
+      summary: List Developer Accounts
+      description: Returns a list of developer accounts in the 3scale admin portal. Supports filtering by state (approved, pending, rejected) and pagination with per_page and page parameters.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      - name: state
+        in: query
+        description: Filter accounts by state
+        schema:
+          type: string
+          enum:
+          - approved
+          - pending
+          - rejected
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        description: Number of results per page (max 500)
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: List of accounts returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountList'
+    post:
+      operationId: createAccount
+      summary: Create Developer Account
+      description: Creates a new developer account in the 3scale developer portal. The account requires an organization name and a user with email and password. The account state defaults to pending unless auto-approval is enabled.
+      tags:
+      - Accounts
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateAccountRequest'
+      responses:
+        '201':
+          description: Account created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '422':
+          description: Validation error
+  /accounts/{id}.json:
+    get:
+      operationId: getAccount
+      summary: Get Developer Account
+      description: Returns the details of a specific developer account by ID.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      - name: id
+        in: path
+        required: true
+        description: The ID of the account
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Account details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: Account not found
+    put:
+      operationId: updateAccount
+      summary: Update Developer Account
+      description: Updates the details of a specific developer account.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      - name: id
+        in: path
+        required: true
+        description: The ID of the account
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateAccountRequest'
+      responses:
+        '200':
+          description: Account updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: Account not found
+    delete:
+      operationId: deleteAccount
+      summary: Delete Developer Account
+      description: Deletes a developer account and all associated applications.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      - name: id
+        in: path
+        required: true
+        description: The ID of the account to delete
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Account deleted successfully
+        '404':
+          description: Account not found
+components:
+  parameters:
+    accessToken:
+      name: access_token
+      in: query
+      required: true
+      description: Admin API access token
+      schema:
+        type: string
+  schemas:
+    UpdateAccountRequest:
+      type: object
+      properties:
+        org_name:
+          type: string
+        extra_fields:
+          type: object
+    AccountList:
+      type: object
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+    CreateAccountRequest:
+      type: object
+      required:
+      - org_name
+      - username
+      - email
+      - password
+      properties:
+        org_name:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    Account:
+      type: object
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        state:
+          type: string
+          enum:
+          - approved
+          - pending
+          - rejected
+        org_name:
+          type: string
+          description: Organization name
+        extra_fields:
+          type: object
+          additionalProperties: true
+        links:
+          type: array
+          items:
+            type: object
+  securitySchemes:
+    provider_key:
+      type: apiKey
+      in: query
+      name: access_token
+externalDocs:
+  description: Red Hat 3scale Admin Portal Guide
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index

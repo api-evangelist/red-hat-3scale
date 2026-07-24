@@ -1,0 +1,109 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale Account Management Accounts Configuration API
+  description: The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+servers:
+- url: https://{domain}-admin.3scale.net/admin/api
+  description: 3scale Account Management API
+  variables:
+    domain:
+      default: your-domain
+      description: Your 3scale tenant domain
+security:
+- provider_key: []
+tags:
+- name: Configuration
+  description: Retrieve and update APIcast gateway configuration
+paths:
+  /config:
+    get:
+      operationId: getConfig
+      summary: Get Gateway Configuration
+      description: Returns the current APIcast configuration in JSON format. This includes the loaded service configurations, proxy settings, and policy chains currently active in the gateway.
+      tags:
+      - Configuration
+      responses:
+        '200':
+          description: Current configuration returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayConfig'
+        '404':
+          description: No configuration loaded
+    post:
+      operationId: updateConfigPost
+      summary: Update Gateway Configuration (POST)
+      description: Updates the APIcast configuration by replacing it with the JSON payload provided in the request body.
+      tags:
+      - Configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewayConfig'
+      responses:
+        '200':
+          description: Configuration updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayConfig'
+    put:
+      operationId: updateConfigPut
+      summary: Update Gateway Configuration (PUT)
+      description: Updates the APIcast configuration by replacing it with the JSON payload provided in the request body (idempotent).
+      tags:
+      - Configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewayConfig'
+      responses:
+        '200':
+          description: Configuration updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayConfig'
+    delete:
+      operationId: deleteConfig
+      summary: Delete Gateway Configuration
+      description: Deletes the current APIcast configuration, resetting the gateway.
+      tags:
+      - Configuration
+      responses:
+        '200':
+          description: Configuration deleted successfully
+        '404':
+          description: No configuration loaded
+components:
+  schemas:
+    GatewayConfig:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              proxy:
+                type: object
+  securitySchemes:
+    provider_key:
+      type: apiKey
+      in: query
+      name: access_token
+externalDocs:
+  description: Red Hat 3scale Admin Portal Guide
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index

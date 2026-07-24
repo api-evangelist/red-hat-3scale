@@ -1,0 +1,100 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale Account Management Accounts Health API
+  description: The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+servers:
+- url: https://{domain}-admin.3scale.net/admin/api
+  description: 3scale Account Management API
+  variables:
+    domain:
+      default: your-domain
+      description: Your 3scale tenant domain
+security:
+- provider_key: []
+tags:
+- name: Health
+  description: Health check and liveness/readiness probes
+paths:
+  /status/ready:
+    get:
+      operationId: getReadiness
+      summary: Check Readiness
+      description: Returns the readiness status of the APIcast gateway. Used as a Kubernetes readiness probe. Returns 200 when the gateway is ready to accept traffic, non-200 when not ready.
+      tags:
+      - Health
+      responses:
+        '200':
+          description: Gateway is ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadinessStatus'
+        '503':
+          description: Gateway is not ready
+  /status/live:
+    get:
+      operationId: getLiveness
+      summary: Check Liveness
+      description: Returns the liveness status of the APIcast gateway. Used as a Kubernetes liveness probe. Returns 200 if the process is alive.
+      tags:
+      - Health
+      responses:
+        '200':
+          description: Gateway is alive
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LivenessStatus'
+  /status/info:
+    get:
+      operationId: getStatusInfo
+      summary: Get Status Information
+      description: Returns internal information about the APIcast gateway including timer states, worker process counts, and internal configuration parameters useful for debugging.
+      tags:
+      - Health
+      responses:
+        '200':
+          description: Status information returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusInfo'
+components:
+  schemas:
+    ReadinessStatus:
+      type: object
+      properties:
+        success:
+          type: boolean
+        status:
+          type: string
+          enum:
+          - ready
+          - not_ready
+    StatusInfo:
+      type: object
+      properties:
+        timers:
+          type: object
+          additionalProperties: true
+        workers:
+          type: integer
+          description: Number of worker processes
+    LivenessStatus:
+      type: object
+      properties:
+        success:
+          type: boolean
+  securitySchemes:
+    provider_key:
+      type: apiKey
+      in: query
+      name: access_token
+externalDocs:
+  description: Red Hat 3scale Admin Portal Guide
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index

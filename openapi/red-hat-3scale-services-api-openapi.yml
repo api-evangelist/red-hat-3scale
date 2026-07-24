@@ -1,0 +1,277 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale Account Management Accounts Services API
+  description: The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+servers:
+- url: https://{domain}-admin.3scale.net/admin/api
+  description: 3scale Account Management API
+  variables:
+    domain:
+      default: your-domain
+      description: Your 3scale tenant domain
+security:
+- provider_key: []
+tags:
+- name: Services
+  description: Manage API services and their settings
+paths:
+  /services.json:
+    get:
+      operationId: listServices
+      summary: List Services
+      description: Returns a list of all API services configured in the 3scale admin portal.
+      tags:
+      - Services
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: List of services returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceList'
+  /services/{id}.json:
+    get:
+      operationId: getService
+      summary: Get Service
+      description: Returns the details of a specific API service.
+      tags:
+      - Services
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      - name: id
+        in: path
+        required: true
+        description: The service ID
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Service details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '404':
+          description: Service not found
+  /services/{service_id}/usage.json:
+    get:
+      operationId: getServiceUsage
+      summary: Get Service Usage
+      description: Returns usage statistics for a specific API service. Supports filtering by metric, time period, granularity, and date range. Results include hit counts, response time, and other tracked metrics.
+      tags:
+      - Services
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      - name: service_id
+        in: path
+        required: true
+        description: The ID of the API service
+        schema:
+          type: integer
+      - name: metric_name
+        in: query
+        required: true
+        description: The name of the metric to retrieve (e.g., hits)
+        schema:
+          type: string
+      - name: period
+        in: query
+        required: true
+        description: The time period for the statistics
+        schema:
+          type: string
+          enum:
+          - hour
+          - day
+          - week
+          - month
+          - year
+          - eternity
+      - name: since
+        in: query
+        description: Start date for custom date range (ISO 8601 format)
+        schema:
+          type: string
+          format: date-time
+      - name: until
+        in: query
+        description: End date for custom date range (ISO 8601 format)
+        schema:
+          type: string
+          format: date-time
+      - name: granularity
+        in: query
+        description: Granularity of data points within the period
+        schema:
+          type: string
+          enum:
+          - hour
+          - day
+          - month
+      - name: skip_change
+        in: query
+        description: Skip change data in response
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Usage statistics returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageStats'
+        '404':
+          description: Service or metric not found
+  /services/{service_id}/top_applications.json:
+    get:
+      operationId: getTopApplications
+      summary: Get Top Applications by Usage
+      description: Returns the top applications for a service ranked by usage volume for a given metric and time period.
+      tags:
+      - Services
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      - name: service_id
+        in: path
+        required: true
+        description: The ID of the API service
+        schema:
+          type: integer
+      - name: metric_name
+        in: query
+        required: true
+        description: The metric to rank by
+        schema:
+          type: string
+      - name: period
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - hour
+          - day
+          - week
+          - month
+          - year
+      responses:
+        '200':
+          description: Top applications returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopApplicationsList'
+components:
+  parameters:
+    accessToken:
+      name: access_token
+      in: query
+      required: true
+      description: Admin API access token
+      schema:
+        type: string
+  schemas:
+    Service:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        system_name:
+          type: string
+        backend_version:
+          type: string
+          description: Authentication mode (1=API Key, 2=App ID/Key, oidc=OAuth/OIDC)
+        deployment_option:
+          type: string
+    ServiceList:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+    UsageStats:
+      type: object
+      properties:
+        metric:
+          type: string
+          description: The metric name
+        period:
+          type: string
+          description: The time period
+        period_start:
+          type: string
+          format: date-time
+        period_end:
+          type: string
+          format: date-time
+        total:
+          type: integer
+          description: Total value for the period
+        values:
+          type: array
+          description: Time-series data points
+          items:
+            type: array
+            items:
+              oneOf:
+              - type: string
+                format: date-time
+              - type: integer
+    TopApplicationsList:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopApplication'
+    TopApplication:
+      type: object
+      properties:
+        application:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            account:
+              type: object
+              properties:
+                id:
+                  type: integer
+                org_name:
+                  type: string
+        total:
+          type: integer
+          description: Total usage for this application in the period
+  securitySchemes:
+    provider_key:
+      type: apiKey
+      in: query
+      name: access_token
+externalDocs:
+  description: Red Hat 3scale Admin Portal Guide
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index

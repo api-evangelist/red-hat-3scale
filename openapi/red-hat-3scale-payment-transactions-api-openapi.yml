@@ -1,0 +1,93 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale Account Management Accounts Payment Transactions API
+  description: The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+servers:
+- url: https://{domain}-admin.3scale.net/admin/api
+  description: 3scale Account Management API
+  variables:
+    domain:
+      default: your-domain
+      description: Your 3scale tenant domain
+security:
+- provider_key: []
+tags:
+- name: Payment Transactions
+  description: View payment transactions associated with invoices
+paths:
+  /invoices/{id}/payment_transactions.json:
+    get:
+      operationId: listInvoicePaymentTransactions
+      summary: List Invoice Payment Transactions
+      description: Returns all payment transactions associated with a specific invoice.
+      tags:
+      - Payment Transactions
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      - name: id
+        in: path
+        required: true
+        description: The invoice ID
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Payment transactions returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentTransactionList'
+        '404':
+          description: Invoice not found
+components:
+  schemas:
+    PaymentTransaction:
+      type: object
+      properties:
+        id:
+          type: integer
+        invoice_id:
+          type: integer
+        amount:
+          type: number
+        currency:
+          type: string
+        success:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        reference:
+          type: string
+          description: Payment gateway reference or transaction ID
+        message:
+          type: string
+          description: Payment gateway response message
+    PaymentTransactionList:
+      type: object
+      properties:
+        payment_transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentTransaction'
+  parameters:
+    accessToken:
+      name: access_token
+      in: query
+      required: true
+      description: Admin API access token
+      schema:
+        type: string
+  securitySchemes:
+    provider_key:
+      type: apiKey
+      in: query
+      name: access_token
+externalDocs:
+  description: Red Hat 3scale Admin Portal Guide
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index

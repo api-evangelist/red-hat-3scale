@@ -1,0 +1,83 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale Account Management Accounts Plans API
+  description: The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+servers:
+- url: https://{domain}-admin.3scale.net/admin/api
+  description: 3scale Account Management API
+  variables:
+    domain:
+      default: your-domain
+      description: Your 3scale tenant domain
+security:
+- provider_key: []
+tags:
+- name: Plans
+  description: Manage application plans and their features and limits
+paths:
+  /application_plans.json:
+    get:
+      operationId: listApplicationPlans
+      summary: List Application Plans
+      description: Returns all application plans across all services.
+      tags:
+      - Plans
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      responses:
+        '200':
+          description: List of application plans
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationPlanList'
+components:
+  parameters:
+    accessToken:
+      name: access_token
+      in: query
+      required: true
+      description: Admin API access token
+      schema:
+        type: string
+  schemas:
+    ApplicationPlanList:
+      type: object
+      properties:
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationPlan'
+    ApplicationPlan:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        system_name:
+          type: string
+        state:
+          type: string
+          enum:
+          - published
+          - hidden
+        approval_required:
+          type: boolean
+        setup_fee:
+          type: number
+        cost_per_month:
+          type: number
+  securitySchemes:
+    provider_key:
+      type: apiKey
+      in: query
+      name: access_token
+externalDocs:
+  description: Red Hat 3scale Admin Portal Guide
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index

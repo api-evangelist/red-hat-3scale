@@ -1,0 +1,310 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale Account Management Accounts Applications API
+  description: The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+servers:
+- url: https://{domain}-admin.3scale.net/admin/api
+  description: 3scale Account Management API
+  variables:
+    domain:
+      default: your-domain
+      description: Your 3scale tenant domain
+security:
+- provider_key: []
+tags:
+- name: Applications
+  description: Manage applications and their API keys and credentials
+paths:
+  /accounts/{account_id}/applications.json:
+    get:
+      operationId: listApplications
+      summary: List Applications for Account
+      description: Returns all applications belonging to a specific developer account. Applications represent individual API credentials (keys or OAuth clients).
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      - name: account_id
+        in: path
+        required: true
+        description: The ID of the developer account
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List of applications returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationList'
+    post:
+      operationId: createApplication
+      summary: Create Application
+      description: Creates a new application for a developer account, subscribing it to a specific application plan. The application will be assigned API keys or OAuth client credentials based on the service authentication mode.
+      tags:
+      - Applications
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        description: The ID of the developer account
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+      responses:
+        '201':
+          description: Application created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '422':
+          description: Validation error
+  /accounts/{account_id}/applications/{id}.json:
+    get:
+      operationId: getApplication
+      summary: Get Application
+      description: Returns details for a specific application including keys and credentials.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: The application ID
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Application details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '404':
+          description: Application not found
+    put:
+      operationId: updateApplication
+      summary: Update Application
+      description: Updates an application's name, description, or plan assignment.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationRequest'
+      responses:
+        '200':
+          description: Application updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+  /applications/{application_id}/usage.json:
+    get:
+      operationId: getApplicationUsage
+      summary: Get Application Usage
+      description: Returns usage statistics for a specific application. Supports filtering by metric, time period, and date range.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/accessToken'
+      - name: application_id
+        in: path
+        required: true
+        description: The application ID
+        schema:
+          type: integer
+      - name: metric_name
+        in: query
+        required: true
+        description: The name of the metric to retrieve
+        schema:
+          type: string
+      - name: period
+        in: query
+        required: true
+        description: The time period for the statistics
+        schema:
+          type: string
+          enum:
+          - hour
+          - day
+          - week
+          - month
+          - year
+          - eternity
+      - name: since
+        in: query
+        description: Start date for custom date range
+        schema:
+          type: string
+          format: date-time
+      - name: until
+        in: query
+        description: End date for custom date range
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Application usage statistics returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageStats'
+        '404':
+          description: Application not found
+components:
+  parameters:
+    accessToken:
+      name: access_token
+      in: query
+      required: true
+      description: Admin API access token
+      schema:
+        type: string
+  schemas:
+    ApplicationPlan:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        system_name:
+          type: string
+        state:
+          type: string
+          enum:
+          - published
+          - hidden
+        approval_required:
+          type: boolean
+        setup_fee:
+          type: number
+        cost_per_month:
+          type: number
+    UpdateApplicationRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        plan_id:
+          type: integer
+    CreateApplicationRequest:
+      type: object
+      required:
+      - plan_id
+      - name
+      properties:
+        plan_id:
+          type: integer
+          description: The ID of the application plan to subscribe to
+        name:
+          type: string
+          description: Name of the application
+        description:
+          type: string
+    UsageStats:
+      type: object
+      properties:
+        metric:
+          type: string
+          description: The metric name
+        period:
+          type: string
+          description: The time period
+        period_start:
+          type: string
+          format: date-time
+        period_end:
+          type: string
+          format: date-time
+        total:
+          type: integer
+          description: Total value for the period
+        values:
+          type: array
+          description: Time-series data points
+          items:
+            type: array
+            items:
+              oneOf:
+              - type: string
+                format: date-time
+              - type: integer
+    ApplicationList:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+    Application:
+      type: object
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        state:
+          type: string
+          enum:
+          - live
+          - suspended
+        user_account_id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        user_key:
+          type: string
+          description: API key (for API key authentication mode)
+        plan:
+          $ref: '#/components/schemas/ApplicationPlan'
+  securitySchemes:
+    provider_key:
+      type: apiKey
+      in: query
+      name: access_token
+externalDocs:
+  description: Red Hat 3scale Admin Portal Guide
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
