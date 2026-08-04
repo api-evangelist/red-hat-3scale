@@ -1,0 +1,908 @@
+{
+  "info": {
+    "_postman_id": "f2a55557-0824-4fb5-83c4-9de049ee7785",
+    "name": "Red Hat 3scale Account Management Accounts Applications API",
+    "description": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:42:54.000Z",
+    "updatedAt": "2026-07-28T02:42:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f2a55557-0824-4fb5-83c4-9de049ee7785"
+  },
+  "item": [
+    {
+      "name": "accounts",
+      "item": [
+        {
+          "name": "{account_id}",
+          "item": [
+            {
+              "name": "applications.json",
+              "item": [
+                {
+                  "name": "List Applications for Account",
+                  "id": "788b0ba4-85fc-4dce-9a32-767067a1f6b0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id/applications.json?access_token=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id",
+                        "applications.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "3f942ffc-45ff-42e7-8215-28ee2b556e69",
+                          "key": "account_id",
+                          "value": "<integer>",
+                          "description": "(Required) The ID of the developer account"
+                        }
+                      ]
+                    },
+                    "description": "Returns all applications belonging to a specific developer account. Applications represent individual API credentials (keys or OAuth clients)."
+                  },
+                  "response": [
+                    {
+                      "id": "0506e710-7fd6-4e58-9802-3aa84cfceafb",
+                      "name": "List of applications returned",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/applications.json?access_token=<API Key>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "applications.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Admin API access token",
+                              "key": "access_token",
+                              "value": "<API Key>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"applications\": [\n    {\n      \"id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"state\": \"suspended\",\n      \"user_account_id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"user_key\": \"<string>\",\n      \"plan\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"system_name\": \"<string>\",\n        \"state\": \"published\",\n        \"approval_required\": \"<boolean>\",\n        \"setup_fee\": \"<number>\",\n        \"cost_per_month\": \"<number>\"\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"state\": \"suspended\",\n      \"user_account_id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"user_key\": \"<string>\",\n      \"plan\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"system_name\": \"<string>\",\n        \"state\": \"published\",\n        \"approval_required\": \"<boolean>\",\n        \"setup_fee\": \"<number>\",\n        \"cost_per_month\": \"<number>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:42:55.000Z",
+                      "updatedAt": "2026-07-28T02:42:55.000Z",
+                      "uid": "35240-0506e710-7fd6-4e58-9802-3aa84cfceafb"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:42:55.000Z",
+                  "updatedAt": "2026-07-28T02:42:55.000Z",
+                  "uid": "35240-788b0ba4-85fc-4dce-9a32-767067a1f6b0"
+                },
+                {
+                  "name": "Create Application",
+                  "id": "0edc4053-4863-4e12-9801-17999394e15a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The ID of the application plan to subscribe to",
+                          "key": "plan_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "(Required) Name of the application",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "description",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id/applications.json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id",
+                        "applications.json"
+                      ],
+                      "variable": [
+                        {
+                          "id": "459bf2c9-640b-4dd8-8639-1183a5139e43",
+                          "key": "account_id",
+                          "value": "<integer>",
+                          "description": "(Required) The ID of the developer account"
+                        }
+                      ]
+                    },
+                    "description": "Creates a new application for a developer account, subscribing it to a specific application plan. The application will be assigned API keys or OAuth client credentials based on the service authentication mode."
+                  },
+                  "response": [
+                    {
+                      "id": "f567ce94-3a67-4a64-a9bd-a34c475ea5d3",
+                      "name": "Application created successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The ID of the application plan to subscribe to",
+                              "key": "plan_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "(Required) Name of the application",
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "description",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/applications.json?access_token=<API Key>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "applications.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "Added as a part of security scheme: apikey",
+                              "key": "access_token",
+                              "value": "<API Key>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"state\": \"suspended\",\n  \"user_account_id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"user_key\": \"<string>\",\n  \"plan\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"system_name\": \"<string>\",\n    \"state\": \"hidden\",\n    \"approval_required\": \"<boolean>\",\n    \"setup_fee\": \"<number>\",\n    \"cost_per_month\": \"<number>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:42:55.000Z",
+                      "updatedAt": "2026-07-28T02:42:55.000Z",
+                      "uid": "35240-f567ce94-3a67-4a64-a9bd-a34c475ea5d3"
+                    },
+                    {
+                      "id": "520968b7-8950-4fed-bdbe-2a216cf7242f",
+                      "name": "Validation error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "(Required) The ID of the application plan to subscribe to",
+                              "key": "plan_id",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "(Required) Name of the application",
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "description",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/applications.json?access_token=<API Key>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "applications.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "Added as a part of security scheme: apikey",
+                              "key": "access_token",
+                              "value": "<API Key>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:42:55.000Z",
+                      "updatedAt": "2026-07-28T02:42:55.000Z",
+                      "uid": "35240-520968b7-8950-4fed-bdbe-2a216cf7242f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:42:55.000Z",
+                  "updatedAt": "2026-07-28T02:42:55.000Z",
+                  "uid": "35240-0edc4053-4863-4e12-9801-17999394e15a"
+                }
+              ],
+              "id": "a4bcd9e8-8d86-4e3e-99a9-976f2a85b732",
+              "createdAt": "2026-07-28T02:42:54.000Z",
+              "updatedAt": "2026-07-28T02:42:54.000Z",
+              "uid": "35240-a4bcd9e8-8d86-4e3e-99a9-976f2a85b732"
+            },
+            {
+              "name": "applications",
+              "item": [
+                {
+                  "name": "{id}.json",
+                  "item": [
+                    {
+                      "name": "Get Application",
+                      "id": "431e4dd4-606e-4549-adb9-1381f97f804d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/applications/{{id}}.json?access_token=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "applications",
+                            "{{id}}.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Admin API access token",
+                              "key": "access_token",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "a019ea8f-11e2-4164-9784-8408bb5d8685",
+                              "key": "account_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Returns details for a specific application including keys and credentials."
+                      },
+                      "response": [
+                        {
+                          "id": "a5f866ec-b2cb-48b8-97d1-920196640c15",
+                          "name": "Application details returned",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/applications/{{id}}.json?access_token=<API Key>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "applications",
+                                "{{id}}.json"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Admin API access token",
+                                  "key": "access_token",
+                                  "value": "<API Key>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"state\": \"suspended\",\n  \"user_account_id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"user_key\": \"<string>\",\n  \"plan\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"system_name\": \"<string>\",\n    \"state\": \"hidden\",\n    \"approval_required\": \"<boolean>\",\n    \"setup_fee\": \"<number>\",\n    \"cost_per_month\": \"<number>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:42:55.000Z",
+                          "updatedAt": "2026-07-28T02:42:55.000Z",
+                          "uid": "35240-a5f866ec-b2cb-48b8-97d1-920196640c15"
+                        },
+                        {
+                          "id": "2bb9fbed-3694-4d78-ad2a-d03c9b38f741",
+                          "name": "Application not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/applications/{{id}}.json?access_token=<API Key>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "applications",
+                                "{{id}}.json"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Admin API access token",
+                                  "key": "access_token",
+                                  "value": "<API Key>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:42:55.000Z",
+                          "updatedAt": "2026-07-28T02:42:55.000Z",
+                          "uid": "35240-2bb9fbed-3694-4d78-ad2a-d03c9b38f741"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:42:55.000Z",
+                      "updatedAt": "2026-07-28T02:42:55.000Z",
+                      "uid": "35240-431e4dd4-606e-4549-adb9-1381f97f804d"
+                    },
+                    {
+                      "name": "Update Application",
+                      "id": "87f3f9d4-6671-4bdf-a377-c6ee874e507d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "description",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "plan_id",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/applications/{{id}}.json?access_token=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "applications",
+                            "{{id}}.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Admin API access token",
+                              "key": "access_token",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "e800db85-0bec-442e-a4ba-5e7b3f266cfc",
+                              "key": "account_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Updates an application's name, description, or plan assignment."
+                      },
+                      "response": [
+                        {
+                          "id": "e1b091d0-5f70-4797-8152-27df28a52e0a",
+                          "name": "Application updated",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "key": "name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "description",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "plan_id",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/applications/{{id}}.json?access_token=<API Key>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "applications",
+                                "{{id}}.json"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Admin API access token",
+                                  "key": "access_token",
+                                  "value": "<API Key>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"state\": \"suspended\",\n  \"user_account_id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"user_key\": \"<string>\",\n  \"plan\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"system_name\": \"<string>\",\n    \"state\": \"hidden\",\n    \"approval_required\": \"<boolean>\",\n    \"setup_fee\": \"<number>\",\n    \"cost_per_month\": \"<number>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:42:55.000Z",
+                          "updatedAt": "2026-07-28T02:42:55.000Z",
+                          "uid": "35240-e1b091d0-5f70-4797-8152-27df28a52e0a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:42:55.000Z",
+                      "updatedAt": "2026-07-28T02:42:55.000Z",
+                      "uid": "35240-87f3f9d4-6671-4bdf-a377-c6ee874e507d"
+                    }
+                  ],
+                  "id": "9c77486a-0cef-4a24-ab8d-3bddcb4620dd",
+                  "createdAt": "2026-07-28T02:42:54.000Z",
+                  "updatedAt": "2026-07-28T02:42:54.000Z",
+                  "uid": "35240-9c77486a-0cef-4a24-ab8d-3bddcb4620dd"
+                }
+              ],
+              "id": "b63cfabd-f160-4dda-8fd0-79651caad63d",
+              "createdAt": "2026-07-28T02:42:54.000Z",
+              "updatedAt": "2026-07-28T02:42:54.000Z",
+              "uid": "35240-b63cfabd-f160-4dda-8fd0-79651caad63d"
+            }
+          ],
+          "id": "fa6fd70a-026b-4a13-89ed-1c16a3af0105",
+          "createdAt": "2026-07-28T02:42:54.000Z",
+          "updatedAt": "2026-07-28T02:42:54.000Z",
+          "uid": "35240-fa6fd70a-026b-4a13-89ed-1c16a3af0105"
+        }
+      ],
+      "id": "0b2b4937-09d1-4454-ad13-b129f3e22d55",
+      "createdAt": "2026-07-28T02:42:54.000Z",
+      "updatedAt": "2026-07-28T02:42:54.000Z",
+      "uid": "35240-0b2b4937-09d1-4454-ad13-b129f3e22d55"
+    },
+    {
+      "name": "applications",
+      "item": [
+        {
+          "name": "{application_id}",
+          "item": [
+            {
+              "name": "usage.json",
+              "item": [
+                {
+                  "name": "Get Application Usage",
+                  "id": "ceafea1d-971e-494d-b9b4-0b0b74467d91",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/applications/:application_id/usage.json?access_token=<string>&metric_name=<string>&period=week&since=<dateTime>&until=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "applications",
+                        ":application_id",
+                        "usage.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The name of the metric to retrieve",
+                          "key": "metric_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The time period for the statistics",
+                          "key": "period",
+                          "value": "week"
+                        },
+                        {
+                          "description": "Start date for custom date range",
+                          "key": "since",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End date for custom date range",
+                          "key": "until",
+                          "value": "<dateTime>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "6c770d73-5f74-4341-9863-44163186fdf5",
+                          "key": "application_id",
+                          "value": "<integer>",
+                          "description": "(Required) The application ID"
+                        }
+                      ]
+                    },
+                    "description": "Returns usage statistics for a specific application. Supports filtering by metric, time period, and date range."
+                  },
+                  "response": [
+                    {
+                      "id": "8d24e64f-d6ba-4506-8c53-bba6af4a0c37",
+                      "name": "Application usage statistics returned",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:application_id/usage.json?access_token=<API Key>&metric_name=<string>&period=week&since=<dateTime>&until=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":application_id",
+                            "usage.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Admin API access token",
+                              "key": "access_token",
+                              "value": "<API Key>"
+                            },
+                            {
+                              "description": "(Required) The name of the metric to retrieve",
+                              "key": "metric_name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The time period for the statistics",
+                              "key": "period",
+                              "value": "week"
+                            },
+                            {
+                              "description": "Start date for custom date range",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for custom date range",
+                              "key": "until",
+                              "value": "<dateTime>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "application_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"metric\": \"<string>\",\n  \"period\": \"<string>\",\n  \"period_start\": \"<dateTime>\",\n  \"period_end\": \"<dateTime>\",\n  \"total\": \"<integer>\",\n  \"values\": [\n    [\n      \"<dateTime>\",\n      \"<dateTime>\"\n    ],\n    [\n      \"<dateTime>\",\n      \"<dateTime>\"\n    ]\n  ]\n}",
+                      "createdAt": "2026-07-28T02:42:55.000Z",
+                      "updatedAt": "2026-07-28T02:42:55.000Z",
+                      "uid": "35240-8d24e64f-d6ba-4506-8c53-bba6af4a0c37"
+                    },
+                    {
+                      "id": "1aad6b61-922c-4253-a106-017f116a43d7",
+                      "name": "Application not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/applications/:application_id/usage.json?access_token=<API Key>&metric_name=<string>&period=week&since=<dateTime>&until=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "applications",
+                            ":application_id",
+                            "usage.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Admin API access token",
+                              "key": "access_token",
+                              "value": "<API Key>"
+                            },
+                            {
+                              "description": "(Required) The name of the metric to retrieve",
+                              "key": "metric_name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The time period for the statistics",
+                              "key": "period",
+                              "value": "week"
+                            },
+                            {
+                              "description": "Start date for custom date range",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for custom date range",
+                              "key": "until",
+                              "value": "<dateTime>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "application_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:42:55.000Z",
+                      "updatedAt": "2026-07-28T02:42:55.000Z",
+                      "uid": "35240-1aad6b61-922c-4253-a106-017f116a43d7"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:42:55.000Z",
+                  "updatedAt": "2026-07-28T02:42:55.000Z",
+                  "uid": "35240-ceafea1d-971e-494d-b9b4-0b0b74467d91"
+                }
+              ],
+              "id": "3b98e771-2c52-45ba-ba8e-39d3d7879506",
+              "createdAt": "2026-07-28T02:42:54.000Z",
+              "updatedAt": "2026-07-28T02:42:54.000Z",
+              "uid": "35240-3b98e771-2c52-45ba-ba8e-39d3d7879506"
+            }
+          ],
+          "id": "10116929-a980-4395-ba04-0748886df4ae",
+          "createdAt": "2026-07-28T02:42:54.000Z",
+          "updatedAt": "2026-07-28T02:42:54.000Z",
+          "uid": "35240-10116929-a980-4395-ba04-0748886df4ae"
+        }
+      ],
+      "id": "b804282d-182d-4cb0-a234-02c653388931",
+      "createdAt": "2026-07-28T02:42:54.000Z",
+      "updatedAt": "2026-07-28T02:42:54.000Z",
+      "uid": "35240-b804282d-182d-4cb0-a234-02c653388931"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "domain",
+      "value": "your-domain"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api"
+    },
+    {
+      "key": "id",
+      "value": "<integer>"
+    }
+  ]
+}

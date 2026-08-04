@@ -1,0 +1,494 @@
+{
+  "info": {
+    "_postman_id": "8413d4e8-875b-4a42-bae3-491725150d2d",
+    "name": "Red Hat 3scale Account Management Accounts Authorization API",
+    "description": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:42:55.000Z",
+    "updatedAt": "2026-07-28T02:42:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8413d4e8-875b-4a42-bae3-491725150d2d"
+  },
+  "item": [
+    {
+      "name": "transactions",
+      "item": [
+        {
+          "name": "authorize.xml",
+          "item": [
+            {
+              "name": "Authorize API Transaction",
+              "id": "93493d1a-31ed-41cd-b43f-6cedd10524a7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/transactions/authorize.xml?provider_key=<string>&user_key=<string>&service_id=<string>&usage[hits]=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "transactions",
+                    "authorize.xml"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The provider key identifying your 3scale account",
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The API key of the application making the call",
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ID of the service being accessed",
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of hits to report with this authorization",
+                      "key": "usage[hits]",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Authorizes an API call by checking whether the application identified by the user key is within its usage limits. Returns success or failure along with current usage data. Used by APIcast before forwarding requests to the backend API."
+              },
+              "response": [
+                {
+                  "id": "962bc896-27c7-4cc2-aec2-cb967ff6ac5b",
+                  "name": "Authorization response (success or failure)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/transactions/authorize.xml?provider_key=<string>&user_key=<string>&service_id=<string>&usage[hits]=<integer>&access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "transactions",
+                        "authorize.xml"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The provider key identifying your 3scale account",
+                          "key": "provider_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The API key of the application making the call",
+                          "key": "user_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The ID of the service being accessed",
+                          "key": "service_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of hits to report with this authorization",
+                          "key": "usage[hits]",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Added as a part of security scheme: apikey",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "xml",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/xml"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <plan>(string)</plan>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n</element>",
+                  "createdAt": "2026-07-28T02:42:56.000Z",
+                  "updatedAt": "2026-07-28T02:42:56.000Z",
+                  "uid": "35240-962bc896-27c7-4cc2-aec2-cb967ff6ac5b"
+                },
+                {
+                  "id": "613f3abd-cce5-464c-8827-dcf32625966e",
+                  "name": "Authorization denied",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/transactions/authorize.xml?provider_key=<string>&user_key=<string>&service_id=<string>&usage[hits]=<integer>&access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "transactions",
+                        "authorize.xml"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The provider key identifying your 3scale account",
+                          "key": "provider_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The API key of the application making the call",
+                          "key": "user_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The ID of the service being accessed",
+                          "key": "service_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of hits to report with this authorization",
+                          "key": "usage[hits]",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Added as a part of security scheme: apikey",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "xml",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/xml"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <code>(string)</code>\n  <message>(string)</message>\n</element>",
+                  "createdAt": "2026-07-28T02:42:56.000Z",
+                  "updatedAt": "2026-07-28T02:42:56.000Z",
+                  "uid": "35240-613f3abd-cce5-464c-8827-dcf32625966e"
+                },
+                {
+                  "id": "acaf09b8-9296-4de7-85bc-21a59ff0c19c",
+                  "name": "Application not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/transactions/authorize.xml?provider_key=<string>&user_key=<string>&service_id=<string>&usage[hits]=<integer>&access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "transactions",
+                        "authorize.xml"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The provider key identifying your 3scale account",
+                          "key": "provider_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The API key of the application making the call",
+                          "key": "user_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The ID of the service being accessed",
+                          "key": "service_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of hits to report with this authorization",
+                          "key": "usage[hits]",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Added as a part of security scheme: apikey",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:42:56.000Z",
+                  "updatedAt": "2026-07-28T02:42:56.000Z",
+                  "uid": "35240-acaf09b8-9296-4de7-85bc-21a59ff0c19c"
+                }
+              ],
+              "createdAt": "2026-07-28T02:42:55.000Z",
+              "updatedAt": "2026-07-28T02:42:55.000Z",
+              "uid": "35240-93493d1a-31ed-41cd-b43f-6cedd10524a7"
+            }
+          ],
+          "id": "116e3e17-7bc4-443a-a27c-e2d6c048ba08",
+          "createdAt": "2026-07-28T02:42:55.000Z",
+          "updatedAt": "2026-07-28T02:42:55.000Z",
+          "uid": "35240-116e3e17-7bc4-443a-a27c-e2d6c048ba08"
+        },
+        {
+          "name": "authrep.xml",
+          "item": [
+            {
+              "name": "Authorize and Report API Transaction",
+              "id": "1b4e26c4-e7e6-4389-af0e-ba40ebd61bba",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/transactions/authrep.xml?provider_key=<string>&user_key=<string>&service_id=<string>&usage[hits]=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "transactions",
+                    "authrep.xml"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The provider key identifying your 3scale account",
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The API key of the application making the call",
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ID of the service being accessed",
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of hits to report",
+                      "key": "usage[hits]",
+                      "value": "1"
+                    }
+                  ]
+                },
+                "description": "Combines authorization and reporting in a single call. Authorizes the API call and simultaneously reports usage metrics to 3scale. This is the recommended approach for reporting hits and other metrics."
+              },
+              "response": [
+                {
+                  "id": "0d85af45-73cb-4f91-9804-5de5cde6e7a4",
+                  "name": "Authorization and report successful",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/transactions/authrep.xml?provider_key=<string>&user_key=<string>&service_id=<string>&usage[hits]=1&access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "transactions",
+                        "authrep.xml"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The provider key identifying your 3scale account",
+                          "key": "provider_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The API key of the application making the call",
+                          "key": "user_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The ID of the service being accessed",
+                          "key": "service_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of hits to report",
+                          "key": "usage[hits]",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Added as a part of security scheme: apikey",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "xml",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/xml"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <plan>(string)</plan>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n</element>",
+                  "createdAt": "2026-07-28T02:42:56.000Z",
+                  "updatedAt": "2026-07-28T02:42:56.000Z",
+                  "uid": "35240-0d85af45-73cb-4f91-9804-5de5cde6e7a4"
+                },
+                {
+                  "id": "b7d36dbf-d134-441d-9b53-80d6059e81f5",
+                  "name": "Authorization denied or limits exceeded",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/transactions/authrep.xml?provider_key=<string>&user_key=<string>&service_id=<string>&usage[hits]=1&access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "transactions",
+                        "authrep.xml"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The provider key identifying your 3scale account",
+                          "key": "provider_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The API key of the application making the call",
+                          "key": "user_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The ID of the service being accessed",
+                          "key": "service_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of hits to report",
+                          "key": "usage[hits]",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Added as a part of security scheme: apikey",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "xml",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/xml"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <code>(string)</code>\n  <message>(string)</message>\n</element>",
+                  "createdAt": "2026-07-28T02:42:56.000Z",
+                  "updatedAt": "2026-07-28T02:42:56.000Z",
+                  "uid": "35240-b7d36dbf-d134-441d-9b53-80d6059e81f5"
+                }
+              ],
+              "createdAt": "2026-07-28T02:42:55.000Z",
+              "updatedAt": "2026-07-28T02:42:55.000Z",
+              "uid": "35240-1b4e26c4-e7e6-4389-af0e-ba40ebd61bba"
+            }
+          ],
+          "id": "f10c8833-0fad-48b5-bee7-4b6695d74052",
+          "createdAt": "2026-07-28T02:42:55.000Z",
+          "updatedAt": "2026-07-28T02:42:55.000Z",
+          "uid": "35240-f10c8833-0fad-48b5-bee7-4b6695d74052"
+        }
+      ],
+      "id": "95bc5a05-447c-49b0-94a9-c2332d3b5292",
+      "createdAt": "2026-07-28T02:42:55.000Z",
+      "updatedAt": "2026-07-28T02:42:55.000Z",
+      "uid": "35240-95bc5a05-447c-49b0-94a9-c2332d3b5292"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "domain",
+      "value": "your-domain"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api"
+    }
+  ]
+}

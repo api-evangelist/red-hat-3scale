@@ -1,0 +1,482 @@
+{
+  "info": {
+    "_postman_id": "753eda88-d988-4789-9d78-db56dd6fc136",
+    "name": "Red Hat 3scale Account Management Accounts Invoices API",
+    "description": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:42:59.000Z",
+    "updatedAt": "2026-07-28T02:42:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-753eda88-d988-4789-9d78-db56dd6fc136"
+  },
+  "item": [
+    {
+      "name": "accounts",
+      "item": [
+        {
+          "name": "{account_id}",
+          "item": [
+            {
+              "name": "invoices.json",
+              "item": [
+                {
+                  "name": "List Account Invoices",
+                  "id": "1f5eb2f2-3989-42ca-9080-a6dd0840fd2b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/:account_id/invoices.json?access_token=<string>&state=failed&month=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        ":account_id",
+                        "invoices.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by invoice state",
+                          "key": "state",
+                          "value": "failed"
+                        },
+                        {
+                          "description": "Filter by billing month (YYYY-MM format)",
+                          "key": "month",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "c38694db-89d2-4e61-918b-a73d75588a8e",
+                          "key": "account_id",
+                          "value": "<integer>",
+                          "description": "(Required) The ID of the developer account"
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of invoices for a specific developer account, including their amounts, states, and billing periods."
+                  },
+                  "response": [
+                    {
+                      "id": "cffa312f-5ef4-4e1a-ba71-a3abc5f6c8b6",
+                      "name": "List of invoices returned",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/invoices.json?access_token=<API Key>&state=failed&month=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "invoices.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Admin API access token",
+                              "key": "access_token",
+                              "value": "<API Key>"
+                            },
+                            {
+                              "description": "Filter by invoice state",
+                              "key": "state",
+                              "value": "failed"
+                            },
+                            {
+                              "description": "Filter by billing month (YYYY-MM format)",
+                              "key": "month",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "account_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"invoices\": [\n    {\n      \"id\": \"<integer>\",\n      \"state\": \"open\",\n      \"friendly_id\": \"<string>\",\n      \"month\": \"<string>\",\n      \"due_on\": \"<date>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"cost\": \"<float>\",\n      \"currency\": \"<string>\",\n      \"account\": {\n        \"id\": \"<integer>\",\n        \"org_name\": \"<string>\"\n      },\n      \"line_items\": [\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\",\n          \"cost\": \"<number>\",\n          \"quantity\": \"<number>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\",\n          \"cost\": \"<number>\",\n          \"quantity\": \"<number>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"state\": \"failed\",\n      \"friendly_id\": \"<string>\",\n      \"month\": \"<string>\",\n      \"due_on\": \"<date>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"cost\": \"<float>\",\n      \"currency\": \"<string>\",\n      \"account\": {\n        \"id\": \"<integer>\",\n        \"org_name\": \"<string>\"\n      },\n      \"line_items\": [\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\",\n          \"cost\": \"<number>\",\n          \"quantity\": \"<number>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\",\n          \"cost\": \"<number>\",\n          \"quantity\": \"<number>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:43:00.000Z",
+                      "updatedAt": "2026-07-28T02:43:00.000Z",
+                      "uid": "35240-cffa312f-5ef4-4e1a-ba71-a3abc5f6c8b6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:43:00.000Z",
+                  "updatedAt": "2026-07-28T02:43:00.000Z",
+                  "uid": "35240-1f5eb2f2-3989-42ca-9080-a6dd0840fd2b"
+                }
+              ],
+              "id": "a2f35be4-e968-4903-8bd0-46e5710a9e2a",
+              "createdAt": "2026-07-28T02:43:00.000Z",
+              "updatedAt": "2026-07-28T02:43:00.000Z",
+              "uid": "35240-a2f35be4-e968-4903-8bd0-46e5710a9e2a"
+            },
+            {
+              "name": "invoices",
+              "item": [
+                {
+                  "name": "{id}.json",
+                  "item": [
+                    {
+                      "name": "Get Account Invoice",
+                      "id": "3e00e1b5-60b3-4f97-af87-5347ad64c1af",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/accounts/:account_id/invoices/{{id}}.json?access_token=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "accounts",
+                            ":account_id",
+                            "invoices",
+                            "{{id}}.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Admin API access token",
+                              "key": "access_token",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "79ae46c2-8718-47d0-872a-fa96f1d55e48",
+                              "key": "account_id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Returns details for a specific invoice including line items and total."
+                      },
+                      "response": [
+                        {
+                          "id": "16c1e5e8-c998-47c5-8ed1-3ab0ec6327fa",
+                          "name": "Invoice details returned",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/invoices/{{id}}.json?access_token=<API Key>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "invoices",
+                                "{{id}}.json"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Admin API access token",
+                                  "key": "access_token",
+                                  "value": "<API Key>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<integer>\",\n  \"state\": \"cancelled\",\n  \"friendly_id\": \"<string>\",\n  \"month\": \"<string>\",\n  \"due_on\": \"<date>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"cost\": \"<float>\",\n  \"currency\": \"<string>\",\n  \"account\": {\n    \"id\": \"<integer>\",\n    \"org_name\": \"<string>\"\n  },\n  \"line_items\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"cost\": \"<number>\",\n      \"quantity\": \"<number>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"cost\": \"<number>\",\n      \"quantity\": \"<number>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:43:00.000Z",
+                          "updatedAt": "2026-07-28T02:43:00.000Z",
+                          "uid": "35240-16c1e5e8-c998-47c5-8ed1-3ab0ec6327fa"
+                        },
+                        {
+                          "id": "2cde1fa6-2f0a-44a3-bb7c-99eb4d8be820",
+                          "name": "Invoice not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/accounts/:account_id/invoices/{{id}}.json?access_token=<API Key>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "accounts",
+                                ":account_id",
+                                "invoices",
+                                "{{id}}.json"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Admin API access token",
+                                  "key": "access_token",
+                                  "value": "<API Key>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "account_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:43:00.000Z",
+                          "updatedAt": "2026-07-28T02:43:00.000Z",
+                          "uid": "35240-2cde1fa6-2f0a-44a3-bb7c-99eb4d8be820"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:43:00.000Z",
+                      "updatedAt": "2026-07-28T02:43:00.000Z",
+                      "uid": "35240-3e00e1b5-60b3-4f97-af87-5347ad64c1af"
+                    }
+                  ],
+                  "id": "1e6b32b3-1f02-4d06-b73a-43b3ff2d3034",
+                  "createdAt": "2026-07-28T02:43:00.000Z",
+                  "updatedAt": "2026-07-28T02:43:00.000Z",
+                  "uid": "35240-1e6b32b3-1f02-4d06-b73a-43b3ff2d3034"
+                }
+              ],
+              "id": "86d6872a-9a38-405f-b9d9-d8e298d13b4a",
+              "createdAt": "2026-07-28T02:43:00.000Z",
+              "updatedAt": "2026-07-28T02:43:00.000Z",
+              "uid": "35240-86d6872a-9a38-405f-b9d9-d8e298d13b4a"
+            }
+          ],
+          "id": "5a3d372d-b1a8-46ec-9411-4a9d59167181",
+          "createdAt": "2026-07-28T02:43:00.000Z",
+          "updatedAt": "2026-07-28T02:43:00.000Z",
+          "uid": "35240-5a3d372d-b1a8-46ec-9411-4a9d59167181"
+        }
+      ],
+      "id": "e7054f40-cef8-48da-a4ea-2d7730535891",
+      "createdAt": "2026-07-28T02:43:00.000Z",
+      "updatedAt": "2026-07-28T02:43:00.000Z",
+      "uid": "35240-e7054f40-cef8-48da-a4ea-2d7730535891"
+    },
+    {
+      "name": "invoices.json",
+      "item": [
+        {
+          "name": "List All Invoices",
+          "id": "c49b60c2-d9db-4469-b047-fbb411af5a43",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices.json?access_token=<string>&state=failed&month=<string>&page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "invoices.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Admin API access token",
+                  "key": "access_token",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by invoice state",
+                  "key": "state",
+                  "value": "failed"
+                },
+                {
+                  "description": "Filter by billing month (YYYY-MM)",
+                  "key": "month",
+                  "value": "<string>"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Returns all invoices across all accounts. Supports filtering by month and state."
+          },
+          "response": [
+            {
+              "id": "f49e7155-6a40-4a6d-89b5-9428a1696d39",
+              "name": "All invoices returned",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/invoices.json?access_token=<API Key>&state=failed&month=<string>&page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "invoices.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Admin API access token",
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Filter by invoice state",
+                      "key": "state",
+                      "value": "failed"
+                    },
+                    {
+                      "description": "Filter by billing month (YYYY-MM)",
+                      "key": "month",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"invoices\": [\n    {\n      \"id\": \"<integer>\",\n      \"state\": \"open\",\n      \"friendly_id\": \"<string>\",\n      \"month\": \"<string>\",\n      \"due_on\": \"<date>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"cost\": \"<float>\",\n      \"currency\": \"<string>\",\n      \"account\": {\n        \"id\": \"<integer>\",\n        \"org_name\": \"<string>\"\n      },\n      \"line_items\": [\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\",\n          \"cost\": \"<number>\",\n          \"quantity\": \"<number>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\",\n          \"cost\": \"<number>\",\n          \"quantity\": \"<number>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<integer>\",\n      \"state\": \"failed\",\n      \"friendly_id\": \"<string>\",\n      \"month\": \"<string>\",\n      \"due_on\": \"<date>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"cost\": \"<float>\",\n      \"currency\": \"<string>\",\n      \"account\": {\n        \"id\": \"<integer>\",\n        \"org_name\": \"<string>\"\n      },\n      \"line_items\": [\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\",\n          \"cost\": \"<number>\",\n          \"quantity\": \"<number>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\",\n          \"cost\": \"<number>\",\n          \"quantity\": \"<number>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:43:00.000Z",
+              "updatedAt": "2026-07-28T02:43:00.000Z",
+              "uid": "35240-f49e7155-6a40-4a6d-89b5-9428a1696d39"
+            }
+          ],
+          "createdAt": "2026-07-28T02:43:00.000Z",
+          "updatedAt": "2026-07-28T02:43:00.000Z",
+          "uid": "35240-c49b60c2-d9db-4469-b047-fbb411af5a43"
+        }
+      ],
+      "id": "74a870b2-da89-4340-a7b6-f1d39047ecd2",
+      "createdAt": "2026-07-28T02:43:00.000Z",
+      "updatedAt": "2026-07-28T02:43:00.000Z",
+      "uid": "35240-74a870b2-da89-4340-a7b6-f1d39047ecd2"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "domain",
+      "value": "your-domain"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api"
+    },
+    {
+      "key": "id",
+      "value": "<integer>"
+    }
+  ]
+}

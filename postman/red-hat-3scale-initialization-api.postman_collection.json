@@ -1,0 +1,128 @@
+{
+  "info": {
+    "_postman_id": "6fb19b16-aa57-43cb-9b7d-0711ee80e16a",
+    "name": "Red Hat 3scale Account Management Accounts Initialization API",
+    "description": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:42:58.000Z",
+    "updatedAt": "2026-07-28T02:42:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6fb19b16-aa57-43cb-9b7d-0711ee80e16a"
+  },
+  "item": [
+    {
+      "name": "boot",
+      "item": [
+        {
+          "name": "Boot Gateway",
+          "id": "f37a9369-04fe-48f8-b670-0e3c68154a7c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/boot",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "boot"
+              ]
+            },
+            "description": "Triggers the APIcast initialization process, causing the gateway to attempt to download a new configuration from the 3scale management API. This is useful for forcing a configuration refresh."
+          },
+          "response": [
+            {
+              "id": "fed7b96f-afaf-4a82-8780-53f562f6ab9f",
+              "name": "Boot process initiated successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/boot?access_token=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "boot"
+                  ],
+                  "query": [
+                    {
+                      "description": "Added as a part of security scheme: apikey",
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"success\": \"<boolean>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:42:59.000Z",
+              "updatedAt": "2026-07-28T02:42:59.000Z",
+              "uid": "35240-fed7b96f-afaf-4a82-8780-53f562f6ab9f"
+            }
+          ],
+          "createdAt": "2026-07-28T02:42:59.000Z",
+          "updatedAt": "2026-07-28T02:42:59.000Z",
+          "uid": "35240-f37a9369-04fe-48f8-b670-0e3c68154a7c"
+        }
+      ],
+      "id": "e23c6c14-887f-4861-8844-a56409fb5db2",
+      "createdAt": "2026-07-28T02:42:59.000Z",
+      "updatedAt": "2026-07-28T02:42:59.000Z",
+      "uid": "35240-e23c6c14-887f-4861-8844-a56409fb5db2"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "domain",
+      "value": "your-domain"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api"
+    }
+  ]
+}

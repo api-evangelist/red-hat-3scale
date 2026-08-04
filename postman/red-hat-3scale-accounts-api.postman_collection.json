@@ -1,0 +1,766 @@
+{
+  "info": {
+    "_postman_id": "c39be8db-07cc-4248-b584-6aedde1d5fd8",
+    "name": "Red Hat 3scale Account Management Accounts API",
+    "description": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:42:53.000Z",
+    "updatedAt": "2026-07-28T02:42:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c39be8db-07cc-4248-b584-6aedde1d5fd8"
+  },
+  "item": [
+    {
+      "name": "accounts.json",
+      "item": [
+        {
+          "name": "List Developer Accounts",
+          "id": "a4f244fd-a9cb-4c83-9ef9-d1fa7c93d9ca",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/accounts.json?access_token=<string>&state=approved&page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Admin API access token",
+                  "key": "access_token",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter accounts by state",
+                  "key": "state",
+                  "value": "approved"
+                },
+                {
+                  "description": "Page number for pagination",
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "Number of results per page (max 500)",
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Returns a list of developer accounts in the 3scale admin portal. Supports filtering by state (approved, pending, rejected) and pagination with per_page and page parameters."
+          },
+          "response": [
+            {
+              "id": "915d0162-1461-4c9e-a4e6-8a487b20d527",
+              "name": "List of accounts returned",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/accounts.json?access_token=<API Key>&state=approved&page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Admin API access token",
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "description": "Filter accounts by state",
+                      "key": "state",
+                      "value": "approved"
+                    },
+                    {
+                      "description": "Page number for pagination",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of results per page (max 500)",
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"accounts\": [\n    {\n      \"id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"state\": \"pending\",\n      \"org_name\": \"<string>\",\n      \"extra_fields\": {\n        \"Duis0c\": \"labore aliqua\",\n        \"aliqua_3f2\": \"Ut eu\"\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"state\": \"approved\",\n      \"org_name\": \"<string>\",\n      \"extra_fields\": {\n        \"ullamco_b66\": false,\n        \"ind0b\": false\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:42:54.000Z",
+              "updatedAt": "2026-07-28T02:42:54.000Z",
+              "uid": "35240-915d0162-1461-4c9e-a4e6-8a487b20d527"
+            }
+          ],
+          "createdAt": "2026-07-28T02:42:54.000Z",
+          "updatedAt": "2026-07-28T02:42:54.000Z",
+          "uid": "35240-a4f244fd-a9cb-4c83-9ef9-d1fa7c93d9ca"
+        },
+        {
+          "name": "Create Developer Account",
+          "id": "fb144caf-f4d6-4bdd-aba1-d746d5b42b88",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "description": "(Required) ",
+                  "key": "org_name",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "username",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "email",
+                  "value": "<email>"
+                },
+                {
+                  "description": "(Required) ",
+                  "key": "password",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/accounts.json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts.json"
+              ]
+            },
+            "description": "Creates a new developer account in the 3scale developer portal. The account requires an organization name and a user with email and password. The account state defaults to pending unless auto-approval is enabled."
+          },
+          "response": [
+            {
+              "id": "b6d4979f-a986-47ff-b81e-a506c71f4a4b",
+              "name": "Account created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) ",
+                      "key": "org_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/accounts.json?access_token=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "Added as a part of security scheme: apikey",
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"state\": \"approved\",\n  \"org_name\": \"<string>\",\n  \"extra_fields\": {\n    \"esse_65\": \"aliquip ut enim\"\n  }\n}",
+              "createdAt": "2026-07-28T02:42:54.000Z",
+              "updatedAt": "2026-07-28T02:42:54.000Z",
+              "uid": "35240-b6d4979f-a986-47ff-b81e-a506c71f4a4b"
+            },
+            {
+              "id": "ee18d6fa-d5fa-4153-b269-5136f78c8394",
+              "name": "Validation error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) ",
+                      "key": "org_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/accounts.json?access_token=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "Added as a part of security scheme: apikey",
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:42:54.000Z",
+              "updatedAt": "2026-07-28T02:42:54.000Z",
+              "uid": "35240-ee18d6fa-d5fa-4153-b269-5136f78c8394"
+            }
+          ],
+          "createdAt": "2026-07-28T02:42:54.000Z",
+          "updatedAt": "2026-07-28T02:42:54.000Z",
+          "uid": "35240-fb144caf-f4d6-4bdd-aba1-d746d5b42b88"
+        }
+      ],
+      "id": "120dc831-bc96-4f5d-b2bd-fcaddf19ccf1",
+      "createdAt": "2026-07-28T02:42:54.000Z",
+      "updatedAt": "2026-07-28T02:42:54.000Z",
+      "uid": "35240-120dc831-bc96-4f5d-b2bd-fcaddf19ccf1"
+    },
+    {
+      "name": "accounts",
+      "item": [
+        {
+          "name": "{id}.json",
+          "item": [
+            {
+              "name": "Get Developer Account",
+              "id": "15359547-bc15-4697-9c4c-435d1086570d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/accounts/{{id}}.json?access_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts",
+                    "{{id}}.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Admin API access token",
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Returns the details of a specific developer account by ID."
+              },
+              "response": [
+                {
+                  "id": "2141d65e-161c-4ba7-9662-2f125d850129",
+                  "name": "Account details returned",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/{{id}}.json?access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        "{{id}}.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"state\": \"approved\",\n  \"org_name\": \"<string>\",\n  \"extra_fields\": {\n    \"esse_65\": \"aliquip ut enim\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:42:54.000Z",
+                  "updatedAt": "2026-07-28T02:42:54.000Z",
+                  "uid": "35240-2141d65e-161c-4ba7-9662-2f125d850129"
+                },
+                {
+                  "id": "c5331d35-31a7-49c2-aebf-7f26ec8f207e",
+                  "name": "Account not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/{{id}}.json?access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        "{{id}}.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:42:54.000Z",
+                  "updatedAt": "2026-07-28T02:42:54.000Z",
+                  "uid": "35240-c5331d35-31a7-49c2-aebf-7f26ec8f207e"
+                }
+              ],
+              "createdAt": "2026-07-28T02:42:54.000Z",
+              "updatedAt": "2026-07-28T02:42:54.000Z",
+              "uid": "35240-15359547-bc15-4697-9c4c-435d1086570d"
+            },
+            {
+              "name": "Update Developer Account",
+              "id": "916c4230-eaaa-4008-85ac-b7f16085fe65",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "org_name",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/accounts/{{id}}.json?access_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts",
+                    "{{id}}.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Admin API access token",
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Updates the details of a specific developer account."
+              },
+              "response": [
+                {
+                  "id": "a0d3258c-9db9-4132-8dc1-ca6cd05911c2",
+                  "name": "Account updated successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "key": "org_name",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/{{id}}.json?access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        "{{id}}.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"state\": \"approved\",\n  \"org_name\": \"<string>\",\n  \"extra_fields\": {\n    \"esse_65\": \"aliquip ut enim\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:42:54.000Z",
+                  "updatedAt": "2026-07-28T02:42:54.000Z",
+                  "uid": "35240-a0d3258c-9db9-4132-8dc1-ca6cd05911c2"
+                },
+                {
+                  "id": "da89845b-cf12-4466-b563-b57c52a91dbd",
+                  "name": "Account not found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "key": "org_name",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/{{id}}.json?access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        "{{id}}.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:42:54.000Z",
+                  "updatedAt": "2026-07-28T02:42:54.000Z",
+                  "uid": "35240-da89845b-cf12-4466-b563-b57c52a91dbd"
+                }
+              ],
+              "createdAt": "2026-07-28T02:42:54.000Z",
+              "updatedAt": "2026-07-28T02:42:54.000Z",
+              "uid": "35240-916c4230-eaaa-4008-85ac-b7f16085fe65"
+            },
+            {
+              "name": "Delete Developer Account",
+              "id": "05942194-f6af-4441-9582-68229f5aa9d9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/accounts/{{id}}.json?access_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts",
+                    "{{id}}.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Admin API access token",
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Deletes a developer account and all associated applications."
+              },
+              "response": [
+                {
+                  "id": "cccf32c8-d1b9-4c04-8d47-f7803a140da5",
+                  "name": "Account deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/{{id}}.json?access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        "{{id}}.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:42:54.000Z",
+                  "updatedAt": "2026-07-28T02:42:54.000Z",
+                  "uid": "35240-cccf32c8-d1b9-4c04-8d47-f7803a140da5"
+                },
+                {
+                  "id": "133086ff-9a75-4ba4-9a1d-1a8d17043932",
+                  "name": "Account not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/accounts/{{id}}.json?access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "accounts",
+                        "{{id}}.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:42:54.000Z",
+                  "updatedAt": "2026-07-28T02:42:54.000Z",
+                  "uid": "35240-133086ff-9a75-4ba4-9a1d-1a8d17043932"
+                }
+              ],
+              "createdAt": "2026-07-28T02:42:54.000Z",
+              "updatedAt": "2026-07-28T02:42:54.000Z",
+              "uid": "35240-05942194-f6af-4441-9582-68229f5aa9d9"
+            }
+          ],
+          "id": "d37e8a77-8b3d-4045-b0c3-e0183717fa5a",
+          "createdAt": "2026-07-28T02:42:54.000Z",
+          "updatedAt": "2026-07-28T02:42:54.000Z",
+          "uid": "35240-d37e8a77-8b3d-4045-b0c3-e0183717fa5a"
+        }
+      ],
+      "id": "aefda909-92db-4d84-85da-76f7e21fee00",
+      "createdAt": "2026-07-28T02:42:54.000Z",
+      "updatedAt": "2026-07-28T02:42:54.000Z",
+      "uid": "35240-aefda909-92db-4d84-85da-76f7e21fee00"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "domain",
+      "value": "your-domain"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api"
+    },
+    {
+      "key": "id",
+      "value": "<integer>"
+    }
+  ]
+}

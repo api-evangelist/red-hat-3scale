@@ -1,0 +1,285 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale Billing API
+  description: >-
+    The 3scale Billing API enables management of billing and invoicing for API
+    usage within the 3scale platform. It supports retrieving and managing invoices,
+    payment transactions, and monetization of API subscriptions based on usage
+    plans and application metrics.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+externalDocs:
+  description: Red Hat 3scale Billing Documentation
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/billing
+servers:
+  - url: https://{domain}-admin.3scale.net/api
+    description: 3scale Billing API
+    variables:
+      domain:
+        default: your-domain
+        description: Your 3scale tenant domain
+tags:
+  - name: Invoices
+    description: Manage billing invoices for developer accounts
+  - name: Payment Transactions
+    description: View payment transactions associated with invoices
+security:
+  - access_token: []
+paths:
+  /accounts/{account_id}/invoices.json:
+    get:
+      operationId: listAccountInvoices
+      summary: List Account Invoices
+      description: >-
+        Returns a list of invoices for a specific developer account, including
+        their amounts, states, and billing periods.
+      tags:
+        - Invoices
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: account_id
+          in: path
+          required: true
+          description: The ID of the developer account
+          schema:
+            type: integer
+        - name: state
+          in: query
+          description: Filter by invoice state
+          schema:
+            type: string
+            enum:
+              - open
+              - pending
+              - unpaid
+              - paid
+              - failed
+              - cancelled
+        - name: month
+          in: query
+          description: Filter by billing month (YYYY-MM format)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of invoices returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceList'
+  /accounts/{account_id}/invoices/{id}.json:
+    get:
+      operationId: getAccountInvoice
+      summary: Get Account Invoice
+      description: Returns details for a specific invoice including line items and total.
+      tags:
+        - Invoices
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: id
+          in: path
+          required: true
+          description: The invoice ID
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Invoice details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '404':
+          description: Invoice not found
+  /invoices.json:
+    get:
+      operationId: listAllInvoices
+      summary: List All Invoices
+      description: >-
+        Returns all invoices across all accounts. Supports filtering by month
+        and state.
+      tags:
+        - Invoices
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: state
+          in: query
+          description: Filter by invoice state
+          schema:
+            type: string
+            enum:
+              - open
+              - pending
+              - unpaid
+              - paid
+              - failed
+              - cancelled
+        - name: month
+          in: query
+          description: Filter by billing month (YYYY-MM)
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: All invoices returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceList'
+  /invoices/{id}/payment_transactions.json:
+    get:
+      operationId: listInvoicePaymentTransactions
+      summary: List Invoice Payment Transactions
+      description: Returns all payment transactions associated with a specific invoice.
+      tags:
+        - Payment Transactions
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: id
+          in: path
+          required: true
+          description: The invoice ID
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Payment transactions returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentTransactionList'
+        '404':
+          description: Invoice not found
+components:
+  securitySchemes:
+    access_token:
+      type: apiKey
+      in: query
+      name: access_token
+  parameters:
+    accessToken:
+      name: access_token
+      in: query
+      required: true
+      description: Admin API access token
+      schema:
+        type: string
+  schemas:
+    InvoiceList:
+      type: object
+      properties:
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: integer
+        state:
+          type: string
+          enum:
+            - open
+            - pending
+            - unpaid
+            - paid
+            - failed
+            - cancelled
+        friendly_id:
+          type: string
+          description: Human-readable invoice ID (e.g., 2026-00000001)
+        month:
+          type: string
+          description: Billing month in YYYY-MM format
+        due_on:
+          type: string
+          format: date
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        cost:
+          type: number
+          format: float
+          description: Invoice total amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        account:
+          type: object
+          properties:
+            id:
+              type: integer
+            org_name:
+              type: string
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceLineItem'
+    InvoiceLineItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          description: Description of the line item
+        cost:
+          type: number
+          description: Cost for this line item
+        quantity:
+          type: number
+          description: Quantity consumed
+        type:
+          type: string
+          description: Type of charge (setup, recurring, variable)
+    PaymentTransactionList:
+      type: object
+      properties:
+        payment_transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentTransaction'
+    PaymentTransaction:
+      type: object
+      properties:
+        id:
+          type: integer
+        invoice_id:
+          type: integer
+        amount:
+          type: number
+        currency:
+          type: string
+        success:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        reference:
+          type: string
+          description: Payment gateway reference or transaction ID
+        message:
+          type: string
+          description: Payment gateway response message

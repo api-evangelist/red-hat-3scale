@@ -1,0 +1,211 @@
+{
+  "info": {
+    "_postman_id": "8d47ece8-65df-46ae-85e0-6d7184e53db5",
+    "name": "Red Hat 3scale Account Management Accounts Payment Transactions API",
+    "description": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:43:05.000Z",
+    "updatedAt": "2026-07-28T02:43:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8d47ece8-65df-46ae-85e0-6d7184e53db5"
+  },
+  "item": [
+    {
+      "name": "invoices",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "payment_transactions.json",
+              "item": [
+                {
+                  "name": "List Invoice Payment Transactions",
+                  "id": "284c9ceb-8a1b-4679-8acd-16fe81b3cfd8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/invoices/:id/payment_transactions.json?access_token=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "invoices",
+                        ":id",
+                        "payment_transactions.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "a84c2e03-b909-4a06-bc7d-ff6387b31959",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The invoice ID"
+                        }
+                      ]
+                    },
+                    "description": "Returns all payment transactions associated with a specific invoice."
+                  },
+                  "response": [
+                    {
+                      "id": "878770f2-09c3-4178-83e2-4c5dab180a09",
+                      "name": "Payment transactions returned",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/invoices/:id/payment_transactions.json?access_token=<API Key>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "invoices",
+                            ":id",
+                            "payment_transactions.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Admin API access token",
+                              "key": "access_token",
+                              "value": "<API Key>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"payment_transactions\": [\n    {\n      \"id\": \"<integer>\",\n      \"invoice_id\": \"<integer>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"success\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"reference\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"invoice_id\": \"<integer>\",\n      \"amount\": \"<number>\",\n      \"currency\": \"<string>\",\n      \"success\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"reference\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:43:05.000Z",
+                      "updatedAt": "2026-07-28T02:43:05.000Z",
+                      "uid": "35240-878770f2-09c3-4178-83e2-4c5dab180a09"
+                    },
+                    {
+                      "id": "e2c29bbd-8abf-4011-802c-b284ef7048e9",
+                      "name": "Invoice not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/invoices/:id/payment_transactions.json?access_token=<API Key>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "invoices",
+                            ":id",
+                            "payment_transactions.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Admin API access token",
+                              "key": "access_token",
+                              "value": "<API Key>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:43:05.000Z",
+                      "updatedAt": "2026-07-28T02:43:05.000Z",
+                      "uid": "35240-e2c29bbd-8abf-4011-802c-b284ef7048e9"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:43:05.000Z",
+                  "updatedAt": "2026-07-28T02:43:05.000Z",
+                  "uid": "35240-284c9ceb-8a1b-4679-8acd-16fe81b3cfd8"
+                }
+              ],
+              "id": "5d1e811d-f747-4c56-a08d-77a67278105f",
+              "createdAt": "2026-07-28T02:43:05.000Z",
+              "updatedAt": "2026-07-28T02:43:05.000Z",
+              "uid": "35240-5d1e811d-f747-4c56-a08d-77a67278105f"
+            }
+          ],
+          "id": "cb83bf4b-0959-4705-bbad-8fb9d3db4232",
+          "createdAt": "2026-07-28T02:43:05.000Z",
+          "updatedAt": "2026-07-28T02:43:05.000Z",
+          "uid": "35240-cb83bf4b-0959-4705-bbad-8fb9d3db4232"
+        }
+      ],
+      "id": "078f9ef8-3853-4147-919d-22c24f258430",
+      "createdAt": "2026-07-28T02:43:05.000Z",
+      "updatedAt": "2026-07-28T02:43:05.000Z",
+      "uid": "35240-078f9ef8-3853-4147-919d-22c24f258430"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "domain",
+      "value": "your-domain"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api"
+    }
+  ]
+}

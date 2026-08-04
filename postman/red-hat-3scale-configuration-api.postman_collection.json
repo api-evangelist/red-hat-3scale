@@ -1,0 +1,462 @@
+{
+  "info": {
+    "_postman_id": "92a325b7-9a27-4e12-a955-55344d6f3767",
+    "name": "Red Hat 3scale Account Management Accounts Configuration API",
+    "description": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:42:56.000Z",
+    "updatedAt": "2026-07-28T02:42:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-92a325b7-9a27-4e12-a955-55344d6f3767"
+  },
+  "item": [
+    {
+      "name": "config",
+      "item": [
+        {
+          "name": "Get Gateway Configuration",
+          "id": "e1f822c9-47fe-4ac8-a9ea-d16f690a33df",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/config",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "config"
+              ]
+            },
+            "description": "Returns the current APIcast configuration in JSON format. This includes the loaded service configurations, proxy settings, and policy chains currently active in the gateway."
+          },
+          "response": [
+            {
+              "id": "f3857980-3adf-4f76-a636-e6007987366e",
+              "name": "Current configuration returned",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/config?access_token=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "config"
+                  ],
+                  "query": [
+                    {
+                      "description": "Added as a part of security scheme: apikey",
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"services\": [\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    },\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:42:56.000Z",
+              "updatedAt": "2026-07-28T02:42:56.000Z",
+              "uid": "35240-f3857980-3adf-4f76-a636-e6007987366e"
+            },
+            {
+              "id": "e00e23f7-7d22-4a59-9185-d5415be82444",
+              "name": "No configuration loaded",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/config?access_token=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "config"
+                  ],
+                  "query": [
+                    {
+                      "description": "Added as a part of security scheme: apikey",
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:42:56.000Z",
+              "updatedAt": "2026-07-28T02:42:56.000Z",
+              "uid": "35240-e00e23f7-7d22-4a59-9185-d5415be82444"
+            }
+          ],
+          "createdAt": "2026-07-28T02:42:56.000Z",
+          "updatedAt": "2026-07-28T02:42:56.000Z",
+          "uid": "35240-e1f822c9-47fe-4ac8-a9ea-d16f690a33df"
+        },
+        {
+          "name": "Update Gateway Configuration (POST)",
+          "id": "9239a1f4-30b6-4bcc-90e8-030ede64f2ce",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"services\": [\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    },\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/config",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "config"
+              ]
+            },
+            "description": "Updates the APIcast configuration by replacing it with the JSON payload provided in the request body."
+          },
+          "response": [
+            {
+              "id": "5247bab8-8090-4f82-beb0-0928083fb1d9",
+              "name": "Configuration updated successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"services\": [\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    },\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/config?access_token=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "config"
+                  ],
+                  "query": [
+                    {
+                      "description": "Added as a part of security scheme: apikey",
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"services\": [\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    },\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:42:56.000Z",
+              "updatedAt": "2026-07-28T02:42:56.000Z",
+              "uid": "35240-5247bab8-8090-4f82-beb0-0928083fb1d9"
+            }
+          ],
+          "createdAt": "2026-07-28T02:42:56.000Z",
+          "updatedAt": "2026-07-28T02:42:56.000Z",
+          "uid": "35240-9239a1f4-30b6-4bcc-90e8-030ede64f2ce"
+        },
+        {
+          "name": "Update Gateway Configuration (PUT)",
+          "id": "4a83c850-6abc-41de-af5b-98deff9ba919",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"services\": [\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    },\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/config",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "config"
+              ]
+            },
+            "description": "Updates the APIcast configuration by replacing it with the JSON payload provided in the request body (idempotent)."
+          },
+          "response": [
+            {
+              "id": "c18a768f-67f4-4000-9e5d-419e8df39d1c",
+              "name": "Configuration updated successfully",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"services\": [\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    },\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/config?access_token=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "config"
+                  ],
+                  "query": [
+                    {
+                      "description": "Added as a part of security scheme: apikey",
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"services\": [\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    },\n    {\n      \"id\": \"<integer>\",\n      \"proxy\": {}\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:42:56.000Z",
+              "updatedAt": "2026-07-28T02:42:56.000Z",
+              "uid": "35240-c18a768f-67f4-4000-9e5d-419e8df39d1c"
+            }
+          ],
+          "createdAt": "2026-07-28T02:42:56.000Z",
+          "updatedAt": "2026-07-28T02:42:56.000Z",
+          "uid": "35240-4a83c850-6abc-41de-af5b-98deff9ba919"
+        },
+        {
+          "name": "Delete Gateway Configuration",
+          "id": "0df9b3e3-7224-493d-ba10-45e3921a099e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/config",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "config"
+              ]
+            },
+            "description": "Deletes the current APIcast configuration, resetting the gateway."
+          },
+          "response": [
+            {
+              "id": "04389bf3-dbf5-467f-ad47-a4742c0753df",
+              "name": "Configuration deleted successfully",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/config?access_token=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "config"
+                  ],
+                  "query": [
+                    {
+                      "description": "Added as a part of security scheme: apikey",
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:42:56.000Z",
+              "updatedAt": "2026-07-28T02:42:56.000Z",
+              "uid": "35240-04389bf3-dbf5-467f-ad47-a4742c0753df"
+            },
+            {
+              "id": "bd83c691-3eb3-4fdb-8005-4fc0192ae654",
+              "name": "No configuration loaded",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/config?access_token=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "config"
+                  ],
+                  "query": [
+                    {
+                      "description": "Added as a part of security scheme: apikey",
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:42:56.000Z",
+              "updatedAt": "2026-07-28T02:42:56.000Z",
+              "uid": "35240-bd83c691-3eb3-4fdb-8005-4fc0192ae654"
+            }
+          ],
+          "createdAt": "2026-07-28T02:42:56.000Z",
+          "updatedAt": "2026-07-28T02:42:56.000Z",
+          "uid": "35240-0df9b3e3-7224-493d-ba10-45e3921a099e"
+        }
+      ],
+      "id": "d59c5739-129d-47be-be91-bebcdf901580",
+      "createdAt": "2026-07-28T02:42:56.000Z",
+      "updatedAt": "2026-07-28T02:42:56.000Z",
+      "uid": "35240-d59c5739-129d-47be-be91-bebcdf901580"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "domain",
+      "value": "your-domain"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api"
+    }
+  ]
+}

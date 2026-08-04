@@ -1,0 +1,211 @@
+{
+  "info": {
+    "_postman_id": "1316bf3b-d62a-4443-a6b6-c13e80b39aa6",
+    "name": "Red Hat 3scale Account Management Accounts OAuth API",
+    "description": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:43:00.000Z",
+    "updatedAt": "2026-07-28T02:43:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1316bf3b-d62a-4443-a6b6-c13e80b39aa6"
+  },
+  "item": [
+    {
+      "name": "transactions",
+      "item": [
+        {
+          "name": "oauth_authorize.xml",
+          "item": [
+            {
+              "name": "Authorize OAuth Token",
+              "id": "2ab68908-493c-438f-bcf1-b834df646f64",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/transactions/oauth_authorize.xml?provider_key=<string>&access_token=<string>&service_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "transactions",
+                    "oauth_authorize.xml"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The provider key identifying your 3scale account",
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The OAuth 2.0 access token to authorize",
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The ID of the service being accessed",
+                      "key": "service_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Authorizes an OAuth 2.0 access token against the 3scale service, checking whether the token is valid and within usage limits. Returns the application and plan details associated with the token."
+              },
+              "response": [
+                {
+                  "id": "4bcd76f6-f712-4c9f-bf24-28f72b1e462f",
+                  "name": "OAuth token authorized successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/xml"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/transactions/oauth_authorize.xml?provider_key=<string>&access_token=<API Key>&service_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "transactions",
+                        "oauth_authorize.xml"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The provider key identifying your 3scale account",
+                          "key": "provider_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The OAuth 2.0 access token to authorize",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        },
+                        {
+                          "description": "The ID of the service being accessed",
+                          "key": "service_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "xml",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/xml"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <application>\n    <id>(string)</id>\n    <key>(string)</key>\n    <redirect_url>(string)</redirect_url>\n  </application>\n</element>",
+                  "createdAt": "2026-07-28T02:43:01.000Z",
+                  "updatedAt": "2026-07-28T02:43:01.000Z",
+                  "uid": "35240-4bcd76f6-f712-4c9f-bf24-28f72b1e462f"
+                },
+                {
+                  "id": "66023693-8150-4e81-9fe4-d460bfde8e0f",
+                  "name": "Token invalid or limits exceeded",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/transactions/oauth_authorize.xml?provider_key=<string>&access_token=<API Key>&service_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "transactions",
+                        "oauth_authorize.xml"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The provider key identifying your 3scale account",
+                          "key": "provider_key",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The OAuth 2.0 access token to authorize",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        },
+                        {
+                          "description": "The ID of the service being accessed",
+                          "key": "service_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:43:01.000Z",
+                  "updatedAt": "2026-07-28T02:43:01.000Z",
+                  "uid": "35240-66023693-8150-4e81-9fe4-d460bfde8e0f"
+                }
+              ],
+              "createdAt": "2026-07-28T02:43:01.000Z",
+              "updatedAt": "2026-07-28T02:43:01.000Z",
+              "uid": "35240-2ab68908-493c-438f-bcf1-b834df646f64"
+            }
+          ],
+          "id": "1dbf3970-ac1b-439e-9485-b5ec49a0b8b7",
+          "createdAt": "2026-07-28T02:43:01.000Z",
+          "updatedAt": "2026-07-28T02:43:01.000Z",
+          "uid": "35240-1dbf3970-ac1b-439e-9485-b5ec49a0b8b7"
+        }
+      ],
+      "id": "5b62db76-d51f-4260-b953-77d4ba8aede4",
+      "createdAt": "2026-07-28T02:43:01.000Z",
+      "updatedAt": "2026-07-28T02:43:01.000Z",
+      "uid": "35240-5b62db76-d51f-4260-b953-77d4ba8aede4"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "domain",
+      "value": "your-domain"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api"
+    }
+  ]
+}

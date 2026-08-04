@@ -1,0 +1,346 @@
+{
+  "info": {
+    "_postman_id": "faf9e46f-b636-4df8-aa60-efb98576b514",
+    "name": "Red Hat 3scale Account Management Accounts Health API",
+    "description": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:42:57.000Z",
+    "updatedAt": "2026-07-28T02:42:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-faf9e46f-b636-4df8-aa60-efb98576b514"
+  },
+  "item": [
+    {
+      "name": "status",
+      "item": [
+        {
+          "name": "ready",
+          "item": [
+            {
+              "name": "Check Readiness",
+              "id": "f0785fae-66fb-4232-a38e-e848ab4afdf6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/status/ready",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "status",
+                    "ready"
+                  ]
+                },
+                "description": "Returns the readiness status of the APIcast gateway. Used as a Kubernetes readiness probe. Returns 200 when the gateway is ready to accept traffic, non-200 when not ready."
+              },
+              "response": [
+                {
+                  "id": "c97bb010-467d-473d-ac0b-448f50b14545",
+                  "name": "Gateway is ready",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/status/ready?access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "status",
+                        "ready"
+                      ],
+                      "query": [
+                        {
+                          "description": "Added as a part of security scheme: apikey",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": \"<boolean>\",\n  \"status\": \"not_ready\"\n}",
+                  "createdAt": "2026-07-28T02:42:58.000Z",
+                  "updatedAt": "2026-07-28T02:42:58.000Z",
+                  "uid": "35240-c97bb010-467d-473d-ac0b-448f50b14545"
+                },
+                {
+                  "id": "a10b84fe-e56f-4276-a969-9e9af82f7eba",
+                  "name": "Gateway is not ready",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/status/ready?access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "status",
+                        "ready"
+                      ],
+                      "query": [
+                        {
+                          "description": "Added as a part of security scheme: apikey",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Service Unavailable",
+                  "code": 503,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:42:58.000Z",
+                  "updatedAt": "2026-07-28T02:42:58.000Z",
+                  "uid": "35240-a10b84fe-e56f-4276-a969-9e9af82f7eba"
+                }
+              ],
+              "createdAt": "2026-07-28T02:42:58.000Z",
+              "updatedAt": "2026-07-28T02:42:58.000Z",
+              "uid": "35240-f0785fae-66fb-4232-a38e-e848ab4afdf6"
+            }
+          ],
+          "id": "9f75d0f9-f1b1-4976-ac93-ab4aeae51d36",
+          "createdAt": "2026-07-28T02:42:58.000Z",
+          "updatedAt": "2026-07-28T02:42:58.000Z",
+          "uid": "35240-9f75d0f9-f1b1-4976-ac93-ab4aeae51d36"
+        },
+        {
+          "name": "live",
+          "item": [
+            {
+              "name": "Check Liveness",
+              "id": "b93ac47c-ee52-4035-b482-012ca4fe9859",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/status/live",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "status",
+                    "live"
+                  ]
+                },
+                "description": "Returns the liveness status of the APIcast gateway. Used as a Kubernetes liveness probe. Returns 200 if the process is alive."
+              },
+              "response": [
+                {
+                  "id": "27b37a3b-6128-4363-bbbc-cd26a8e7d2ea",
+                  "name": "Gateway is alive",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/status/live?access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "status",
+                        "live"
+                      ],
+                      "query": [
+                        {
+                          "description": "Added as a part of security scheme: apikey",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": \"<boolean>\"\n}",
+                  "createdAt": "2026-07-28T02:42:58.000Z",
+                  "updatedAt": "2026-07-28T02:42:58.000Z",
+                  "uid": "35240-27b37a3b-6128-4363-bbbc-cd26a8e7d2ea"
+                }
+              ],
+              "createdAt": "2026-07-28T02:42:58.000Z",
+              "updatedAt": "2026-07-28T02:42:58.000Z",
+              "uid": "35240-b93ac47c-ee52-4035-b482-012ca4fe9859"
+            }
+          ],
+          "id": "d1ee67fc-024b-4d0d-92b9-211822b7eac7",
+          "createdAt": "2026-07-28T02:42:58.000Z",
+          "updatedAt": "2026-07-28T02:42:58.000Z",
+          "uid": "35240-d1ee67fc-024b-4d0d-92b9-211822b7eac7"
+        },
+        {
+          "name": "info",
+          "item": [
+            {
+              "name": "Get Status Information",
+              "id": "7bbb09e3-645d-4998-b2c5-77d20b520c46",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/status/info",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "status",
+                    "info"
+                  ]
+                },
+                "description": "Returns internal information about the APIcast gateway including timer states, worker process counts, and internal configuration parameters useful for debugging."
+              },
+              "response": [
+                {
+                  "id": "2da18649-58f3-4bfd-9bf7-62e6238d4757",
+                  "name": "Status information returned",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/status/info?access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "status",
+                        "info"
+                      ],
+                      "query": [
+                        {
+                          "description": "Added as a part of security scheme: apikey",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"timers\": {\n    \"sunta_5\": true\n  },\n  \"workers\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T02:42:58.000Z",
+                  "updatedAt": "2026-07-28T02:42:58.000Z",
+                  "uid": "35240-2da18649-58f3-4bfd-9bf7-62e6238d4757"
+                }
+              ],
+              "createdAt": "2026-07-28T02:42:58.000Z",
+              "updatedAt": "2026-07-28T02:42:58.000Z",
+              "uid": "35240-7bbb09e3-645d-4998-b2c5-77d20b520c46"
+            }
+          ],
+          "id": "442453f0-1b58-4623-ba01-e07289909421",
+          "createdAt": "2026-07-28T02:42:58.000Z",
+          "updatedAt": "2026-07-28T02:42:58.000Z",
+          "uid": "35240-442453f0-1b58-4623-ba01-e07289909421"
+        }
+      ],
+      "id": "310ba2ad-7cb0-434f-bb1a-c9e0c8c14f53",
+      "createdAt": "2026-07-28T02:42:58.000Z",
+      "updatedAt": "2026-07-28T02:42:58.000Z",
+      "uid": "35240-310ba2ad-7cb0-434f-bb1a-c9e0c8c14f53"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "domain",
+      "value": "your-domain"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api"
+    }
+  ]
+}

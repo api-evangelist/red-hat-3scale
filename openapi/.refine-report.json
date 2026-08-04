@@ -1,0 +1,38 @@
+{
+  "provider": "red-hat-3scale",
+  "sources": [
+    "red-hat-3scale-accounts-api-openapi.yml",
+    "red-hat-3scale-applications-api-openapi.yml",
+    "red-hat-3scale-authorization-api-openapi.yml",
+    "red-hat-3scale-configuration-api-openapi.yml",
+    "red-hat-3scale-dns-api-openapi.yml",
+    "red-hat-3scale-health-api-openapi.yml",
+    "red-hat-3scale-initialization-api-openapi.yml",
+    "red-hat-3scale-invoices-api-openapi.yml",
+    "red-hat-3scale-oauth-api-openapi.yml",
+    "red-hat-3scale-payment-transactions-api-openapi.yml",
+    "red-hat-3scale-plans-api-openapi.yml",
+    "red-hat-3scale-reporting-api-openapi.yml",
+    "red-hat-3scale-services-api-openapi.yml"
+  ],
+  "outputs": [
+    "red-hat-3scale-accounts-api-openapi.yml",
+    "red-hat-3scale-applications-api-openapi.yml",
+    "red-hat-3scale-authorization-api-openapi.yml",
+    "red-hat-3scale-configuration-api-openapi.yml",
+    "red-hat-3scale-dns-api-openapi.yml",
+    "red-hat-3scale-health-api-openapi.yml",
+    "red-hat-3scale-initialization-api-openapi.yml",
+    "red-hat-3scale-invoices-api-openapi.yml",
+    "red-hat-3scale-oauth-api-openapi.yml",
+    "red-hat-3scale-payment-transactions-api-openapi.yml",
+    "red-hat-3scale-plans-api-openapi.yml",
+    "red-hat-3scale-reporting-api-openapi.yml",
+    "red-hat-3scale-services-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

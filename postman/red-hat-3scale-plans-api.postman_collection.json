@@ -1,0 +1,135 @@
+{
+  "info": {
+    "_postman_id": "089e977d-5d64-490a-b0ce-bbad1f3d334b",
+    "name": "Red Hat 3scale Account Management Accounts Plans API",
+    "description": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:43:21.000Z",
+    "updatedAt": "2026-07-28T02:43:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-089e977d-5d64-490a-b0ce-bbad1f3d334b"
+  },
+  "item": [
+    {
+      "name": "application_plans.json",
+      "item": [
+        {
+          "name": "List Application Plans",
+          "id": "131648c8-c3b2-4644-9191-693d7b97594b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/application_plans.json?access_token=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "application_plans.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Admin API access token",
+                  "key": "access_token",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns all application plans across all services."
+          },
+          "response": [
+            {
+              "id": "d7c07bbc-5081-447b-8079-041d4a129155",
+              "name": "List of application plans",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/application_plans.json?access_token=<API Key>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "application_plans.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Admin API access token",
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"plans\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"system_name\": \"<string>\",\n      \"state\": \"published\",\n      \"approval_required\": \"<boolean>\",\n      \"setup_fee\": \"<number>\",\n      \"cost_per_month\": \"<number>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"system_name\": \"<string>\",\n      \"state\": \"published\",\n      \"approval_required\": \"<boolean>\",\n      \"setup_fee\": \"<number>\",\n      \"cost_per_month\": \"<number>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:43:21.000Z",
+              "updatedAt": "2026-07-28T02:43:21.000Z",
+              "uid": "35240-d7c07bbc-5081-447b-8079-041d4a129155"
+            }
+          ],
+          "createdAt": "2026-07-28T02:43:21.000Z",
+          "updatedAt": "2026-07-28T02:43:21.000Z",
+          "uid": "35240-131648c8-c3b2-4644-9191-693d7b97594b"
+        }
+      ],
+      "id": "38e32cf8-b27c-4aaa-b3ed-b560506479b2",
+      "createdAt": "2026-07-28T02:43:21.000Z",
+      "updatedAt": "2026-07-28T02:43:21.000Z",
+      "uid": "35240-38e32cf8-b27c-4aaa-b3ed-b560506479b2"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "domain",
+      "value": "your-domain"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api"
+    }
+  ]
+}

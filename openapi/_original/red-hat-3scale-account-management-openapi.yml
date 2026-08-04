@@ -1,0 +1,537 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale Account Management API
+  description: >-
+    The 3scale Account Management API provides programmatic access to manage
+    developer accounts, applications, application plans, keys, and API
+    subscriptions within the 3scale platform. It enables automation of developer
+    onboarding, subscription management, and application lifecycle operations.
+    All endpoints require admin API credentials and are accessible on the admin
+    domain at {your-domain}-admin.3scale.net.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+externalDocs:
+  description: Red Hat 3scale Admin Portal Guide
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
+servers:
+  - url: https://{domain}-admin.3scale.net/admin/api
+    description: 3scale Account Management API
+    variables:
+      domain:
+        default: your-domain
+        description: Your 3scale tenant domain
+tags:
+  - name: Accounts
+    description: Manage developer accounts in the 3scale developer portal
+  - name: Applications
+    description: Manage applications and their API keys and credentials
+  - name: Plans
+    description: Manage application plans and their features and limits
+  - name: Services
+    description: Manage API services and their settings
+  - name: Users
+    description: Manage users associated with developer accounts
+security:
+  - provider_key: []
+paths:
+  /accounts.json:
+    get:
+      operationId: listAccounts
+      summary: List Developer Accounts
+      description: >-
+        Returns a list of developer accounts in the 3scale admin portal.
+        Supports filtering by state (approved, pending, rejected) and
+        pagination with per_page and page parameters.
+      tags:
+        - Accounts
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: state
+          in: query
+          description: Filter accounts by state
+          schema:
+            type: string
+            enum:
+              - approved
+              - pending
+              - rejected
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          description: Number of results per page (max 500)
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: List of accounts returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountList'
+    post:
+      operationId: createAccount
+      summary: Create Developer Account
+      description: >-
+        Creates a new developer account in the 3scale developer portal. The
+        account requires an organization name and a user with email and
+        password. The account state defaults to pending unless auto-approval
+        is enabled.
+      tags:
+        - Accounts
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateAccountRequest'
+      responses:
+        '201':
+          description: Account created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '422':
+          description: Validation error
+  /accounts/{id}.json:
+    get:
+      operationId: getAccount
+      summary: Get Developer Account
+      description: Returns the details of a specific developer account by ID.
+      tags:
+        - Accounts
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the account
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Account details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: Account not found
+    put:
+      operationId: updateAccount
+      summary: Update Developer Account
+      description: Updates the details of a specific developer account.
+      tags:
+        - Accounts
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the account
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateAccountRequest'
+      responses:
+        '200':
+          description: Account updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: Account not found
+    delete:
+      operationId: deleteAccount
+      summary: Delete Developer Account
+      description: Deletes a developer account and all associated applications.
+      tags:
+        - Accounts
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the account to delete
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Account deleted successfully
+        '404':
+          description: Account not found
+  /accounts/{account_id}/applications.json:
+    get:
+      operationId: listApplications
+      summary: List Applications for Account
+      description: >-
+        Returns all applications belonging to a specific developer account.
+        Applications represent individual API credentials (keys or OAuth clients).
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: account_id
+          in: path
+          required: true
+          description: The ID of the developer account
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of applications returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationList'
+    post:
+      operationId: createApplication
+      summary: Create Application
+      description: >-
+        Creates a new application for a developer account, subscribing it to
+        a specific application plan. The application will be assigned API keys
+        or OAuth client credentials based on the service authentication mode.
+      tags:
+        - Applications
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          description: The ID of the developer account
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+      responses:
+        '201':
+          description: Application created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '422':
+          description: Validation error
+  /accounts/{account_id}/applications/{id}.json:
+    get:
+      operationId: getApplication
+      summary: Get Application
+      description: Returns details for a specific application including keys and credentials.
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: id
+          in: path
+          required: true
+          description: The application ID
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Application details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '404':
+          description: Application not found
+    put:
+      operationId: updateApplication
+      summary: Update Application
+      description: Updates an application's name, description, or plan assignment.
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationRequest'
+      responses:
+        '200':
+          description: Application updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+  /services.json:
+    get:
+      operationId: listServices
+      summary: List Services
+      description: Returns a list of all API services configured in the 3scale admin portal.
+      tags:
+        - Services
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: List of services returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceList'
+  /services/{id}.json:
+    get:
+      operationId: getService
+      summary: Get Service
+      description: Returns the details of a specific API service.
+      tags:
+        - Services
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+        - name: id
+          in: path
+          required: true
+          description: The service ID
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Service details returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '404':
+          description: Service not found
+  /application_plans.json:
+    get:
+      operationId: listApplicationPlans
+      summary: List Application Plans
+      description: Returns all application plans across all services.
+      tags:
+        - Plans
+      parameters:
+        - $ref: '#/components/parameters/accessToken'
+      responses:
+        '200':
+          description: List of application plans
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationPlanList'
+components:
+  securitySchemes:
+    provider_key:
+      type: apiKey
+      in: query
+      name: access_token
+  parameters:
+    accessToken:
+      name: access_token
+      in: query
+      required: true
+      description: Admin API access token
+      schema:
+        type: string
+  schemas:
+    AccountList:
+      type: object
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+    Account:
+      type: object
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        state:
+          type: string
+          enum:
+            - approved
+            - pending
+            - rejected
+        org_name:
+          type: string
+          description: Organization name
+        extra_fields:
+          type: object
+          additionalProperties: true
+        links:
+          type: array
+          items:
+            type: object
+    CreateAccountRequest:
+      type: object
+      required:
+        - org_name
+        - username
+        - email
+        - password
+      properties:
+        org_name:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    UpdateAccountRequest:
+      type: object
+      properties:
+        org_name:
+          type: string
+        extra_fields:
+          type: object
+    ApplicationList:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+    Application:
+      type: object
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        state:
+          type: string
+          enum:
+            - live
+            - suspended
+        user_account_id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        user_key:
+          type: string
+          description: API key (for API key authentication mode)
+        plan:
+          $ref: '#/components/schemas/ApplicationPlan'
+    CreateApplicationRequest:
+      type: object
+      required:
+        - plan_id
+        - name
+      properties:
+        plan_id:
+          type: integer
+          description: The ID of the application plan to subscribe to
+        name:
+          type: string
+          description: Name of the application
+        description:
+          type: string
+    UpdateApplicationRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        plan_id:
+          type: integer
+    ServiceList:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+    Service:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        system_name:
+          type: string
+        backend_version:
+          type: string
+          description: Authentication mode (1=API Key, 2=App ID/Key, oidc=OAuth/OIDC)
+        deployment_option:
+          type: string
+    ApplicationPlanList:
+      type: object
+      properties:
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationPlan'
+    ApplicationPlan:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        system_name:
+          type: string
+        state:
+          type: string
+          enum:
+            - published
+            - hidden
+        approval_required:
+          type: boolean
+        setup_fee:
+          type: number
+        cost_per_month:
+          type: number

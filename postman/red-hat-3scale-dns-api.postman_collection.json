@@ -1,0 +1,139 @@
+{
+  "info": {
+    "_postman_id": "4b68d221-f525-48ff-9275-282f17c860be",
+    "name": "Red Hat 3scale Account Management Accounts DNS API",
+    "description": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:42:57.000Z",
+    "updatedAt": "2026-07-28T02:42:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4b68d221-f525-48ff-9275-282f17c860be"
+  },
+  "item": [
+    {
+      "name": "dns",
+      "item": [
+        {
+          "name": "cache",
+          "item": [
+            {
+              "name": "Get DNS Cache",
+              "id": "e1f7a0fe-d908-43c5-a3d0-1eb9f2d95e82",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dns/cache",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dns",
+                    "cache"
+                  ]
+                },
+                "description": "Returns the current state of the APIcast DNS cache including cached records, their expiration times, and resolved IP addresses. Useful for debugging DNS resolution issues."
+              },
+              "response": [
+                {
+                  "id": "fb708481-211c-485d-b5fb-0a7226eb14c1",
+                  "name": "DNS cache contents returned",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dns/cache?access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dns",
+                        "cache"
+                      ],
+                      "query": [
+                        {
+                          "description": "Added as a part of security scheme: apikey",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"dns_cache\": [\n    {\n      \"name\": \"<string>\",\n      \"addresses\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"expire\": \"<number>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"addresses\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"expire\": \"<number>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:42:57.000Z",
+                  "updatedAt": "2026-07-28T02:42:57.000Z",
+                  "uid": "35240-fb708481-211c-485d-b5fb-0a7226eb14c1"
+                }
+              ],
+              "createdAt": "2026-07-28T02:42:57.000Z",
+              "updatedAt": "2026-07-28T02:42:57.000Z",
+              "uid": "35240-e1f7a0fe-d908-43c5-a3d0-1eb9f2d95e82"
+            }
+          ],
+          "id": "39fc2e67-b8e7-424b-8a1f-5e87cb12d7fe",
+          "createdAt": "2026-07-28T02:42:57.000Z",
+          "updatedAt": "2026-07-28T02:42:57.000Z",
+          "uid": "35240-39fc2e67-b8e7-424b-8a1f-5e87cb12d7fe"
+        }
+      ],
+      "id": "0955d9a1-f565-4fbd-a109-68eecd710497",
+      "createdAt": "2026-07-28T02:42:57.000Z",
+      "updatedAt": "2026-07-28T02:42:57.000Z",
+      "uid": "35240-0955d9a1-f565-4fbd-a109-68eecd710497"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "domain",
+      "value": "your-domain"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api"
+    }
+  ]
+}

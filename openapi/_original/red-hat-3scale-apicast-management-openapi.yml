@@ -1,0 +1,254 @@
+openapi: 3.1.0
+info:
+  title: Red Hat 3scale APIcast Management API
+  description: >-
+    The APIcast Management API is an HTTP REST interface exposed by the APIcast
+    API gateway on port 8090 for debugging and runtime configuration management.
+    It provides endpoints to retrieve and update the gateway configuration,
+    inspect DNS cache state, trigger boot/initialization sequences, and check
+    readiness and liveness health status. Access level is controlled via the
+    APICAST_MANAGEMENT_API environment variable (debug, status, or disabled).
+    This API is intended for debugging and is not production-hardened.
+  version: '1'
+  contact:
+    name: Red Hat 3scale Support
+    url: https://access.redhat.com/support
+  termsOfService: https://www.redhat.com/en/about/agreements
+externalDocs:
+  description: APIcast Management API Documentation
+  url: https://github.com/3scale/APIcast/blob/master/doc/management-api.md
+servers:
+  - url: http://localhost:8090
+    description: APIcast Management API (local)
+tags:
+  - name: Configuration
+    description: Retrieve and update APIcast gateway configuration
+  - name: DNS
+    description: Inspect and manage DNS cache state
+  - name: Health
+    description: Health check and liveness/readiness probes
+  - name: Initialization
+    description: Bootstrap and initialization endpoints
+paths:
+  /config:
+    get:
+      operationId: getConfig
+      summary: Get Gateway Configuration
+      description: >-
+        Returns the current APIcast configuration in JSON format. This includes
+        the loaded service configurations, proxy settings, and policy chains
+        currently active in the gateway.
+      tags:
+        - Configuration
+      responses:
+        '200':
+          description: Current configuration returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayConfig'
+        '404':
+          description: No configuration loaded
+    post:
+      operationId: updateConfigPost
+      summary: Update Gateway Configuration (POST)
+      description: >-
+        Updates the APIcast configuration by replacing it with the JSON payload
+        provided in the request body.
+      tags:
+        - Configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewayConfig'
+      responses:
+        '200':
+          description: Configuration updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayConfig'
+    put:
+      operationId: updateConfigPut
+      summary: Update Gateway Configuration (PUT)
+      description: >-
+        Updates the APIcast configuration by replacing it with the JSON payload
+        provided in the request body (idempotent).
+      tags:
+        - Configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewayConfig'
+      responses:
+        '200':
+          description: Configuration updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayConfig'
+    delete:
+      operationId: deleteConfig
+      summary: Delete Gateway Configuration
+      description: Deletes the current APIcast configuration, resetting the gateway.
+      tags:
+        - Configuration
+      responses:
+        '200':
+          description: Configuration deleted successfully
+        '404':
+          description: No configuration loaded
+  /boot:
+    post:
+      operationId: bootGateway
+      summary: Boot Gateway
+      description: >-
+        Triggers the APIcast initialization process, causing the gateway to
+        attempt to download a new configuration from the 3scale management API.
+        This is useful for forcing a configuration refresh.
+      tags:
+        - Initialization
+      responses:
+        '200':
+          description: Boot process initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BootResponse'
+  /dns/cache:
+    get:
+      operationId: getDnsCache
+      summary: Get DNS Cache
+      description: >-
+        Returns the current state of the APIcast DNS cache including cached
+        records, their expiration times, and resolved IP addresses. Useful
+        for debugging DNS resolution issues.
+      tags:
+        - DNS
+      responses:
+        '200':
+          description: DNS cache contents returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DnsCacheResponse'
+  /status/ready:
+    get:
+      operationId: getReadiness
+      summary: Check Readiness
+      description: >-
+        Returns the readiness status of the APIcast gateway. Used as a
+        Kubernetes readiness probe. Returns 200 when the gateway is ready
+        to accept traffic, non-200 when not ready.
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Gateway is ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadinessStatus'
+        '503':
+          description: Gateway is not ready
+  /status/live:
+    get:
+      operationId: getLiveness
+      summary: Check Liveness
+      description: >-
+        Returns the liveness status of the APIcast gateway. Used as a
+        Kubernetes liveness probe. Returns 200 if the process is alive.
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Gateway is alive
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LivenessStatus'
+  /status/info:
+    get:
+      operationId: getStatusInfo
+      summary: Get Status Information
+      description: >-
+        Returns internal information about the APIcast gateway including
+        timer states, worker process counts, and internal configuration
+        parameters useful for debugging.
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Status information returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusInfo'
+components:
+  schemas:
+    GatewayConfig:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              proxy:
+                type: object
+    BootResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    DnsCacheResponse:
+      type: object
+      properties:
+        dns_cache:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The DNS hostname
+              addresses:
+                type: array
+                items:
+                  type: string
+                description: Resolved IP addresses
+              expire:
+                type: number
+                description: Expiration time in seconds
+    ReadinessStatus:
+      type: object
+      properties:
+        success:
+          type: boolean
+        status:
+          type: string
+          enum:
+            - ready
+            - not_ready
+    LivenessStatus:
+      type: object
+      properties:
+        success:
+          type: boolean
+    StatusInfo:
+      type: object
+      properties:
+        timers:
+          type: object
+          additionalProperties: true
+        workers:
+          type: integer
+          description: Number of worker processes

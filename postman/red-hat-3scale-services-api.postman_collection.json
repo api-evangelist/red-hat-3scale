@@ -1,0 +1,668 @@
+{
+  "info": {
+    "_postman_id": "5224f1dc-2f80-40e3-840f-5a8d03cfe98a",
+    "name": "Red Hat 3scale Account Management Accounts Services API",
+    "description": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:43:29.000Z",
+    "updatedAt": "2026-07-28T02:43:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5224f1dc-2f80-40e3-840f-5a8d03cfe98a"
+  },
+  "item": [
+    {
+      "name": "services.json",
+      "item": [
+        {
+          "name": "List Services",
+          "id": "5d851083-3476-436e-8ebd-08ee0219683b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/services.json?access_token=<string>&page=1&per_page=20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "services.json"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Admin API access token",
+                  "key": "access_token",
+                  "value": "<string>"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Returns a list of all API services configured in the 3scale admin portal."
+          },
+          "response": [
+            {
+              "id": "44a4068a-0b80-4c02-8b2b-1e0cd654dd8b",
+              "name": "List of services returned",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/services.json?access_token=<API Key>&page=1&per_page=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "services.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Admin API access token",
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"services\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"system_name\": \"<string>\",\n      \"backend_version\": \"<string>\",\n      \"deployment_option\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"system_name\": \"<string>\",\n      \"backend_version\": \"<string>\",\n      \"deployment_option\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:43:29.000Z",
+              "updatedAt": "2026-07-28T02:43:29.000Z",
+              "uid": "35240-44a4068a-0b80-4c02-8b2b-1e0cd654dd8b"
+            }
+          ],
+          "createdAt": "2026-07-28T02:43:29.000Z",
+          "updatedAt": "2026-07-28T02:43:29.000Z",
+          "uid": "35240-5d851083-3476-436e-8ebd-08ee0219683b"
+        }
+      ],
+      "id": "ea6327b3-7797-4529-baa0-1da6f981dad1",
+      "createdAt": "2026-07-28T02:43:29.000Z",
+      "updatedAt": "2026-07-28T02:43:29.000Z",
+      "uid": "35240-ea6327b3-7797-4529-baa0-1da6f981dad1"
+    },
+    {
+      "name": "services",
+      "item": [
+        {
+          "name": "{id}.json",
+          "item": [
+            {
+              "name": "Get Service",
+              "id": "daa7534e-288e-4ae7-a924-83d53355e70a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/services/{{id}}.json?access_token=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "services",
+                    "{{id}}.json"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Admin API access token",
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Returns the details of a specific API service."
+              },
+              "response": [
+                {
+                  "id": "2312890e-c9ca-449a-872c-f3aad6d20e6a",
+                  "name": "Service details returned",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/services/{{id}}.json?access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "services",
+                        "{{id}}.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"system_name\": \"<string>\",\n  \"backend_version\": \"<string>\",\n  \"deployment_option\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:43:29.000Z",
+                  "updatedAt": "2026-07-28T02:43:29.000Z",
+                  "uid": "35240-2312890e-c9ca-449a-872c-f3aad6d20e6a"
+                },
+                {
+                  "id": "2565a3c6-e054-4aca-b947-0df6365dd0dc",
+                  "name": "Service not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/services/{{id}}.json?access_token=<API Key>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "services",
+                        "{{id}}.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<API Key>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:43:29.000Z",
+                  "updatedAt": "2026-07-28T02:43:29.000Z",
+                  "uid": "35240-2565a3c6-e054-4aca-b947-0df6365dd0dc"
+                }
+              ],
+              "createdAt": "2026-07-28T02:43:29.000Z",
+              "updatedAt": "2026-07-28T02:43:29.000Z",
+              "uid": "35240-daa7534e-288e-4ae7-a924-83d53355e70a"
+            }
+          ],
+          "id": "e501d381-1c4e-42d3-a909-610633c22d27",
+          "createdAt": "2026-07-28T02:43:29.000Z",
+          "updatedAt": "2026-07-28T02:43:29.000Z",
+          "uid": "35240-e501d381-1c4e-42d3-a909-610633c22d27"
+        },
+        {
+          "name": "{service_id}",
+          "item": [
+            {
+              "name": "usage.json",
+              "item": [
+                {
+                  "name": "Get Service Usage",
+                  "id": "089fd1a8-f6dc-4130-9257-74896c01e43b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/services/:service_id/usage.json?access_token=<string>&metric_name=<string>&period=month&since=<dateTime>&until=<dateTime>&granularity=day&skip_change=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "services",
+                        ":service_id",
+                        "usage.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The name of the metric to retrieve (e.g., hits)",
+                          "key": "metric_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The time period for the statistics",
+                          "key": "period",
+                          "value": "month"
+                        },
+                        {
+                          "description": "Start date for custom date range (ISO 8601 format)",
+                          "key": "since",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End date for custom date range (ISO 8601 format)",
+                          "key": "until",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Granularity of data points within the period",
+                          "key": "granularity",
+                          "value": "day"
+                        },
+                        {
+                          "description": "Skip change data in response",
+                          "key": "skip_change",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "c09886fb-4fea-4a2f-98ca-6a119db0e21f",
+                          "key": "service_id",
+                          "value": "<integer>",
+                          "description": "(Required) The ID of the API service"
+                        }
+                      ]
+                    },
+                    "description": "Returns usage statistics for a specific API service. Supports filtering by metric, time period, granularity, and date range. Results include hit counts, response time, and other tracked metrics."
+                  },
+                  "response": [
+                    {
+                      "id": "73b229cf-e35a-47df-9125-66304ae25f07",
+                      "name": "Usage statistics returned successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/services/:service_id/usage.json?access_token=<API Key>&metric_name=<string>&period=month&since=<dateTime>&until=<dateTime>&granularity=day&skip_change=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "services",
+                            ":service_id",
+                            "usage.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Admin API access token",
+                              "key": "access_token",
+                              "value": "<API Key>"
+                            },
+                            {
+                              "description": "(Required) The name of the metric to retrieve (e.g., hits)",
+                              "key": "metric_name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The time period for the statistics",
+                              "key": "period",
+                              "value": "month"
+                            },
+                            {
+                              "description": "Start date for custom date range (ISO 8601 format)",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for custom date range (ISO 8601 format)",
+                              "key": "until",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Granularity of data points within the period",
+                              "key": "granularity",
+                              "value": "day"
+                            },
+                            {
+                              "description": "Skip change data in response",
+                              "key": "skip_change",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "service_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"metric\": \"<string>\",\n  \"period\": \"<string>\",\n  \"period_start\": \"<dateTime>\",\n  \"period_end\": \"<dateTime>\",\n  \"total\": \"<integer>\",\n  \"values\": [\n    [\n      \"<dateTime>\",\n      \"<dateTime>\"\n    ],\n    [\n      \"<dateTime>\",\n      \"<dateTime>\"\n    ]\n  ]\n}",
+                      "createdAt": "2026-07-28T02:43:29.000Z",
+                      "updatedAt": "2026-07-28T02:43:29.000Z",
+                      "uid": "35240-73b229cf-e35a-47df-9125-66304ae25f07"
+                    },
+                    {
+                      "id": "00f25152-5e1e-4800-9f67-57d0ef33f4e8",
+                      "name": "Service or metric not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/services/:service_id/usage.json?access_token=<API Key>&metric_name=<string>&period=month&since=<dateTime>&until=<dateTime>&granularity=day&skip_change=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "services",
+                            ":service_id",
+                            "usage.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Admin API access token",
+                              "key": "access_token",
+                              "value": "<API Key>"
+                            },
+                            {
+                              "description": "(Required) The name of the metric to retrieve (e.g., hits)",
+                              "key": "metric_name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The time period for the statistics",
+                              "key": "period",
+                              "value": "month"
+                            },
+                            {
+                              "description": "Start date for custom date range (ISO 8601 format)",
+                              "key": "since",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for custom date range (ISO 8601 format)",
+                              "key": "until",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Granularity of data points within the period",
+                              "key": "granularity",
+                              "value": "day"
+                            },
+                            {
+                              "description": "Skip change data in response",
+                              "key": "skip_change",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "service_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:43:29.000Z",
+                      "updatedAt": "2026-07-28T02:43:29.000Z",
+                      "uid": "35240-00f25152-5e1e-4800-9f67-57d0ef33f4e8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:43:29.000Z",
+                  "updatedAt": "2026-07-28T02:43:29.000Z",
+                  "uid": "35240-089fd1a8-f6dc-4130-9257-74896c01e43b"
+                }
+              ],
+              "id": "3e1d1dbd-2db1-40b2-a558-dd69e565b401",
+              "createdAt": "2026-07-28T02:43:29.000Z",
+              "updatedAt": "2026-07-28T02:43:29.000Z",
+              "uid": "35240-3e1d1dbd-2db1-40b2-a558-dd69e565b401"
+            },
+            {
+              "name": "top_applications.json",
+              "item": [
+                {
+                  "name": "Get Top Applications by Usage",
+                  "id": "c7a72276-db08-46ff-b630-c7a3e45cad70",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/services/:service_id/top_applications.json?access_token=<string>&metric_name=<string>&period=week",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "services",
+                        ":service_id",
+                        "top_applications.json"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Admin API access token",
+                          "key": "access_token",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The metric to rank by",
+                          "key": "metric_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "period",
+                          "value": "week"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "962d5e04-2292-45a3-9bfb-1e710062218f",
+                          "key": "service_id",
+                          "value": "<integer>",
+                          "description": "(Required) The ID of the API service"
+                        }
+                      ]
+                    },
+                    "description": "Returns the top applications for a service ranked by usage volume for a given metric and time period."
+                  },
+                  "response": [
+                    {
+                      "id": "89574215-8241-43be-9040-9874b69d33c1",
+                      "name": "Top applications returned",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/services/:service_id/top_applications.json?access_token=<API Key>&metric_name=<string>&period=week",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "services",
+                            ":service_id",
+                            "top_applications.json"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Admin API access token",
+                              "key": "access_token",
+                              "value": "<API Key>"
+                            },
+                            {
+                              "description": "(Required) The metric to rank by",
+                              "key": "metric_name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "period",
+                              "value": "week"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "service_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"applications\": [\n    {\n      \"application\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"account\": {\n          \"id\": \"<integer>\",\n          \"org_name\": \"<string>\"\n        }\n      },\n      \"total\": \"<integer>\"\n    },\n    {\n      \"application\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"account\": {\n          \"id\": \"<integer>\",\n          \"org_name\": \"<string>\"\n        }\n      },\n      \"total\": \"<integer>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:43:29.000Z",
+                      "updatedAt": "2026-07-28T02:43:29.000Z",
+                      "uid": "35240-89574215-8241-43be-9040-9874b69d33c1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:43:29.000Z",
+                  "updatedAt": "2026-07-28T02:43:29.000Z",
+                  "uid": "35240-c7a72276-db08-46ff-b630-c7a3e45cad70"
+                }
+              ],
+              "id": "fed3509b-9c80-48c5-885b-85e7e0ddc99a",
+              "createdAt": "2026-07-28T02:43:29.000Z",
+              "updatedAt": "2026-07-28T02:43:29.000Z",
+              "uid": "35240-fed3509b-9c80-48c5-885b-85e7e0ddc99a"
+            }
+          ],
+          "id": "71dc50bb-22d0-41d0-92d5-06bce7e3d377",
+          "createdAt": "2026-07-28T02:43:29.000Z",
+          "updatedAt": "2026-07-28T02:43:29.000Z",
+          "uid": "35240-71dc50bb-22d0-41d0-92d5-06bce7e3d377"
+        }
+      ],
+      "id": "1ff1985b-48ad-432e-ac74-12f869e430e2",
+      "createdAt": "2026-07-28T02:43:29.000Z",
+      "updatedAt": "2026-07-28T02:43:29.000Z",
+      "uid": "35240-1ff1985b-48ad-432e-ac74-12f869e430e2"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "query",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "domain",
+      "value": "your-domain"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api"
+    },
+    {
+      "key": "id",
+      "value": "<integer>"
+    }
+  ]
+}
