@@ -486,6 +486,10 @@ apis:
   - type: Documentation
     url: https://github.com/3scale/APIcast/blob/master/doc/management-api.md
 common:
+- type: TrustCenter
+  url: https://www.redhat.com/en/trust
+- type: Compliance
+  url: https://access.redhat.com/compliance/
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/red-hat-3scale/overview
 - type: AgenticAccess
@@ -527,15 +531,15 @@ common:
 - type: ChangeLog
   url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/release_notes/index
 - type: OpenAPI
-  url: openapi/red-hat-3scale-service-management-openapi.yml
+  url: openapi/_original/red-hat-3scale-service-management-openapi.yml
 - type: OpenAPI
-  url: openapi/red-hat-3scale-account-management-openapi.yml
+  url: openapi/_original/red-hat-3scale-account-management-openapi.yml
 - type: OpenAPI
-  url: openapi/red-hat-3scale-analytics-openapi.yml
+  url: openapi/_original/red-hat-3scale-analytics-openapi.yml
 - type: OpenAPI
-  url: openapi/red-hat-3scale-billing-openapi.yml
+  url: openapi/_original/red-hat-3scale-billing-openapi.yml
 - type: OpenAPI
-  url: openapi/red-hat-3scale-apicast-management-openapi.yml
+  url: openapi/_original/red-hat-3scale-apicast-management-openapi.yml
 - type: JSONLDContext
   url: json-ld/red-hat-3scale-context.jsonld
 - type: JSONSchema
