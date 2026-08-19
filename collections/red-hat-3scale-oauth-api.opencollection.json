@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red Hat 3scale Account Management Accounts OAuth API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OAuth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authorize OAuth Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/transactions/oauth_authorize.xml",
+            "params": [
+              {
+                "name": "provider_key",
+                "value": "",
+                "type": "query",
+                "description": "The provider key identifying your 3scale account"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "The OAuth 2.0 access token to authorize"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the service being accessed"
+              }
+            ]
+          },
+          "docs": "Authorizes an OAuth 2.0 access token against the 3scale service, checking whether the token is valid and within usage limits. Returns the application and plan details associated with the token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

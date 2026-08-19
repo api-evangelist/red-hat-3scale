@@ -1,0 +1,149 @@
+{
+  "item": [
+    {
+      "id": "3e0e8631-7e79-4020-9c5d-5a753a7ca8f5",
+      "name": "DNS",
+      "description": {
+        "content": "Inspect and manage DNS cache state",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8648e417-a530-4224-a8fc-eabffff12626",
+          "name": "Get DNS Cache",
+          "request": {
+            "name": "Get DNS Cache",
+            "description": {
+              "content": "Returns the current state of the APIcast DNS cache including cached records, their expiration times, and resolved IP addresses. Useful for debugging DNS resolution issues.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dns",
+                "cache"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7524df4-f7a0-40fd-849a-cece271afc4a",
+              "name": "DNS cache contents returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dns",
+                    "cache"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dns_cache\": [\n    {\n      \"name\": \"string\",\n      \"addresses\": [\n        \"string\",\n        \"string\"\n      ],\n      \"expire\": 7027.264581137338\n    },\n    {\n      \"name\": \"string\",\n      \"addresses\": [\n        \"string\",\n        \"string\"\n      ],\n      \"expire\": 3911.5149471744394\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your 3scale tenant domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "67595d8b-7eea-486e-be01-2397e0521cf4",
+    "name": "Red Hat 3scale Account Management Accounts DNS API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+      "type": "text/plain"
+    }
+  }
+}

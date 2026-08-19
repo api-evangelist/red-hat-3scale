@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red Hat 3scale Account Management Accounts DNS API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DNS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get DNS Cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/dns/cache"
+          },
+          "docs": "Returns the current state of the APIcast DNS cache including cached records, their expiration times, and resolved IP addresses. Useful for debugging DNS resolution issues."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

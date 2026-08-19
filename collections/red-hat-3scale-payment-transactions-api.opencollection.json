@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red Hat 3scale Account Management Accounts Payment Transactions API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Invoice Payment Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/invoices/:id/payment_transactions.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The invoice ID"
+              }
+            ]
+          },
+          "docs": "Returns all payment transactions associated with a specific invoice."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

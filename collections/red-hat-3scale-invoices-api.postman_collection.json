@@ -1,0 +1,519 @@
+{
+  "item": [
+    {
+      "id": "d7fa77c7-e01a-4965-a7b9-27fec1b7ae34",
+      "name": "Invoices",
+      "description": {
+        "content": "Manage billing invoices for developer accounts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5a0810df-0c9d-4b84-bf87-8231d1d689f4",
+          "name": "List Account Invoices",
+          "request": {
+            "name": "List Account Invoices",
+            "description": {
+              "content": "Returns a list of invoices for a specific developer account, including their amounts, states, and billing periods.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "invoices.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter by invoice state"
+                },
+                {
+                  "disabled": false,
+                  "key": "month",
+                  "value": "<string>",
+                  "description": "Filter by billing month (YYYY-MM format)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) The ID of the developer account"
+                },
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ba0bd90-ab9f-42a3-99a4-403bbb2c121d",
+              "name": "List of invoices returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "invoices.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "month",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) The ID of the developer account"
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invoices\": [\n    {\n      \"id\": 7014,\n      \"state\": \"pending\",\n      \"friendly_id\": \"string\",\n      \"month\": \"string\",\n      \"due_on\": \"2002-09-17\",\n      \"created_at\": \"2001-08-31T06:28:33.690Z\",\n      \"updated_at\": \"1990-09-24T12:36:02.939Z\",\n      \"cost\": 7167.6030807086845,\n      \"currency\": \"string\",\n      \"account\": {\n        \"id\": 1900,\n        \"org_name\": \"string\"\n      },\n      \"line_items\": [\n        {\n          \"id\": 7677,\n          \"name\": \"string\",\n          \"cost\": 6174.162453487113,\n          \"quantity\": 1285.6592771891817,\n          \"type\": \"string\"\n        },\n        {\n          \"id\": 6379,\n          \"name\": \"string\",\n          \"cost\": 3551.8001738838543,\n          \"quantity\": 1902.1969314044186,\n          \"type\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": 4707,\n      \"state\": \"pending\",\n      \"friendly_id\": \"string\",\n      \"month\": \"string\",\n      \"due_on\": \"1954-04-11\",\n      \"created_at\": \"2019-05-23T13:52:33.412Z\",\n      \"updated_at\": \"1990-10-19T14:55:41.047Z\",\n      \"cost\": 3496.307118253319,\n      \"currency\": \"string\",\n      \"account\": {\n        \"id\": 9489,\n        \"org_name\": \"string\"\n      },\n      \"line_items\": [\n        {\n          \"id\": 8215,\n          \"name\": \"string\",\n          \"cost\": 9545.787325110347,\n          \"quantity\": 4262.9476306574525,\n          \"type\": \"string\"\n        },\n        {\n          \"id\": 7777,\n          \"name\": \"string\",\n          \"cost\": 2701.7600515485074,\n          \"quantity\": 2405.9275139908023,\n          \"type\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eba62b18-ee8f-4daa-9cf1-3a705f822e31",
+          "name": "Get Account Invoice",
+          "request": {
+            "name": "Get Account Invoice",
+            "description": {
+              "content": "Returns details for a specific invoice including line items and total.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "invoices",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "account_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f76109af-a6f8-419f-9274-30a204b1bf6c",
+              "name": "Invoice details returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "invoices",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2021,\n  \"state\": \"cancelled\",\n  \"friendly_id\": \"string\",\n  \"month\": \"string\",\n  \"due_on\": \"2001-10-12\",\n  \"created_at\": \"1992-05-23T01:34:42.709Z\",\n  \"updated_at\": \"1991-04-16T16:20:30.283Z\",\n  \"cost\": 671.2469123116349,\n  \"currency\": \"string\",\n  \"account\": {\n    \"id\": 1078,\n    \"org_name\": \"string\"\n  },\n  \"line_items\": [\n    {\n      \"id\": 3755,\n      \"name\": \"string\",\n      \"cost\": 8607.51137702649,\n      \"quantity\": 6822.195627593764,\n      \"type\": \"string\"\n    },\n    {\n      \"id\": 8096,\n      \"name\": \"string\",\n      \"cost\": 4976.012298341423,\n      \"quantity\": 1236.079430614948,\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3a7ab6b-ba25-4412-9e0a-c3584222343d",
+              "name": "Invoice not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "invoices",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "account_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8ab1bfc-29c0-425d-ad15-cf71cac42a7f",
+          "name": "List All Invoices",
+          "request": {
+            "name": "List All Invoices",
+            "description": {
+              "content": "Returns all invoices across all accounts. Supports filtering by month and state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter by invoice state"
+                },
+                {
+                  "disabled": false,
+                  "key": "month",
+                  "value": "<string>",
+                  "description": "Filter by billing month (YYYY-MM)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cbceacb3-16a5-43ae-b8fe-e18a3ed6a8d9",
+              "name": "All invoices returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "month",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invoices\": [\n    {\n      \"id\": 7014,\n      \"state\": \"pending\",\n      \"friendly_id\": \"string\",\n      \"month\": \"string\",\n      \"due_on\": \"2002-09-17\",\n      \"created_at\": \"2001-08-31T06:28:33.690Z\",\n      \"updated_at\": \"1990-09-24T12:36:02.939Z\",\n      \"cost\": 7167.6030807086845,\n      \"currency\": \"string\",\n      \"account\": {\n        \"id\": 1900,\n        \"org_name\": \"string\"\n      },\n      \"line_items\": [\n        {\n          \"id\": 7677,\n          \"name\": \"string\",\n          \"cost\": 6174.162453487113,\n          \"quantity\": 1285.6592771891817,\n          \"type\": \"string\"\n        },\n        {\n          \"id\": 6379,\n          \"name\": \"string\",\n          \"cost\": 3551.8001738838543,\n          \"quantity\": 1902.1969314044186,\n          \"type\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": 4707,\n      \"state\": \"pending\",\n      \"friendly_id\": \"string\",\n      \"month\": \"string\",\n      \"due_on\": \"1954-04-11\",\n      \"created_at\": \"2019-05-23T13:52:33.412Z\",\n      \"updated_at\": \"1990-10-19T14:55:41.047Z\",\n      \"cost\": 3496.307118253319,\n      \"currency\": \"string\",\n      \"account\": {\n        \"id\": 9489,\n        \"org_name\": \"string\"\n      },\n      \"line_items\": [\n        {\n          \"id\": 8215,\n          \"name\": \"string\",\n          \"cost\": 9545.787325110347,\n          \"quantity\": 4262.9476306574525,\n          \"type\": \"string\"\n        },\n        {\n          \"id\": 7777,\n          \"name\": \"string\",\n          \"cost\": 2701.7600515485074,\n          \"quantity\": 2405.9275139908023,\n          \"type\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your 3scale tenant domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The invoice ID",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "id"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "28d3d710-8c00-446a-a241-79cd78bc3c7c",
+    "name": "Red Hat 3scale Account Management Accounts Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+      "type": "text/plain"
+    }
+  }
+}

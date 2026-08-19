@@ -1,0 +1,508 @@
+{
+  "item": [
+    {
+      "id": "78f588a4-5647-445f-9037-63c9cf2c13e1",
+      "name": "Authorization",
+      "description": {
+        "content": "Authorize API calls and check access permissions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "55ef04d2-8a49-4083-9130-17ba5c0a70f4",
+          "name": "Authorize API Transaction",
+          "request": {
+            "name": "Authorize API Transaction",
+            "description": {
+              "content": "Authorizes an API call by checking whether the application identified by the user key is within its usage limits. Returns success or failure along with current usage data. Used by APIcast before forwarding requests to the backend API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "authorize.xml"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider_key",
+                  "value": "<string>",
+                  "description": "(Required) The provider key identifying your 3scale account"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_key",
+                  "value": "<string>",
+                  "description": "(Required) The API key of the application making the call"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_id",
+                  "value": "<string>",
+                  "description": "The ID of the service being accessed"
+                },
+                {
+                  "disabled": false,
+                  "key": "usage[hits]",
+                  "value": "<integer>",
+                  "description": "Number of hits to report with this authorization"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "224d3a17-8ca8-4be0-8f75-f01c2f9ce1a7",
+              "name": "Authorization response (success or failure)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "authorize.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "usage[hits]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <plan>(string)</plan>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "9b26853d-4e11-4bc7-aa7d-fcfb4fae8c66",
+              "name": "Authorization denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "authorize.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "usage[hits]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <code>(string)</code>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "bf4b1395-c706-485e-acd9-4901ad760833",
+              "name": "Application not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "authorize.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "usage[hits]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8aa65d19-aeff-4a3e-8110-39fc7c8a713e",
+          "name": "Authorize and Report API Transaction",
+          "request": {
+            "name": "Authorize and Report API Transaction",
+            "description": {
+              "content": "Combines authorization and reporting in a single call. Authorizes the API call and simultaneously reports usage metrics to 3scale. This is the recommended approach for reporting hits and other metrics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "authrep.xml"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider_key",
+                  "value": "<string>",
+                  "description": "(Required) The provider key identifying your 3scale account"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_key",
+                  "value": "<string>",
+                  "description": "(Required) The API key of the application making the call"
+                },
+                {
+                  "disabled": false,
+                  "key": "service_id",
+                  "value": "<string>",
+                  "description": "The ID of the service being accessed"
+                },
+                {
+                  "disabled": false,
+                  "key": "usage[hits]",
+                  "value": "1",
+                  "description": "Number of hits to report"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f560e86-b911-4fe9-ba9f-46007c1de160",
+              "name": "Authorization and report successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "authrep.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "usage[hits]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <plan>(string)</plan>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n  <usage_reports>\n    <metric>(string)</metric>\n    <period>(string)</period>\n    <period_start>(string)</period_start>\n    <period_end>(string)</period_end>\n    <max_value>(integer)</max_value>\n    <current_value>(integer)</current_value>\n  </usage_reports>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "e586da56-1dc1-4347-a722-d9f8e7036e23",
+              "name": "Authorization denied or limits exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "authrep.xml"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "usage[hits]",
+                      "value": "1"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <status>(string)</status>\n  <code>(string)</code>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your 3scale tenant domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ce855aba-290a-48c7-9e24-5978725bd38a",
+    "name": "Red Hat 3scale Account Management Accounts Authorization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+      "type": "text/plain"
+    }
+  }
+}

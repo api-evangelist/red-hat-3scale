@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red Hat 3scale Account Management Accounts Authorization API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authorize API Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/transactions/authorize.xml",
+            "params": [
+              {
+                "name": "provider_key",
+                "value": "",
+                "type": "query",
+                "description": "The provider key identifying your 3scale account"
+              },
+              {
+                "name": "user_key",
+                "value": "",
+                "type": "query",
+                "description": "The API key of the application making the call"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the service being accessed"
+              },
+              {
+                "name": "usage[hits]",
+                "value": "",
+                "type": "query",
+                "description": "Number of hits to report with this authorization"
+              }
+            ]
+          },
+          "docs": "Authorizes an API call by checking whether the application identified by the user key is within its usage limits. Returns success or failure along with current usage data. Used by APIcast before forwarding requests to the backend API."
+        },
+        {
+          "info": {
+            "name": "Authorize and Report API Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/transactions/authrep.xml",
+            "params": [
+              {
+                "name": "provider_key",
+                "value": "",
+                "type": "query",
+                "description": "The provider key identifying your 3scale account"
+              },
+              {
+                "name": "user_key",
+                "value": "",
+                "type": "query",
+                "description": "The API key of the application making the call"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the service being accessed"
+              },
+              {
+                "name": "usage[hits]",
+                "value": "",
+                "type": "query",
+                "description": "Number of hits to report"
+              }
+            ]
+          },
+          "docs": "Combines authorization and reporting in a single call. Authorizes the API call and simultaneously reports usage metrics to 3scale. This is the recommended approach for reporting hits and other metrics."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

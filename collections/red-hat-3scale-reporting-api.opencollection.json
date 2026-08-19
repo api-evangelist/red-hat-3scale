@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red Hat 3scale Account Management Accounts Reporting API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authorize and Report API Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/transactions/authrep.xml",
+            "params": [
+              {
+                "name": "provider_key",
+                "value": "",
+                "type": "query",
+                "description": "The provider key identifying your 3scale account"
+              },
+              {
+                "name": "user_key",
+                "value": "",
+                "type": "query",
+                "description": "The API key of the application making the call"
+              },
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the service being accessed"
+              },
+              {
+                "name": "usage[hits]",
+                "value": "",
+                "type": "query",
+                "description": "Number of hits to report"
+              }
+            ]
+          },
+          "docs": "Combines authorization and reporting in a single call. Authorizes the API call and simultaneously reports usage metrics to 3scale. This is the recommended approach for reporting hits and other metrics."
+        },
+        {
+          "info": {
+            "name": "Report API Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{domain}-admin.3scale.net/admin/api/transactions.xml",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Reports multiple API usage transactions in batch to 3scale. Used to asynchronously report usage metrics after API calls have already been processed. Supports reporting for multiple application keys in a single call."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

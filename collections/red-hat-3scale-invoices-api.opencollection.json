@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Red Hat 3scale Account Management Accounts Invoices API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "access_token",
+      "value": "{{access_token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Account Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/accounts/:account_id/invoices.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the developer account"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter by invoice state"
+              },
+              {
+                "name": "month",
+                "value": "",
+                "type": "query",
+                "description": "Filter by billing month (YYYY-MM format)"
+              }
+            ]
+          },
+          "docs": "Returns a list of invoices for a specific developer account, including their amounts, states, and billing periods."
+        },
+        {
+          "info": {
+            "name": "Get Account Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/accounts/:account_id/invoices/:id.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The invoice ID"
+              }
+            ]
+          },
+          "docs": "Returns details for a specific invoice including line items and total."
+        },
+        {
+          "info": {
+            "name": "List All Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{domain}-admin.3scale.net/admin/api/invoices.json",
+            "params": [
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "Admin API access token"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter by invoice state"
+              },
+              {
+                "name": "month",
+                "value": "",
+                "type": "query",
+                "description": "Filter by billing month (YYYY-MM)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all invoices across all accounts. Supports filtering by month and state."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

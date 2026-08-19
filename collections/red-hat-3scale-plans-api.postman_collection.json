@@ -1,0 +1,158 @@
+{
+  "item": [
+    {
+      "id": "9b190aed-8114-42ed-9bb5-9b68a5aca1eb",
+      "name": "Plans",
+      "description": {
+        "content": "Manage application plans and their features and limits",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f5c50e56-a1a7-45c8-99e7-f5dfb41e722f",
+          "name": "List Application Plans",
+          "request": {
+            "name": "List Application Plans",
+            "description": {
+              "content": "Returns all application plans across all services.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "application_plans.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "(Required) Admin API access token"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your 3scale tenant domain",
+                  "type": "any",
+                  "value": "{{domain}}",
+                  "key": "domain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7844032a-a8d7-4c88-a51b-0fef57f8345a",
+              "name": "List of application plans",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "application_plans.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your 3scale tenant domain",
+                      "type": "any",
+                      "value": "{{domain}}",
+                      "key": "domain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"plans\": [\n    {\n      \"id\": 985,\n      \"name\": \"string\",\n      \"system_name\": \"string\",\n      \"state\": \"published\",\n      \"approval_required\": true,\n      \"setup_fee\": 2513.707405666742,\n      \"cost_per_month\": 2934.979056510143\n    },\n    {\n      \"id\": 3662,\n      \"name\": \"string\",\n      \"system_name\": \"string\",\n      \"state\": \"hidden\",\n      \"approval_required\": true,\n      \"setup_fee\": 1542.012664295005,\n      \"cost_per_month\": 9337.225079956072\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your 3scale tenant domain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-domain",
+      "key": "domain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{domain}}-admin.3scale.net/admin/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "access_token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e52021e2-055a-4f1a-a32d-6b8dc1c8c090",
+    "name": "Red Hat 3scale Account Management Accounts Plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.\n\nContact Support:\n Name: Red Hat 3scale Support",
+      "type": "text/plain"
+    }
+  }
+}
