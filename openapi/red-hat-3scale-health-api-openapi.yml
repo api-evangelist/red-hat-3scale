@@ -1,21 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Red Hat 3scale Account Management Accounts Health API
-  description: The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.
+  title: Red Hat 3scale APIcast Management Health API
+  description: The APIcast Management API is an HTTP REST interface exposed by the APIcast API gateway on port 8090 for debugging and runtime configuration management. It provides endpoints to retrieve and update the gateway configuration, inspect DNS cache state, trigger boot/initialization sequences, and check readiness and liveness health status. Access level is controlled via the APICAST_MANAGEMENT_API environment variable (debug, status, or disabled). This API is intended for debugging and is not production-hardened.
   version: '1'
   contact:
     name: Red Hat 3scale Support
     url: https://access.redhat.com/support
   termsOfService: https://www.redhat.com/en/about/agreements
 servers:
-- url: https://{domain}-admin.3scale.net/admin/api
-  description: 3scale Account Management API
-  variables:
-    domain:
-      default: your-domain
-      description: Your 3scale tenant domain
-security:
-- provider_key: []
+- url: http://localhost:8090
+  description: APIcast Management API (local)
 tags:
 - name: Health
   description: Health check and liveness/readiness probes
@@ -66,6 +60,20 @@ paths:
                 $ref: '#/components/schemas/StatusInfo'
 components:
   schemas:
+    LivenessStatus:
+      type: object
+      properties:
+        success:
+          type: boolean
+    StatusInfo:
+      type: object
+      properties:
+        timers:
+          type: object
+          additionalProperties: true
+        workers:
+          type: integer
+          description: Number of worker processes
     ReadinessStatus:
       type: object
       properties:
@@ -76,25 +84,6 @@ components:
           enum:
           - ready
           - not_ready
-    StatusInfo:
-      type: object
-      properties:
-        timers:
-          type: object
-          additionalProperties: true
-        workers:
-          type: integer
-          description: Number of worker processes
-    LivenessStatus:
-      type: object
-      properties:
-        success:
-          type: boolean
-  securitySchemes:
-    provider_key:
-      type: apiKey
-      in: query
-      name: access_token
 externalDocs:
-  description: Red Hat 3scale Admin Portal Guide
-  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
+  description: APIcast Management API Documentation
+  url: https://github.com/3scale/APIcast/blob/master/doc/management-api.md

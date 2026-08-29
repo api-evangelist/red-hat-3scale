@@ -1,12 +1,12 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Red Hat 3scale Account Management Accounts Services API
-  description: The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.
+  title: Red Hat 3scale Services API
   version: '1'
   contact:
     name: Red Hat 3scale Support
     url: https://access.redhat.com/support
   termsOfService: https://www.redhat.com/en/about/agreements
+  description: 'Operations tagged Services across 2 of this provider''s published API definitions: red-hat-3scale-account-management-openapi.yml, red-hat-3scale-analytics-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://{domain}-admin.3scale.net/admin/api
   description: 3scale Account Management API
@@ -14,8 +14,12 @@ servers:
     domain:
       default: your-domain
       description: Your 3scale tenant domain
-security:
-- provider_key: []
+- url: https://{domain}-admin.3scale.net/stats
+  description: 3scale Analytics API
+  variables:
+    domain:
+      default: your-domain
+      description: Your 3scale tenant domain
 tags:
 - name: Services
   description: Manage API services and their settings
@@ -46,6 +50,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceList'
+      security:
+      - provider_key: []
+    servers:
+    - url: https://{domain}-admin.3scale.net/admin/api
+      description: 3scale Account Management API
+      variables:
+        domain:
+          default: your-domain
+          description: Your 3scale tenant domain
   /services/{id}.json:
     get:
       operationId: getService
@@ -70,6 +83,15 @@ paths:
                 $ref: '#/components/schemas/Service'
         '404':
           description: Service not found
+      security:
+      - provider_key: []
+    servers:
+    - url: https://{domain}-admin.3scale.net/admin/api
+      description: 3scale Account Management API
+      variables:
+        domain:
+          default: your-domain
+          description: Your 3scale tenant domain
   /services/{service_id}/usage.json:
     get:
       operationId: getServiceUsage
@@ -140,6 +162,15 @@ paths:
                 $ref: '#/components/schemas/UsageStats'
         '404':
           description: Service or metric not found
+      security:
+      - access_token: []
+    servers:
+    - url: https://{domain}-admin.3scale.net/stats
+      description: 3scale Analytics API
+      variables:
+        domain:
+          default: your-domain
+          description: Your 3scale tenant domain
   /services/{service_id}/top_applications.json:
     get:
       operationId: getTopApplications
@@ -179,6 +210,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TopApplicationsList'
+      security:
+      - access_token: []
+    servers:
+    - url: https://{domain}-admin.3scale.net/stats
+      description: 3scale Analytics API
+      variables:
+        domain:
+          default: your-domain
+          description: Your 3scale tenant domain
 components:
   parameters:
     accessToken:
@@ -212,6 +252,33 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Service'
+    TopApplicationsList:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopApplication'
+    TopApplication:
+      type: object
+      properties:
+        application:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            account:
+              type: object
+              properties:
+                id:
+                  type: integer
+                org_name:
+                  type: string
+        total:
+          type: integer
+          description: Total usage for this application in the period
     UsageStats:
       type: object
       properties:
@@ -240,38 +307,15 @@ components:
               - type: string
                 format: date-time
               - type: integer
-    TopApplicationsList:
-      type: object
-      properties:
-        applications:
-          type: array
-          items:
-            $ref: '#/components/schemas/TopApplication'
-    TopApplication:
-      type: object
-      properties:
-        application:
-          type: object
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
-            account:
-              type: object
-              properties:
-                id:
-                  type: integer
-                org_name:
-                  type: string
-        total:
-          type: integer
-          description: Total usage for this application in the period
   securitySchemes:
     provider_key:
       type: apiKey
       in: query
       name: access_token
-externalDocs:
-  description: Red Hat 3scale Admin Portal Guide
-  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
+    access_token:
+      type: apiKey
+      in: query
+      name: access_token
+x-refined-from:
+- red-hat-3scale-account-management-openapi.yml
+- red-hat-3scale-analytics-openapi.yml

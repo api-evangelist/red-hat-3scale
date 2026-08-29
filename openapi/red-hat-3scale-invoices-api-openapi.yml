@@ -1,21 +1,21 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Red Hat 3scale Account Management Accounts Invoices API
-  description: The 3scale Account Management API provides programmatic access to manage developer accounts, applications, application plans, keys, and API subscriptions within the 3scale platform. It enables automation of developer onboarding, subscription management, and application lifecycle operations. All endpoints require admin API credentials and are accessible on the admin domain at {your-domain}-admin.3scale.net.
+  title: Red Hat 3scale Billing Invoices API
+  description: The 3scale Billing API enables management of billing and invoicing for API usage within the 3scale platform. It supports retrieving and managing invoices, payment transactions, and monetization of API subscriptions based on usage plans and application metrics.
   version: '1'
   contact:
     name: Red Hat 3scale Support
     url: https://access.redhat.com/support
   termsOfService: https://www.redhat.com/en/about/agreements
 servers:
-- url: https://{domain}-admin.3scale.net/admin/api
-  description: 3scale Account Management API
+- url: https://{domain}-admin.3scale.net/api
+  description: 3scale Billing API
   variables:
     domain:
       default: your-domain
       description: Your 3scale tenant domain
 security:
-- provider_key: []
+- access_token: []
 tags:
 - name: Invoices
   description: Manage billing invoices for developer accounts
@@ -133,13 +133,23 @@ paths:
                 $ref: '#/components/schemas/InvoiceList'
 components:
   schemas:
-    InvoiceList:
+    InvoiceLineItem:
       type: object
       properties:
-        invoices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Invoice'
+        id:
+          type: integer
+        name:
+          type: string
+          description: Description of the line item
+        cost:
+          type: number
+          description: Cost for this line item
+        quantity:
+          type: number
+          description: Quantity consumed
+        type:
+          type: string
+          description: Type of charge (setup, recurring, variable)
     Invoice:
       type: object
       properties:
@@ -187,23 +197,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InvoiceLineItem'
-    InvoiceLineItem:
+    InvoiceList:
       type: object
       properties:
-        id:
-          type: integer
-        name:
-          type: string
-          description: Description of the line item
-        cost:
-          type: number
-          description: Cost for this line item
-        quantity:
-          type: number
-          description: Quantity consumed
-        type:
-          type: string
-          description: Type of charge (setup, recurring, variable)
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
   parameters:
     accessToken:
       name: access_token
@@ -213,10 +213,10 @@ components:
       schema:
         type: string
   securitySchemes:
-    provider_key:
+    access_token:
       type: apiKey
       in: query
       name: access_token
 externalDocs:
-  description: Red Hat 3scale Admin Portal Guide
-  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
+  description: Red Hat 3scale Billing Documentation
+  url: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/billing
