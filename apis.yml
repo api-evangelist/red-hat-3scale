@@ -350,40 +350,6 @@ apis:
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/billing
   - type: Documentation
     url: https://github.com/3scale/APIcast/blob/master/doc/management-api.md
-- aid: red-hat-3scale:red-hat-3scale-oauth-api
-  name: Red Hat 3scale OAuth API
-  description: OAuth 2.0 token authorization endpoints
-  humanURL: https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management
-  baseURL: https://su1.3scale.net
-  tags:
-  - Authentication
-  tags_raw:
-  - OAuth
-  properties:
-  - type: OpenAPI
-    url: openapi/red-hat-3scale-oauth-api-openapi.yml
-  - type: Documentation
-    url: >-
-      https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/api_authentication/index
-  - type: Reference
-    url: >-
-      https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
-  - type: Documentation
-    url: >-
-      https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: Reference
-    url: >-
-      https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/accounts
-  - type: Documentation
-    url: >-
-      https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/analytics
-  - type: Documentation
-    url: >-
-      https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/billing
-  - type: Documentation
-    url: https://github.com/3scale/APIcast/blob/master/doc/management-api.md
 - aid: red-hat-3scale:red-hat-3scale-payment-transactions-api
   name: Red Hat 3scale Payment Transactions API
   description: View payment transactions associated with invoices
@@ -490,6 +456,39 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/red-hat-3scale-services-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/api_authentication/index
+  - type: Reference
+    url: >-
+      https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
+  - type: GraphQL
+    url: graphql/red-hat-3scale-graphql.md
+  - type: Documentation
+    url: >-
+      https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
+  - type: Reference
+    url: >-
+      https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/accounts
+  - type: Documentation
+    url: >-
+      https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/analytics
+  - type: Documentation
+    url: >-
+      https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/billing
+  - type: Documentation
+    url: https://github.com/3scale/APIcast/blob/master/doc/management-api.md
+- aid: red-hat-3scale:red-hat-3scale-oauth-api
+  name: Red Hat 3scale O Auth API
+  description: OAuth 2.0 token authorization endpoints
+  humanURL: >-
+    https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/webhooks
+  baseURL: https://su1.3scale.net
+  tags:
+  - OAuth
+  properties:
+  - type: OpenAPI
+    url: openapi/red-hat-3scale-oauth-api-openapi.yml
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/api_authentication/index
