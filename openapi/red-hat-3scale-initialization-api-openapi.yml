@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Red Hat 3scale APIcast Management Initialization API
-  description: The APIcast Management API is an HTTP REST interface exposed by the APIcast API gateway on port 8090 for debugging and runtime configuration management. It provides endpoints to retrieve and update the gateway configuration, inspect DNS cache state, trigger boot/initialization sequences, and check readiness and liveness health status. Access level is controlled via the APICAST_MANAGEMENT_API environment variable (debug, status, or disabled). This API is intended for debugging and is not production-hardened.
+  description: The APIcast Management API is an HTTP REST interface exposed by the APIcast API gateway on port 8090 for debugging and runtime configuration management.
   version: '1'
   contact:
     name: Red Hat 3scale Support

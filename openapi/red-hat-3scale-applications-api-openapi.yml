@@ -222,15 +222,20 @@ paths:
           description: Your 3scale tenant domain
 components:
   schemas:
-    UpdateApplicationRequest:
+    CreateApplicationRequest:
       type: object
+      required:
+      - plan_id
+      - name
       properties:
-        name:
-          type: string
-        description:
-          type: string
         plan_id:
           type: integer
+          description: The ID of the application plan to subscribe to
+        name:
+          type: string
+          description: Name of the application
+        description:
+          type: string
     ApplicationPlan:
       type: object
       properties:
@@ -258,20 +263,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Application'
-    CreateApplicationRequest:
+    UpdateApplicationRequest:
       type: object
-      required:
-      - plan_id
-      - name
       properties:
-        plan_id:
-          type: integer
-          description: The ID of the application plan to subscribe to
         name:
           type: string
-          description: Name of the application
         description:
           type: string
+        plan_id:
+          type: integer
     Application:
       type: object
       properties:

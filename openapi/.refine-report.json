@@ -22,7 +22,9 @@
     "red-hat-3scale-oauth-api-openapi.yml",
     "red-hat-3scale-reporting-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -33,7 +35,9 @@
     "red-hat-3scale-billing-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "red-hat-3scale-service-management-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "tag 'Applications' spans 2 source specs (red-hat-3scale-account-management-openapi.yml, red-hat-3scale-analytics-openapi.yml): per-path servers applied",
-    "tag 'Services' spans 2 source specs (red-hat-3scale-account-management-openapi.yml, red-hat-3scale-analytics-openapi.yml): per-path servers applied"
+    "tag 'Services' spans 2 source specs (red-hat-3scale-account-management-openapi.yml, red-hat-3scale-analytics-openapi.yml): per-path servers applied",
+    "superseded outputs removed: red-hat-3scale-o-auth-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 15 total)"
   ],
   "skipped": [
     "red-hat-3scale-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -44,7 +48,7 @@
     "red-hat-3scale-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "red-hat-3scale-initialization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "red-hat-3scale-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "red-hat-3scale-oauth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "red-hat-3scale-o-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "red-hat-3scale-payment-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "red-hat-3scale-plans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "red-hat-3scale-reporting-api-openapi.yml: previously refined output, superseded by openapi/_original/",

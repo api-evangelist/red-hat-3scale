@@ -151,7 +151,32 @@ paths:
         '404':
           description: Account not found
 components:
+  parameters:
+    accessToken:
+      name: access_token
+      in: query
+      required: true
+      description: Admin API access token
+      schema:
+        type: string
   schemas:
+    CreateAccountRequest:
+      type: object
+      required:
+      - org_name
+      - username
+      - email
+      - password
+      properties:
+        org_name:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
     UpdateAccountRequest:
       type: object
       properties:
@@ -193,31 +218,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Account'
-    CreateAccountRequest:
-      type: object
-      required:
-      - org_name
-      - username
-      - email
-      - password
-      properties:
-        org_name:
-          type: string
-        username:
-          type: string
-        email:
-          type: string
-          format: email
-        password:
-          type: string
-  parameters:
-    accessToken:
-      name: access_token
-      in: query
-      required: true
-      description: Admin API access token
-      schema:
-        type: string
   securitySchemes:
     provider_key:
       type: apiKey

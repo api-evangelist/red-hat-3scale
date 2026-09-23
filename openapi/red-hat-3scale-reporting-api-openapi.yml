@@ -84,6 +84,43 @@ paths:
           description: Invalid transaction data
 components:
   schemas:
+    ReportRequest:
+      type: object
+      required:
+      - provider_key
+      properties:
+        provider_key:
+          type: string
+          description: The provider key
+        service_id:
+          type: string
+          description: The service ID
+        transactions:
+          type: array
+          description: Array of transaction objects to report
+          items:
+            type: object
+    UsageReport:
+      type: object
+      properties:
+        metric:
+          type: string
+          description: The metric name (e.g. hits)
+        period:
+          type: string
+          description: The time period (minute, hour, day, month, year, eternity)
+        period_start:
+          type: string
+          format: date-time
+        period_end:
+          type: string
+          format: date-time
+        max_value:
+          type: integer
+          description: Maximum allowed value for this period
+        current_value:
+          type: integer
+          description: Current usage value for this period
     AuthorizeErrorResponse:
       type: object
       properties:
@@ -112,43 +149,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UsageReport'
-    UsageReport:
-      type: object
-      properties:
-        metric:
-          type: string
-          description: The metric name (e.g. hits)
-        period:
-          type: string
-          description: The time period (minute, hour, day, month, year, eternity)
-        period_start:
-          type: string
-          format: date-time
-        period_end:
-          type: string
-          format: date-time
-        max_value:
-          type: integer
-          description: Maximum allowed value for this period
-        current_value:
-          type: integer
-          description: Current usage value for this period
-    ReportRequest:
-      type: object
-      required:
-      - provider_key
-      properties:
-        provider_key:
-          type: string
-          description: The provider key
-        service_id:
-          type: string
-          description: The service ID
-        transactions:
-          type: array
-          description: Array of transaction objects to report
-          items:
-            type: object
   securitySchemes:
     providerKey:
       type: apiKey

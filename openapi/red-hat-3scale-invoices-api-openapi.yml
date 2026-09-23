@@ -132,6 +132,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvoiceList'
 components:
+  parameters:
+    accessToken:
+      name: access_token
+      in: query
+      required: true
+      description: Admin API access token
+      schema:
+        type: string
   schemas:
     InvoiceLineItem:
       type: object
@@ -150,6 +158,13 @@ components:
         type:
           type: string
           description: Type of charge (setup, recurring, variable)
+    InvoiceList:
+      type: object
+      properties:
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
     Invoice:
       type: object
       properties:
@@ -197,21 +212,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InvoiceLineItem'
-    InvoiceList:
-      type: object
-      properties:
-        invoices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Invoice'
-  parameters:
-    accessToken:
-      name: access_token
-      in: query
-      required: true
-      description: Admin API access token
-      schema:
-        type: string
   securitySchemes:
     access_token:
       type: apiKey

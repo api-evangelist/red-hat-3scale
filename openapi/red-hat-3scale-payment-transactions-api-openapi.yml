@@ -45,6 +45,14 @@ paths:
         '404':
           description: Invoice not found
 components:
+  parameters:
+    accessToken:
+      name: access_token
+      in: query
+      required: true
+      description: Admin API access token
+      schema:
+        type: string
   schemas:
     PaymentTransactionList:
       type: object
@@ -75,14 +83,6 @@ components:
         message:
           type: string
           description: Payment gateway response message
-  parameters:
-    accessToken:
-      name: access_token
-      in: query
-      required: true
-      description: Admin API access token
-      schema:
-        type: string
   securitySchemes:
     access_token:
       type: apiKey
