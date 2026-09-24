@@ -108,8 +108,6 @@ apis:
   - type: Reference
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
@@ -142,8 +140,6 @@ apis:
   - type: Reference
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
@@ -174,8 +170,6 @@ apis:
   - type: Reference
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
@@ -206,8 +200,6 @@ apis:
   - type: Reference
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
@@ -238,8 +230,6 @@ apis:
   - type: Reference
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
@@ -270,8 +260,6 @@ apis:
   - type: Reference
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
@@ -302,8 +290,6 @@ apis:
   - type: Reference
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
@@ -334,8 +320,6 @@ apis:
   - type: Reference
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
@@ -366,8 +350,6 @@ apis:
   - type: Reference
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
@@ -398,8 +380,6 @@ apis:
   - type: Reference
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
@@ -430,8 +410,6 @@ apis:
   - type: Reference
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
@@ -462,8 +440,6 @@ apis:
   - type: Reference
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
@@ -497,8 +473,6 @@ apis:
   - type: Reference
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
-  - type: GraphQL
-    url: graphql/red-hat-3scale-graphql.md
   - type: Documentation
     url: >-
       https://access.redhat.com/documentation/en-us/red_hat_3scale_api_management/2.14/html/admin_portal_guide/index
