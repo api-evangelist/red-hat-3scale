@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Red Hat 3scale Service Management O Auth API
+  title: Red Hat 3scale Service Management OAuth API
   description: The 3scale Service Management API allows API providers to control and manage access to their APIs, track usage, and enforce traffic policies. It is used by the APIcast API gateway to authorize and report API calls in real time. The API supports both API key and OAuth 2.0 based authorization flows.
   version: '1'
   contact:

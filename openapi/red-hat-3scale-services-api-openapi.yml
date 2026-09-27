@@ -221,13 +221,6 @@ paths:
           description: Your 3scale tenant domain
 components:
   schemas:
-    ServiceList:
-      type: object
-      properties:
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/Service'
     Service:
       type: object
       properties:
@@ -244,6 +237,13 @@ components:
           description: Authentication mode (1=API Key, 2=App ID/Key, oidc=OAuth/OIDC)
         deployment_option:
           type: string
+    ServiceList:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
     TopApplicationsList:
       type: object
       properties:
@@ -251,26 +251,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TopApplication'
-    TopApplication:
-      type: object
-      properties:
-        application:
-          type: object
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
-            account:
-              type: object
-              properties:
-                id:
-                  type: integer
-                org_name:
-                  type: string
-        total:
-          type: integer
-          description: Total usage for this application in the period
     UsageStats:
       type: object
       properties:
@@ -299,6 +279,26 @@ components:
               - type: string
                 format: date-time
               - type: integer
+    TopApplication:
+      type: object
+      properties:
+        application:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            account:
+              type: object
+              properties:
+                id:
+                  type: integer
+                org_name:
+                  type: string
+        total:
+          type: integer
+          description: Total usage for this application in the period
   parameters:
     accessToken:
       name: access_token
