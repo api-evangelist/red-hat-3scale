@@ -152,13 +152,6 @@ paths:
           description: Account not found
 components:
   schemas:
-    AccountList:
-      type: object
-      properties:
-        accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
     CreateAccountRequest:
       type: object
       required:
@@ -210,6 +203,13 @@ components:
           type: string
         extra_fields:
           type: object
+    AccountList:
+      type: object
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
   parameters:
     accessToken:
       name: access_token

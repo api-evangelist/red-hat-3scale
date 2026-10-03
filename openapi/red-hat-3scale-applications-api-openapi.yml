@@ -221,7 +221,51 @@ paths:
           default: your-domain
           description: Your 3scale tenant domain
 components:
+  parameters:
+    accessToken:
+      name: access_token
+      in: query
+      required: true
+      description: Admin API access token
+      schema:
+        type: string
   schemas:
+    UpdateApplicationRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        plan_id:
+          type: integer
+    Application:
+      type: object
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        state:
+          type: string
+          enum:
+          - live
+          - suspended
+        user_account_id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        user_key:
+          type: string
+          description: API key (for API key authentication mode)
+        plan:
+          $ref: '#/components/schemas/ApplicationPlan'
     ApplicationList:
       type: object
       properties:
@@ -263,42 +307,6 @@ components:
           description: Name of the application
         description:
           type: string
-    UpdateApplicationRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        plan_id:
-          type: integer
-    Application:
-      type: object
-      properties:
-        id:
-          type: integer
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        state:
-          type: string
-          enum:
-          - live
-          - suspended
-        user_account_id:
-          type: integer
-        name:
-          type: string
-        description:
-          type: string
-        user_key:
-          type: string
-          description: API key (for API key authentication mode)
-        plan:
-          $ref: '#/components/schemas/ApplicationPlan'
     UsageStats:
       type: object
       properties:
@@ -327,14 +335,6 @@ components:
               - type: string
                 format: date-time
               - type: integer
-  parameters:
-    accessToken:
-      name: access_token
-      in: query
-      required: true
-      description: Admin API access token
-      schema:
-        type: string
   securitySchemes:
     provider_key:
       type: apiKey

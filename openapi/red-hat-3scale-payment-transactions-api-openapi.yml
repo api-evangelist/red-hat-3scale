@@ -46,6 +46,13 @@ paths:
           description: Invoice not found
 components:
   schemas:
+    PaymentTransactionList:
+      type: object
+      properties:
+        payment_transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentTransaction'
     PaymentTransaction:
       type: object
       properties:
@@ -68,13 +75,6 @@ components:
         message:
           type: string
           description: Payment gateway response message
-    PaymentTransactionList:
-      type: object
-      properties:
-        payment_transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentTransaction'
   parameters:
     accessToken:
       name: access_token

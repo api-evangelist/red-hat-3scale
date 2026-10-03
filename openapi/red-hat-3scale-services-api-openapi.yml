@@ -220,7 +220,22 @@ paths:
           default: your-domain
           description: Your 3scale tenant domain
 components:
+  parameters:
+    accessToken:
+      name: access_token
+      in: query
+      required: true
+      description: Admin API access token
+      schema:
+        type: string
   schemas:
+    ServiceList:
+      type: object
+      properties:
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
     Service:
       type: object
       properties:
@@ -237,20 +252,6 @@ components:
           description: Authentication mode (1=API Key, 2=App ID/Key, oidc=OAuth/OIDC)
         deployment_option:
           type: string
-    ServiceList:
-      type: object
-      properties:
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/Service'
-    TopApplicationsList:
-      type: object
-      properties:
-        applications:
-          type: array
-          items:
-            $ref: '#/components/schemas/TopApplication'
     UsageStats:
       type: object
       properties:
@@ -299,14 +300,13 @@ components:
         total:
           type: integer
           description: Total usage for this application in the period
-  parameters:
-    accessToken:
-      name: access_token
-      in: query
-      required: true
-      description: Admin API access token
-      schema:
-        type: string
+    TopApplicationsList:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopApplication'
   securitySchemes:
     provider_key:
       type: apiKey
