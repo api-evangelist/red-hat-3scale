@@ -84,6 +84,19 @@ paths:
           description: Invalid transaction data
 components:
   schemas:
+    AuthorizeErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - failure
+        code:
+          type: string
+          description: Error code (e.g. user.exceeded_limits)
+        message:
+          type: string
+          description: Human-readable error message
     ReportRequest:
       type: object
       required:
@@ -100,19 +113,6 @@ components:
           description: Array of transaction objects to report
           items:
             type: object
-    AuthorizeErrorResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - failure
-        code:
-          type: string
-          description: Error code (e.g. user.exceeded_limits)
-        message:
-          type: string
-          description: Human-readable error message
     AuthorizeResponse:
       type: object
       properties:
