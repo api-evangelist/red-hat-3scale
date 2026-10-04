@@ -1,0 +1,77 @@
+slug: red-hat-3scale
+provider: Red Hat 3scale
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Invoices
+  spec_file: red-hat-3scale-invoices-api-openapi.yml
+  capability_id: BC-4250.30
+  capability_id_l1: BC-4250
+  capability_name: Invoicing & Statement Management
+  confidence: 0.85
+  evidence: GET /accounts/{account_id}/invoices.json listAccountInvoices List Account Invoices; schemas
+    InvoiceList, InvoiceLineItem, Invoice; "management of billing and invoicing for API usage"
+  reason: Operations retrieve invoices and line items for accounts billed for API usage, which is invoicing
+    and statement management in the subscription billing capability.
+- tag: Accounts
+  spec_file: red-hat-3scale-accounts-api-openapi.yml
+  capability_id: BC-4270
+  capability_id_l1: BC-4270
+  capability_name: Developer Platform & API Ecosystem Management
+  confidence: 0.75
+  evidence: 'GET /accounts.json  listAccounts  List Developer Accounts; description: ''manage developer
+    accounts, applications, application plans, keys, and API subscriptions'''
+  reason: These are developer accounts on an API management platform — developer ecosystem management
+    rather than customer CRM. Ambiguous between developer identity and portal onboarding sub-capabilities,
+    so L1 only.
+- tag: Applications
+  spec_file: red-hat-3scale-applications-api-openapi.yml
+  capability_id: BC-4270
+  capability_id_l1: BC-4270
+  capability_name: Developer Platform & API Ecosystem Management
+  confidence: 0.75
+  evidence: 'POST /accounts/{account_id}/applications.json  createApplication; GET /applications/{application_id}/usage.json  getApplicationUsage;
+    schemas: ApplicationPlan, UsageStats'
+  reason: Registered developer applications with plans and usage stats are API ecosystem constructs; splits
+    between credential management and consumption governance, so L1 only.
+- tag: Payment Transactions
+  spec_file: red-hat-3scale-payment-transactions-api-openapi.yml
+  capability_id: BC-4250.40
+  capability_id_l1: BC-4250
+  capability_name: Payment Collection & Dunning
+  confidence: 0.75
+  evidence: GET /invoices/{id}/payment_transactions.json listInvoicePaymentTransactions List Invoice Payment
+    Transactions; schemas PaymentTransactionList, PaymentTransaction
+  reason: Exposes payment transactions recorded against subscription invoices, i.e. payment collection
+    within subscription billing; read-only scope limits confidence.
+- tag: Plans
+  spec_file: red-hat-3scale-plans-api-openapi.yml
+  capability_id: BC-4240.10
+  capability_id_l1: BC-4240
+  capability_name: Plan & Entitlement Design
+  confidence: 0.75
+  evidence: GET /application_plans.json listApplicationPlans List Application Plans; schemas ApplicationPlan,
+    ApplicationPlanList; "manage developer accounts, applications, application plans, keys, and API subscriptions"
+  reason: Application plans are the commercial plan/entitlement definitions attached to API subscriptions,
+    matching plan and entitlement design; only a list operation is exposed.
+- tag: Authorization
+  spec_file: red-hat-3scale-authorization-api-openapi.yml
+  capability_id: BC-4270.50
+  capability_id_l1: BC-4270
+  capability_name: API Consumption Governance
+  confidence: 0.72
+  evidence: 'GET /transactions/authrep.xml  authorizeAndReport  Authorize and Report API Transaction;
+    schemas: UsageReport; ''used by the APIcast API gateway to authorize and report API calls in real
+    time'''
+  reason: Real-time authorization plus usage reporting against application plans is API consumption governance
+    (quotas, limits, usage tracking) rather than enterprise IAM.

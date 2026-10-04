@@ -488,6 +488,9 @@ apis:
   - type: Documentation
     url: https://github.com/3scale/APIcast/blob/master/doc/management-api.md
 common:
+- type: CapabilityMap
+  url: capabilities/red-hat-3scale-capability-edges.yml
+  name: Red Hat 3scale Business Capability Map
 - type: IssueTracker
   url: https://github.com/3scale/APIcast/issues
 - type: Releases
