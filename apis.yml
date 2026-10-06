@@ -44,7 +44,7 @@ tags:
 - Red Hat
 url: https://raw.githubusercontent.com/api-evangelist/red-hat-3scale/refs/heads/main/apis.yml
 created: '2026-03-16'
-modified: '2026-05-19'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: red-hat-3scale:webhooks-api
@@ -488,6 +488,10 @@ apis:
   - type: Documentation
     url: https://github.com/3scale/APIcast/blob/master/doc/management-api.md
 common:
+- url: https://developers.redhat.com/blog
+  type: Blog
+- url: https://developers.redhat.com/blog/feed
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/red-hat-3scale-capability-edges.yml
   name: Red Hat 3scale Business Capability Map
