@@ -488,6 +488,12 @@ apis:
   - type: Documentation
     url: https://github.com/3scale/APIcast/blob/master/doc/management-api.md
 common:
+- type: Plans
+  url: plans/red-hat-3scale-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/red-hat-3scale-rate-limits.yml
+- type: FinOps
+  url: finops/red-hat-3scale-finops.yml
 - url: https://developers.redhat.com/blog
   type: Blog
 - url: https://developers.redhat.com/blog/feed
