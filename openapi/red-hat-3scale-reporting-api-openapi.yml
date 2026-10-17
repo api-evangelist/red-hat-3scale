@@ -84,19 +84,21 @@ paths:
           description: Invalid transaction data
 components:
   schemas:
-    AuthorizeErrorResponse:
+    AuthorizeResponse:
       type: object
       properties:
         status:
           type: string
           enum:
+          - success
           - failure
-        code:
+        plan:
           type: string
-          description: Error code (e.g. user.exceeded_limits)
-        message:
-          type: string
-          description: Human-readable error message
+          description: Name of the application plan
+        usage_reports:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageReport'
     ReportRequest:
       type: object
       required:
@@ -113,21 +115,6 @@ components:
           description: Array of transaction objects to report
           items:
             type: object
-    AuthorizeResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-          - failure
-        plan:
-          type: string
-          description: Name of the application plan
-        usage_reports:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsageReport'
     UsageReport:
       type: object
       properties:
@@ -149,6 +136,19 @@ components:
         current_value:
           type: integer
           description: Current usage value for this period
+    AuthorizeErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - failure
+        code:
+          type: string
+          description: Error code (e.g. user.exceeded_limits)
+        message:
+          type: string
+          description: Human-readable error message
   securitySchemes:
     providerKey:
       type: apiKey

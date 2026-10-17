@@ -111,19 +111,6 @@ paths:
                 $ref: '#/components/schemas/AuthorizeErrorResponse'
 components:
   schemas:
-    AuthorizeErrorResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - failure
-        code:
-          type: string
-          description: Error code (e.g. user.exceeded_limits)
-        message:
-          type: string
-          description: Human-readable error message
     AuthorizeResponse:
       type: object
       properties:
@@ -160,6 +147,19 @@ components:
         current_value:
           type: integer
           description: Current usage value for this period
+    AuthorizeErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - failure
+        code:
+          type: string
+          description: Error code (e.g. user.exceeded_limits)
+        message:
+          type: string
+          description: Human-readable error message
   securitySchemes:
     providerKey:
       type: apiKey

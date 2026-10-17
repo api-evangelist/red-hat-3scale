@@ -222,6 +222,40 @@ paths:
           description: Your 3scale tenant domain
 components:
   schemas:
+    ApplicationList:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+    Application:
+      type: object
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        state:
+          type: string
+          enum:
+          - live
+          - suspended
+        user_account_id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        user_key:
+          type: string
+          description: API key (for API key authentication mode)
+        plan:
+          $ref: '#/components/schemas/ApplicationPlan'
     ApplicationPlan:
       type: object
       properties:
@@ -256,33 +290,6 @@ components:
           description: Name of the application
         description:
           type: string
-    Application:
-      type: object
-      properties:
-        id:
-          type: integer
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        state:
-          type: string
-          enum:
-          - live
-          - suspended
-        user_account_id:
-          type: integer
-        name:
-          type: string
-        description:
-          type: string
-        user_key:
-          type: string
-          description: API key (for API key authentication mode)
-        plan:
-          $ref: '#/components/schemas/ApplicationPlan'
     UpdateApplicationRequest:
       type: object
       properties:
@@ -292,13 +299,6 @@ components:
           type: string
         plan_id:
           type: integer
-    ApplicationList:
-      type: object
-      properties:
-        applications:
-          type: array
-          items:
-            $ref: '#/components/schemas/Application'
     UsageStats:
       type: object
       properties:

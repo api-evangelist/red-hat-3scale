@@ -38,6 +38,13 @@ paths:
                 $ref: '#/components/schemas/ApplicationPlanList'
 components:
   schemas:
+    ApplicationPlanList:
+      type: object
+      properties:
+        plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationPlan'
     ApplicationPlan:
       type: object
       properties:
@@ -58,13 +65,6 @@ components:
           type: number
         cost_per_month:
           type: number
-    ApplicationPlanList:
-      type: object
-      properties:
-        plans:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApplicationPlan'
   parameters:
     accessToken:
       name: access_token

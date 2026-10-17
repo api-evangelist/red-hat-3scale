@@ -60,6 +60,15 @@ paths:
                 $ref: '#/components/schemas/StatusInfo'
 components:
   schemas:
+    StatusInfo:
+      type: object
+      properties:
+        timers:
+          type: object
+          additionalProperties: true
+        workers:
+          type: integer
+          description: Number of worker processes
     ReadinessStatus:
       type: object
       properties:
@@ -75,15 +84,6 @@ components:
       properties:
         success:
           type: boolean
-    StatusInfo:
-      type: object
-      properties:
-        timers:
-          type: object
-          additionalProperties: true
-        workers:
-          type: integer
-          description: Number of worker processes
 externalDocs:
   description: APIcast Management API Documentation
   url: https://github.com/3scale/APIcast/blob/master/doc/management-api.md
